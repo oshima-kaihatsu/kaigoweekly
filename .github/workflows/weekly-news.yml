@@ -47,6 +47,7 @@ jobs:
           npm install -g @anthropic-ai/claude-code@2.1.325
 
       - name: 記事づくり（集める→下書き→照合→組み立て。公開はしない）
+        id: make
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           WEEK: ${{ github.event.inputs.week }}
@@ -67,8 +68,8 @@ jobs:
           node -e "const m=require('./dist/mail/weekly-latest.json');console.log('配信の準備：',m.week,m.kind,m.subject)"
           npx wrangler deploy
 
-      - name: 記事と照合の記録をリポジトリに残す（成功したときだけ。失敗した実行の途中の状態は残さない）
-        if: success()
+      - name: 記事と照合の記録をリポジトリに残す（記事づくりが成功したときだけ。公開が失敗しても、公開と記録がずれないよう残す）
+        if: always() && steps.make.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
           WEEK: ${{ github.event.inputs.week }}
