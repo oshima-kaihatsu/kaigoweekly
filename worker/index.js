@@ -209,7 +209,7 @@ export default {
   },
   // 毎日1回：保存期間を過ぎた行を消す
   async scheduled(event, env) {
-    if (event.cron === '30 23 * * SUN' || event.cron === '0 6 16 11 *') { await weeklyCampaign(env, H); await mailDaily(env, H); return; } // 月曜 8:30（日本時間）。毎日の確認も行う
+    if (event.cron === '30 23 * * SUN') { await weeklyCampaign(env, H); await mailDaily(env, H); return; } // 月曜 8:30（日本時間）。毎日の確認も行う
     const now = Date.now();
     await mailDaily(env, H); // 配信の知らせ直し、同意の記録の整理
     // お知らせを送れなかった受付があれば、件数と受付番号だけを知らせ直す（中身はデータベースにある）
