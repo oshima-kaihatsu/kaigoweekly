@@ -1,0 +1,107 @@
+{
+ "2026-W44": {
+  "runId": "20261111T075534-9fc909",
+  "at": "2026-11-11T08:03:47.881Z",
+  "files": [
+   "topic-chiiki-kubun-r9-keika-sochi-an",
+   "topic-kaigo-yuko-kyujin-bairitsu-2026-09",
+   "topic-toroku-shisetsu-kaigo-shien-jinin-kijun-an",
+   "weekly-2026-W44"
+  ],
+  "judged": [
+   {
+    "file": "topic-chiiki-kubun-r9-keika-sochi-an.md",
+    "pass": true,
+    "why": [],
+    "claims": 24,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-kaigo-yuko-kyujin-bairitsu-2026-09.md",
+    "pass": true,
+    "why": [],
+    "claims": 18,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-toroku-shisetsu-kaigo-shien-jinin-kijun-an.md",
+    "pass": true,
+    "why": [],
+    "claims": 18,
+    "bad": 0,
+    "aiVerdict": "合格"
+   }
+  ],
+  "checkFile": "tools/news/checks/2026-W44.md"
+ },
+ "2026-W45": {
+  "runId": "20261111T151721-222c27",
+  "at": "2026-11-11T15:31:21.879Z",
+  "files": [
+   "topic-caremane-satellite-shotaki-haichi-an-2026-11",
+   "topic-maikin-2026-09-sokuhou",
+   "topic-tokuyo-caremane-kenmu-an-2026-11",
+   "weekly-2026-W45"
+  ],
+  "judged": [
+   {
+    "file": "topic-caremane-satellite-shotaki-haichi-an-2026-11.md",
+    "pass": true,
+    "why": [],
+    "claims": 20,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-kaigo-kasuhara-unei-kijun-an-2026-11.md",
+    "pass": false,
+    "why": [
+     "一致しない・確認できない記述が1件"
+    ],
+    "claims": 26,
+    "bad": 1,
+    "aiVerdict": "不合格"
+   },
+   {
+    "file": "topic-maikin-2026-09-sokuhou.md",
+    "pass": true,
+    "why": [],
+    "claims": 15,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-tokuyo-caremane-kenmu-an-2026-11.md",
+    "pass": true,
+    "why": [],
+    "claims": 14,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "weekly-2026-W45.md",
+    "pass": true,
+    "why": [],
+    "claims": 41,
+    "bad": 0,
+    "aiVerdict": "合格"
+   }
+  ],
+  "checkFile": "tools/news/checks/2026-W45.md"
+ },
+ "2026-W46": {
+  "runId": "20261111T081211-88e089",
+  "at": "2026-11-11T08:13:07.137Z",
+  "files": [],
+  "judged": [],
+  "checkFile": "tools/news/checks/2026-W46.md",
+  "lastAttempt": {
+   "runId": "20261116T000131-9d0b8e",
+   "at": "2026-11-16T00:04:14.525Z",
+   "judged": [],
+   "checkFile": "tools/news/checks/2026-W46_20261116T000131-9d0b8e.md"
+  }
+ }
+}

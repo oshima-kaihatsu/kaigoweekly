@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAIGO WEEKLY｜週刊・介護ニュースダイジェスト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=20261113b">
+<link rel="stylesheet" href="assets/service.css?v=20261111d">
+<link rel="stylesheet" href="assets/top.css?v=20261115a">
+</head>
+<body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-site" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9H4z M10 20v-6h4v6"/></symbol>
+  <symbol id="i-page" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16 M8 13h8 M8 16h5"/></symbol>
+  <symbol id="i-lp" viewBox="0 0 24 24"><path d="M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z M9 7h6 M9 11h6 M9 15h3"/></symbol>
+  <symbol id="i-movie" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4 M8 11l2 2 4-4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></symbol>
+</svg>
+<a class="skip" href="#picks">本文へ移動</a>
+
+<header class="site-head">
+  <div class="head-top">
+    <a class="logo logo-img" href="index.html"><img src="assets/20261112_kaigoweekly_logo.png" alt="KAIGO WEEKLY 週刊・介護ニュースダイジェスト" width="1135" height="120"></a>
+    <a class="head-find" href="#news"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>記事をさがす</a>
+  </div>
+</header>
+<nav class="head-nav" aria-label="ページ内の案内">
+  <a href="#picks">最新の注目ニュース</a><a href="#news">ニュース一覧</a><a href="#guide">解説</a><a href="#weekly">1週間まとめ</a><a class="nav-mail" href="#mail">メールで受け取る</a><a class="nav-cta" href="#service">ご依頼はこちら</a>
+</nav>
+
+<main>
+  <h1 class="sr">KAIGO WEEKLY｜週刊・介護ニュースダイジェスト</h1>
+
+  <section class="band" id="picks" tabindex="-1">
+    <div class="wrap">
+      <div class="sec-head" data-en="This week">
+        <div>
+          <p class="sec-label">LATEST</p>
+          <h2 id="thisweek">最新の<em>“注目”</em>介護ニュース</h2>
+        </div>
+        <p class="sec-desc">その週に押さえておきたい、介護の採用と制度のニュースを3本えらんでいます。毎週月曜に、前の週（月〜日）の分を更新します。</p>
+      </div>
+      <div class="issue-sum">
+        <p class="issue-tag"><small id="issue-date"></small></p>
+        <p class="issue-lead" id="issue-lead"></p>
+        <a class="more-link" id="issue-all" href="#weekly">1週間の要点をまとめて読む<span class="go"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      </div>
+      <ul class="picks" id="issue-cards"></ul>
+    </div>
+  </section>
+
+  <section class="band band-soft" id="news">
+    <div class="wrap">
+      <div class="sec-head" data-en="News">
+        <div>
+          <p class="sec-label">NEWS</p>
+          <h2>ニュース<em>一覧</em></h2>
+        </div>
+        <p class="sec-desc">新しい順に並べています。キーワードとカテゴリーで探せます。</p>
+      </div>
+        <div class="tools">
+          <form class="find" id="search" role="search">
+            <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="q" placeholder="キーワードで探す" aria-label="キーワードで記事をさがす">
+          </form>
+          <div class="filter">
+            <span>カテゴリー：</span>
+            <div class="chips" id="chips" role="group" aria-label="カテゴリーで絞り込む"></div>
+          </div>
+        </div>
+        <p class="result-note" id="result-note" role="status" aria-live="polite" hidden></p>
+        <ul class="links two" id="list-news"><li class="empty">記事を読み込み中…</li></ul>
+        <div class="more" id="more-news" hidden><button type="button">もっと見る</button></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head" data-en="Guide">
+        <div>
+          <p class="sec-label">GUIDE</p>
+          <h2 id="guide">解説</h2>
+        </div>
+        <p class="sec-desc">制度や補助金を、手続きの順番に沿ってまとめた記事です。</p>
+      </div>
+      <ul class="links two" id="list-guide"><li class="empty">記事を読み込み中…</li></ul>
+    </div>
+  </section>
+
+  <section class="band band-warm" id="mail-part">
+    <div class="wrap mail-grid">
+      <div class="back-card">
+        <p class="sec-label">BACK NUMBER</p>
+        <h2 id="weekly">これまでの<em>1週間まとめ</em></h2>
+        <p class="back-note">横にずらすと、前の週も見られます。</p>
+        <ul class="issues issues-slide" id="list-weekly"></ul>
+        <a class="back-all" href="articles/weekly-list.html">すべての週のまとめを見る<span class="go"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      </div>
+      <div class="mail-card" id="mail">
+        <p class="sec-label">MAIL</p>
+        <h2>新着ニュースを<br>メールで受け取る</h2>
+        <p>毎週月曜に、前の週の介護ニュースをメールでお届けします。無料です。</p>
+        <form class="mail-form" id="subscribe-form" data-api="/api/subscribe">
+          <div class="signup">
+            <input type="email" name="email" required maxlength="200" autocomplete="email" placeholder="メールアドレス" aria-label="メールアドレス">
+            <button type="submit">登録する</button>
+          </div>
+          <label class="mail-agree"><input type="checkbox" name="agree" value="1" required> 週1回のニュースのまとめと、当方のサービスのご案内をメールで受け取ることに同意し、<a href="articles/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します</label>
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITEKEY__" data-size="flexible"></div>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="point-note">登録すると確認のメールが届きます。メールの中のボタンを押すと、登録が終わります。</p>
+        </form>
+        <a class="more-link" href="articles/weekly-list.html">これまでの1週間まとめを読む<span class="go"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-svc" id="service">
+    <span class="svc-orb o1" data-speed=".16" aria-hidden="true"></span><span class="svc-orb o2" data-speed="-.1" aria-hidden="true"></span><span class="svc-orb o3" data-speed=".08" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="svc-hero">
+        <p class="sec-label">SERVICE</p>
+        <h2>施設運営のお悩み、<em>ご相談ください。</em></h2>
+        <p class="svc-hero-lead">採用活動や施設運営を、いまのやり方を大きく変えずにサポートします。どこに少し力をかけると効くのか、何から始めればよいか分からない場合も、一緒に考えます。</p>
+      </div>
+
+      <figure class="svc-movie" id="svc-movie">
+        <!-- 2026-11-12 紹介動画 v6（経営者承認）。自動再生しない。Web向けの圧縮版 -->
+        <div class="svc-movie-frame">
+          <video controls preload="none" playsinline poster="assets/20261112_service_movie_v6_poster.jpg" width="1280" height="720"
+            aria-label="KAIGO WEEKLYのサービス紹介動画（約1分16秒）">
+            <source src="assets/20261112_service_movie_v6_web.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figcaption>動画でわかる、KAIGO WEEKLYのサポート</figcaption>
+      </figure>
+
+      <!-- 2026-11-11 入口は「診断する」と「全メニューを見る」の2つ。スクリプトが動かないときは、入口を出さずに全メニューをそのまま見せる -->
+      <div class="svc-entry" id="svc-entry" hidden>
+        <button type="button" class="svc-entry-btn main" id="quiz-open" aria-expanded="false" aria-controls="svc-quiz"><b>診断する</b><small>4つの質問に答えると、おすすめを3つご紹介します</small></button>
+        <button type="button" class="svc-entry-btn" id="menu-open" aria-expanded="true" aria-controls="svc-menu"><b>全メニューを見る</b><small>分類ごとに、すべてのサービスを並べます</small></button>
+      </div>
+      <div class="svc-quiz" id="svc-quiz" hidden></div>
+
+      <div class="svc-menu" id="svc-menu">
+      <div class="svc-group">
+        <h3 class="svc-cat" data-name="現場がまわる"><span>Operation</span>現場がまわる<small>業務のAI化</small></h3>
+        <ul class="svc-cards">
+          <li><h4>申し送りのAI化</h4><p>職員が話した一言を、AIが申し送りの文に整えます。今日の利用者と注意点を一覧にし、誰が読んだかも分かります。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>送迎表づくりの効率化</h4><p>電話で入った送迎の変更を、AIが送迎表の案にします。運転する職員は、自分の便だけをスマホで確認できます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>会議・日報のAI整理</h4><p>会議の内容から、やることを担当と期限つきで整理します。日報の下書きも作ります。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>有給・休暇管理</h4><p>就業規則から休暇の決まりを読み取ります。年5日の取得に足りない職員と、取得の計画を一覧にします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>送迎車の点検・期限管理</h4><p>紙の点検表を写真から読み取って記録します。車検・保険の期限と整備の記録を、まとめて見られます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>介護用品の在庫管理</h4><p>おむつ・手袋・消毒液などの在庫を記録します。いつ発注すればよいか、目安が分かるようにします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>設備・防災の点検表</h4><p>福祉用具や消防設備の点検を、1タップで記録します。直す必要がある所を一覧にし、対応の状況を追えるようにします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>AI導入支援</h4><p>求人原稿や書類の下書き、記録の整理など、日々の事務にAIを取り入れる手順を一緒に整えます。いまのやり方を大きく変えずに始められます。</p><span class="sv-price">個別相談</span></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3 class="svc-cat" data-name="人が集まる"><span>Recruit</span>人が集まる<small>採用</small></h3>
+        <ul class="svc-cards">
+          <li><h4>求人原稿作成</h4><p>Indeedやハローワークなどに載せる求人原稿を、働く前に知りたいこと（夜勤・休み・給与の内訳）が伝わる形で書きます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>採用サイト・ページ制作</h4><p>求職者向けサイトを制作。応募へつなげるコンテンツや定着化を意識しサイト設計を行います。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>企業動画制作</h4><p>施設の雰囲気や働く職員の様子を伝える動画を作ります。採用サイトやSNS、見学前のご案内に使えます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>スタッフ紹介動画</h4><p>働く職員の声や仕事の様子を紹介する動画です。ホームページなどに載せて、職場の空気を伝えます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>SNS運用代行（採用向け）</h4><p>求人や職場の様子を伝える投稿の企画や文章・画像づくりを、効率よく回せる形に整えてお手伝いします。まるごと抱えるのではなく、施設の手間を減らす運用をご提案します。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>写真撮影</h4><p>求人やホームページに使う、施設の建物・お部屋・職員の写真を撮影します。撮る場所や時間は、ご利用者の生活に配慮して決めます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>各種採用ツール</h4><p>見学・面接の段取り表や、案内・返信の文例など、応募から入職までに使う書類の作成をサポートします。</p><span class="sv-price">個別相談</span></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3 class="svc-cat" data-name="長く働ける"><span>Retention</span>長く働ける<small>定着・育成</small></h3>
+        <ul class="svc-cards">
+          <li><h4>介助手順のマニュアル動画</h4><p>移乗・入浴・食事などの介助の手順を動画にします。教える人によって説明が変わるのを防ぎます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>新人研修動画</h4><p>入職したばかりの職員向けに、施設の決まりや1日の流れを動画でまとめます。何度でも見返せます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>AIマニュアル・研修</h4><p>写真・動画・ふりがな付きの手順書を作ります。分からないことはAIに質問でき、義務研修の受講記録も残せます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>感染対策・防災訓練の動画</h4><p>手洗い・防護具の着け方や、避難の手順を動画にします。研修や訓練の記録としても使えます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>入職後の面談シート</h4><p>入職後3か月の面談で使う書式を作ります。困りごとを早めに聞き取り、長く働いてもらうための話し合いに使えます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>職員の掲示板・目安箱</h4><p>お知らせ・申請・職員の声を、1か所にまとめます。職員どうしで探し回らずに見られます。</p><span class="sv-price">個別相談</span></li>
+        </ul>
+      </div>
+      <div class="svc-group">
+        <h3 class="svc-cat" data-name="選ばれる"><span>Choice</span>選ばれる<small>集客・発信</small></h3>
+        <ul class="svc-cards">
+          <li><h4>コーポレートサイト</h4><p>法人や施設の案内をまとめたホームページを作ります。ご利用者・ご家族・地域の方に向けた情報を整理します。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>ホームページの更新サポート</h4><p>お知らせの追加や写真の差し替えなど、今あるホームページの小さな更新をお手伝いします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>施設紹介動画</h4><p>建物の中や一日の流れを短い動画にまとめます。見学の前に雰囲気を知ってもらうときに使えます。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>ご家族向けの説明動画</h4><p>利用の手続きや面会の決まりを、ご家族に分かりやすく説明する動画を作ります。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>パンフレット・チラシ</h4><p>施設案内のパンフレットや、見学会・行事のチラシを作ります。印刷用のデータでお渡しします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>施設だより・広報誌</h4><p>毎号の構成を型にして、原稿づくりの手間を減らすご提案をします。ご家族や地域に配るおたより・広報誌を、無理なく続けられる形にします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>SNSの立ち上げ・運用代行</h4><p>InstagramやFacebookのアカウントを立ち上げ、プロフィールや投稿の決まりを整えます。ご利用者・ご家族に向けた投稿も、手間を減らす形でお手伝いします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>LINE公式アカウントの配信代行</h4><p>ご家族や地域の方へのお知らせ・行事の案内を、決まった型で手早く配信できるように整え、配信作業をお手伝いします。</p><span class="sv-price">個別相談</span></li>
+          <li><h4>SNS投稿・施設だよりの作成効率化（AI下書き）</h4><p>SNSの投稿文や施設だよりの下書きを、写真とひと言からAIで作れるように整えます。毎回の作成の手間を軽くして、続けやすくします。</p><span class="sv-price">個別相談</span></li>
+        </ul>
+      </div>
+      <!-- 2026-11-12 経営者の指示：月額のパートナー契約を、一覧の5つ目の分類として入れる -->
+      <div class="svc-group" id="svc-monthly">
+        <h3 class="svc-cat" data-name="改善が続く"><span>Partner</span>改善が続く<small>月額の契約</small></h3>
+        <ul class="svc-cards svc-cards-plan">
+          <li class="svc-plan"><h4>パートナー契約</h4><p>複数の施策の導入を並行して進めます。納品して終わりではなく、導入したしくみの運営・改善まで継続してお手伝いします。専門の職員を採用・教育する必要がなく、すぐに始められ、すぐに改善につながります。</p>
+            <ol class="plan-steps">
+              <li><b>はじめの1か月<em>導入</em></b><span>いまある課題ごとの施策に優先度をつけ、優先度の高いものから順に着手します。</span></li>
+              <li><b>2〜3か月目<em>改善と次の施策</em></b><span>導入したしくみの保守や調整・改善を進めつつ、新たな課題にも継続して対応します。</span></li>
+              <li><b>4か月目から<em>運営・保守</em></b><span>運営・保守中心のご契約内容に切り替え、必要なときには新しい施策にも取り組みます。</span></li>
+            </ol>
+            <span class="sv-price">内容に合わせてご提案</span></li>
+        </ul>
+      </div>
+      <p class="svc-note">料金は内容をうかがってお見積もりします。</p>
+      </div>
+
+      <div class="camp" id="campaign">
+        <div class="camp-top"><p class="camp-badge">期間限定</p><h3 class="camp-h">特別キャンペーン<span>Special Campaign</span></h3><p class="camp-sub">いまだけの特別なご案内です。どちらも先着3社までです。予告なく終了する場合があります。</p></div>
+        <div class="camp-list">
+          <div class="camp-item" id="svc-set">
+            <p class="camp-tag">先着3社</p>
+            <h4>求人ツール一式 <b class="camp-price">50,000<span>円</span></b><small>（税別）</small></h4>
+            <p>次の4つを、まとめて特別価格でお作りします。</p>
+            <ul class="camp-set" role="list"><li>求人原稿<small>Indeed・ハローワークなどに載せる原稿</small></li><li>採用ページ<small>スマホで読みやすい1枚</small></li><li>見学・面接の段取り表<small>案内や返信の文例つき</small></li><li>入職後の面談シート<small>入職後3か月の面談に使う書式</small></li></ul>
+            <p class="camp-terms">修正1回</p>
+            <a class="camp-link" href="#svc-form">求人ツール一式について相談する</a>
+          </div>
+          <div class="camp-item" id="svc-demo">
+            <div class="camp-tags"><p class="camp-tag">先着3社</p><p class="camp-tag free">無料</p></div>
+            <h4>業務効率化アプリのデモ作成 <b class="camp-price">無料</b></h4>
+            <p>記録や書類づくりに、毎日どれくらいの時間を使っていますか。申し送り、送迎表、シフトなど、毎日くり返している作業を、AIでどこまで減らせるかをデモで試していただけます。残業代や事務の人件費の見直しにもつながります。ご提案したデモの作成までが無料です。</p>
+            <p class="camp-example">例：申し送りの要約、送迎表の作成、設備点検の記録</p>
+            <p class="camp-terms">1事業所1回まで</p>
+            <a class="camp-link" href="#svc-form">デモ作成について相談する</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow" id="flow">
+        <div class="sec-head" data-en="Flow">
+          <div>
+            <p class="sec-label">FLOW</p>
+            <h2>いまの困りごとを、<br><em>一緒に整理する</em><span class="nw">ところから。</span></h2>
+          </div>
+          <p class="sec-desc">いきなり制作の話はしません。現状をうかがい、何が大切か、いま何が必要かを一緒に考えます。ご相談とお見積もりは無料です。</p>
+        </div>
+        <ol class="steps">
+          <li><span class="st-no">01</span><b>お問い合わせ</b><small>下のフォームから、いまの状況をお知らせください。</small></li>
+          <li><span class="st-no">02</span><b>困りごとの整理</b><small>オンライン30分で、採用や発信の現状と困りごとを一緒に整理します。</small></li>
+          <li><span class="st-no">03</span><b>優先順位とご提案</b><small>何から手を付けるとよいかを一緒に考え、内容とお見積もりをご提案します。</small></li>
+          <li><span class="st-no">04</span><b>制作・お渡し</b><small>ファイルでお渡しし、そのあとも使い方のご質問にお答えします。</small></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-deep" id="svc-form">
+    <div class="wrap contact-grid">
+      <div class="contact-head" data-en="Contact">
+        <p class="sec-label">CONTACT</p>
+        <h2>まずは、<br>無料でご相談ください。</h2>
+        <p>オンライン30分・無料。3営業日以内に、メールで日程をご連絡します。</p>
+        <p class="contact-note">内容・料金は変わることがあります。ご相談は、説明とご質問への回答です。応募や採用の結果はお約束しません。</p>
+      </div>
+      <div class="contact-box">
+        <form class="sv-form" id="contact-form" data-api="/api/contact">
+          <div class="sv-grid">
+            <label class="sv-field"><span>法人名<span class="req">必須</span></span><input type="text" name="org" autocomplete="organization" maxlength="100" required></label>
+            <label class="sv-field"><span>お名前<span class="req">必須</span></span><input type="text" name="name" autocomplete="name" maxlength="60" required></label>
+            <label class="sv-field"><span>メールアドレス<span class="req">必須</span></span><input type="email" name="email" autocomplete="email" maxlength="200" required></label>
+            <label class="sv-field"><span>電話番号<span class="opt">任意</span></span><input type="tel" name="tel" autocomplete="tel" maxlength="30"></label>
+            <label class="sv-field"><span>事業所名<span class="opt">任意</span></span><input type="text" name="office" maxlength="100"></label>
+            <label class="sv-field"><span>サービスの種類<span class="opt">任意</span></span>
+              <select name="kind"><option value="">選んでください</option><option>訪問介護</option><option>通所介護（デイサービス）</option><option>認知症グループホーム</option><option>特別養護老人ホーム</option><option>介護老人保健施設</option><option>有料老人ホーム・サ高住</option><option>居宅介護支援</option><option>その他</option></select></label>
+          </div>
+          <fieldset class="sv-field">
+            <legend>興味のあるもの<span class="opt">任意・複数可</span></legend>
+            <p class="sv-from-quiz" id="sv-from-quiz" tabindex="-1" role="status" hidden></p>
+            <p class="sv-checks-h first">改善が続く（月額の契約）</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="monthly" data-k="monthly"> パートナー契約（月額）</label>
+            </div>
+            <p class="sv-checks-h">現場がまわる（業務のAI化）</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="ai-okuri" data-k="ai-okuri"> 申し送りのAI化</label>
+            <label><input type="checkbox" name="interest" value="ai-sougei" data-k="ai-sougei"> 送迎表づくりの効率化</label>
+            <label><input type="checkbox" name="interest" value="ai-kaigi" data-k="ai-kaigi"> 会議・日報のAI整理</label>
+            <label><input type="checkbox" name="interest" value="ai-kyuka" data-k="ai-kyuka"> 有給・休暇管理</label>
+            <label><input type="checkbox" name="interest" value="ai-car" data-k="ai-car"> 送迎車の点検・期限管理</label>
+            <label><input type="checkbox" name="interest" value="ai-zaiko" data-k="ai-zaiko"> 介護用品の在庫管理</label>
+            <label><input type="checkbox" name="interest" value="ai-setsubi" data-k="ai-setsubi"> 設備・防災の点検表</label>
+            <label><input type="checkbox" name="interest" value="ai" data-k="ai"> そのほかの事務へのAI導入（書類の下書きなど）</label>
+            </div>
+            <p class="sv-checks-h">人が集まる（採用）</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="set" data-k="set"> 求人ツール一式（キャンペーン）</label>
+            <label><input type="checkbox" name="interest" value="demo" data-k="demo"> 業務効率化アプリのデモ作成（無料）</label>
+            <label><input type="checkbox" name="interest" value="kyujin" data-k="kyujin"> 求人原稿作成</label>
+            <label><input type="checkbox" name="interest" value="site" data-k="site"> 採用サイト・ページ制作</label>
+            <label><input type="checkbox" name="interest" value="corpmovie" data-k="corpmovie"> 企業動画制作</label>
+            <label><input type="checkbox" name="interest" value="staffmovie" data-k="staffmovie"> スタッフ紹介動画</label>
+            <label><input type="checkbox" name="interest" value="snsrec" data-k="snsrec"> SNS運用代行（採用向け）</label>
+            <label><input type="checkbox" name="interest" value="photo" data-k="photo"> 写真撮影</label>
+            <label><input type="checkbox" name="interest" value="tools" data-k="tools"> 各種採用ツール（段取り表・文例など）</label>
+            </div>
+            <p class="sv-checks-h">長く働ける（定着・育成）</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="manualmovie" data-k="manualmovie"> マニュアル・研修動画（介助手順・新人研修・感染対策など）</label>
+            <label><input type="checkbox" name="interest" value="ai-manual" data-k="ai-manual"> AIマニュアル・研修</label>
+            <label><input type="checkbox" name="interest" value="mendan" data-k="mendan"> 入職後の面談シート</label>
+            <label><input type="checkbox" name="interest" value="ai-board" data-k="ai-board"> 職員の掲示板・目安箱</label>
+            </div>
+            <p class="sv-checks-h">選ばれる（集客・発信）</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="hp" data-k="hp"> コーポレートサイト・更新サポート</label>
+            <label><input type="checkbox" name="interest" value="movie" data-k="movie"> 施設紹介・ご家族向けの動画</label>
+            <label><input type="checkbox" name="interest" value="print" data-k="print"> パンフレット・チラシ・広報誌</label>
+            <label><input type="checkbox" name="interest" value="sns" data-k="sns"> SNSの立ち上げ・運用代行・LINE配信</label>
+            <label><input type="checkbox" name="interest" value="ai-draft" data-k="ai-draft"> SNS投稿・施設だよりの作成効率化（AI下書き）</label>
+            </div>
+            <p class="sv-checks-h">そのほか</p>
+            <div class="sv-checks">
+            <label><input type="checkbox" name="interest" value="other" data-k="other"> その他・まだ決めていない</label>
+          </div>
+          </fieldset>
+          <label class="sv-field"><span>ご相談内容<span class="opt">任意</span></span><textarea name="message" rows="3" maxlength="2000" placeholder="例：パートの介護職の応募が月1件ほどしかない"></textarea></label>
+          <p class="sv-warn">応募された方や職員の個人情報は書かないでください。</p>
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITEKEY__"></div>
+          <label class="sv-agree"><input type="checkbox" name="agree" value="1" required> <a href="articles/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</label>
+          <button class="sv-btn main" type="submit">送信する</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="side-tab" type="button" id="fab" aria-haspopup="dialog">ニュースへのご要望はこちら</button>
+<a class="page-top" href="#top"><span aria-hidden="true"></span>PAGE TOP</a>
+
+<dialog class="modal" id="modal" aria-labelledby="modal-title">
+    <h2 id="modal-title">どんな記事・機能がほしいですか？</h2>
+        <form id="voice-form" data-api="/api/voice">
+      <fieldset>
+        <legend>ほしいもの（いくつでも）</legend>
+        <div class="opts">
+          <label><input type="checkbox" name="want" value="制度の期限の一覧"> 制度の期限の一覧</label>
+          <label><input type="checkbox" name="want" value="補助金のまとめ"> 補助金のまとめ</label>
+          <label><input type="checkbox" name="want" value="template"> 求人票のテンプレ・事例集</label>
+          <label><input type="checkbox" name="want" value="region"> 自分の地域の求人の数字</label>
+          <label><input type="checkbox" name="want" value="試算をもっと"> 試算をもっと</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>ひとこと <span class="small">（任意）</span></legend>
+        <textarea name="message" rows="3" maxlength="1000" aria-label="ひとこと（任意）" placeholder="例：処遇改善加算の書類の期限をまとめてほしい"></textarea>
+      </fieldset>
+      <fieldset>
+        <legend>メールアドレス <span class="small">（返信をご希望の場合のみ・任意）</span></legend>
+        <input type="email" name="email" maxlength="200" aria-label="メールアドレス（返信をご希望の場合のみ・任意）">
+      </fieldset>
+      <p class="small">いただいた内容は、記事や機能を考えるために使います。ひとことを記事で紹介するのは、下にチェックをいただいた場合だけで、お名前や事業所名は出しません。応募された方や職員の個人情報は書かないでください。</p>
+      <label class="small"><input type="checkbox" name="quote_ok" value="1"> ひとことを、記事で紹介してもよい（任意）</label>
+      <label class="small"><input type="checkbox" name="agree" value="1" required> <a href="articles/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</label>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITEKEY__" data-size="flexible"></div>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <div class="row-btns">
+        <button class="close" type="button" id="modal-close">閉じる</button>
+        <button class="btn" type="submit">送る</button>
+      </div>
+    </form>
+</dialog>
+
+<footer class="site-foot">
+  <div class="foot-logo"><a class="logo logo-img" href="index.html"><img src="assets/20261112_kaigoweekly_logo.png" alt="KAIGO WEEKLY 週刊・介護ニュースダイジェスト" width="1135" height="120"></a></div>
+  <div class="foot-main">
+    <p>このメディアは、採用サイト・採用ページの制作を行う大島健太郎が運営しています。記事の事実は出典元の公表内容に基づきます。制度の最新情報は必ず一次情報でご確認ください。</p>
+    <p><a href="articles/about.html">運営者情報</a>｜<a href="articles/editorial-policy.html">編集方針・AIの使い方</a>｜<a href="articles/privacy.html">プライバシーポリシー</a>｜<a href="articles/tokushoho.html">特定商取引法に基づく表記</a>｜<button class="foot-voice" type="button" id="foot-voice">ご要望をひとこと</button></p>
+  </div>
+</footer>
+
+<!--ARTICLES--><script>window.ARTICLES = [{"kind":"topic","file":"articles/topic-caremane-satellite-shotaki-haichi-an-2026-11.html","title":"ケアマネのサテライト事業所を制度化する案、小多機の訪問職員の配置も論点に（第274回介護給付費分科会）","date":"2026-11-12","period":"2026-11-02〜2026-11-08","summary":"厚労省は第274回介護給付費分科会で、中山間地域等の担い手不足への対応として、居宅介護支援のサテライト事業所を制度に位置付け、加算を設ける案を示しました。小規模多機能型居宅介護の訪問職員の配置も論点に挙がりました。どちらも案・論点の段階です。","stage":"案","services":["居宅介護支援","小規模多機能型居宅介護","通所系サービス"],"tags":["人員基準","ケアマネ","中山間地域","令和9年度介護報酬改定"],"text":"要点 居宅介護支援で、本体事業所とは別の活動拠点「サテライト事業所」を制度に位置付け、その体制を評価する加算を設ける案が示されました。 2026-11-06の第274回社会保障審議会介護給付費分科会の資料2です。段階は 案 です。小規模多機能型居宅介護（小多機）の訪問職員の配置は、まだ考え方を問う 論点 の段階です。 当てはまる事業所は注意：中山間地域等でケアマネジャーや訪問の職員が集まらない事業所は、今後の議論で人の配置のしかたが変わる可能性があります。 対象 居宅介護支援事業所（とくに中山間地域等） 小規模多機能型居宅介護 通所系サービス（中山間地域等の加算の案） 何が起きたか 第274回社会保障審議会介護給付費分科会（2026-11-06）の資料2「人口減少・サービス需要の変化に応じたサービス提供体制の構築（中山間地域等における加算/地域特性を背景としたサービス提供の効率化/事業者・従事者の不足への対応）」で、厚労省が論点と対応案を示しました。 居宅介護支援のサテライト事業所（対応案） 中山間地域等で、本体事業所のバックアップの下、本体とは別に活動拠点を設けるサテライト事業所を制度に位置付け、その体制を評価する加算を創設してはどうか、としています。 要件の例として、次の4つが挙げられました。 人員基準や各種加算・減算は、本体事業所と一体的に扱う。 事務室等の区画を自ら確保することは不要とし、貸し会議室の活用やテレワークも認める。 クラウドで本体事業所に電子的に保存できることを条件に、サテライト事業所に別に書類を置かなくてもよい。 緊急時等に本体事業所が適切に対応できる体制を要件とし、都道府県外への設置は認めない（中山間地域等は要件を緩和）。 背景として資料は、ケアマネジャーの従事者数が横ばい傾向で、60歳代の割合が増えていることを挙げています。従事者数（実数）は令和6年度で186,165人です（介護サービス施設・事業所調査、10月1日時点）。 小多機の訪問職員の配置（論点） 現行の基準では、本体事業所で日中の訪問サービスに常勤換算で1以上の職員が必要です（通いサービスは常勤換算で3：1以上）。訪問サービスの利用者がいるかどうかにかかわらず配置が求められるため、人材確保が難しい地域では負担になっているという指摘がある、と資料は書いています。 対応案の欄でも「実態に即した配置の在り方をどのように考えるか」と問う形にとどまり、具体的な見直しの中身は示されていません。 資料の調査（令和8年度老人保健健康増進等事業、株式会社NTTデータ経営研究所、速報値、n=19）では、小多機の経営悪化・廃止の主な要因として「看護職員・介護職員の確保が困難なため」が52.6%でした。 そのほかの対応案（同じ資料） 特別地域加算と中山間地域等における小規模事業所加算の対象に、通所系サービスを加える。その際、訪問系サービスとの提供形態の違いを踏まえた評価にする。 小多機・看護小多機・定期巡回で、中山間地域等で区域外指定により市町村を越えてサービスを展開することを、総合マネジメント体制強化加算の算定要件に加えることを検討する。 採用・定着への影響（編集部の見立て） サテライト事業所の案は、ケアマネジャーが本体から離れた拠点で働く形を制度で認めるものです。決まれば、本体まで通うのが難しい地域の人や、テレワークを組み合わせたい人に声をかけやすくなる可能性があります。 小多機の訪問職員の配置は、まだ具体案がありません。配置が緩むかどうかを前提に採用計画を変えるのは早く、続報を待つのが妥当と考えます。 どちらも中山間地域等を中心にした議論です。都市部の事業所への影響は、今の資料からは読み取れません。 こんな事業所は注意 中山間地域等で、利用者宅まで遠く、ケアマネジャーの採用が難しい居宅介護支援事業所 → サテライト事業所の案が決まれば、拠点の置き方と人の配置を考え直す余地が出ます。 訪問サービスの利用が少ない日にも訪問職員を配置している小多機 → 配置の在り方が論点になっています。今後の資料で具体案が出るか確認が必要です。 中山間地域等の通所介護・通所リハ → 特別地域加算などの対象に加える案が出ています。決まれば収入の見通しが変わる可能性があります。 出典と段階 出典名 URL 公表日 段階 第274回社会保障審議会介護給付費分科会（会議ページ） 2026-11-06（開催日） 案 同 資料2「人口減少・サービス需要の変化に応じたサービス提供体制の構築（中山間地域等における加算/地域特性を背景としたサービス提供の効率化/事業者・従事者の不足への対応）」 2026-11-06（資料の日付） 案（小多機の訪問職員の配置は論点） 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 同じ回のハラスメント対策の資料についてはカスハラ対策を運営基準で「講ずべき措置」にする案を参照してください。 特養と併設事業所の配置については特養のケアマネ兼務を明確化する案を参照してください。 続報があれば追記します。 更新履歴 2026-11-12 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W45.html","title":"今週の介護ニュースまとめ（2026年11月2日〜11月8日）：所定内給与3.7%増、ケアマネのサテライト事業所の案ほか","date":"2026-11-12","period":"2026-11-02〜2026-11-08","summary":"11月2日〜11月8日の介護ニュースのまとめ。毎月勤労統計9月分速報（所定内給与3.7%増、パートの時給5.4%増）、居宅介護支援のサテライト事業所を制度化する案、特養のケアマネの兼務を明確化する案を、要点・影響・注意点と、気になるところを調べた答えで整理します。","stage":"","services":[],"tags":[],"text":"今週の総括 全産業の賃金の最新値と、令和9年度の介護報酬改定に向けた案が続いて出た週です。11月6日公表の毎月勤労統計（9月分速報）では、所定内給与が前年同月比3.7%増、パートタイム労働者の時間当たり給与が5.4%増でした。介護給付費分科会では、11月2日の第273回で特養のケアマネジャーの兼務を明確化する案が、11月6日の第274回で居宅介護支援のサテライト事業所を制度に位置付ける案が示されました。どちらも案や論点の段階で、決まってはいません。 毎月勤労統計9月分速報：所定内給与3.7%増、パートの時給5.4%増 一言でいうと ：全産業で、9月の所定内給与は前年同月より3.7%、パートタイム労働者の時給は5.4%上がりました。 要点 所定内給与は279,182円（前年同月比3.7%増）、一般労働者の所定内給与は356,516円（4.0%増）でした。 パートタイム労働者の時間当たり給与は1,463円（5.4%増）で、63か月連続のプラスです。実質賃金指数も2.2%増で、9か月連続のプラスでした。 厚労省が11月6日に公表した毎月勤労統計調査の速報（事業所規模5人以上）の数字です。速報値は確報で改訂される場合があります。 介護事業所への影響 ：応募者は、介護以外の求人とも給与を比べます。全産業で給与が上がっている中、自社の上げ幅がどの位置にあるかを知っておくと、求人の条件を決めやすくなります。 注意点 ：5.4%は全産業のパートの平均時給の伸びで、事業所ごとの賃上げ率とは数え方が違います。「自社の昨年の時給×1.054−自社の今年の時給」で、目安としての差をつかめます。 気になるところを調べました Q：介護（医療,福祉）だけの数字は？ A：産業別の数字は、KAIGO WEEKLYの記事では確かめていません。記事で使っているのは全産業（事業所規模5人以上）の数字です。 Q：この数字は今後変わる？ A：速報値なので、確報で改訂される場合があります。また、2026年1月の調査対象事業所の部分入替えで、現金給与総額に−1,582円（−0.5%）の断層があると資料に注記されています。 出典 ：厚生労働省「毎月勤労統計調査 2026（令和8）年9月分結果速報等」（2026-11-06公表、統計） ／ 同 報道発表資料（2026-11-06公表、統計） → 記事を読む：毎月勤労統計2026年9月分速報：所定内給与3.7%増、パートの時給5.4%増 ケアマネのサテライト事業所を制度化する案、小多機の訪問職員の配置も論点に 一言でいうと ：中山間地域等で、居宅介護支援の本体事業所とは別の活動拠点「サテライト事業所」を制度に位置付け、加算を設ける案が出ました。小規模多機能型居宅介護（小多機）の訪問職員の配置も論点に挙がりました。 要点 11月6日の第274回介護給付費分科会で、厚労省が示した 案 です。小多機の訪問職員の配置は、考え方を問う 論点 の段階で、具体的な見直しの中身は示されていません。 サテライト事業所の要件の例として、人員基準や加算・減算は本体と一体で扱う、事務室の区画は不要（貸し会議室やテレワークも可）、クラウドで本体に保存できれば書類を別に置かなくてよい、都道府県外には置けない（中山間地域等は緩和）、が挙がりました。 特別地域加算と中山間地域等における小規模事業所加算の対象に、通所系サービスを加える案も同じ資料に入っています。 介護事業所への影響 ：ケアマネジャーの従事者数は令和6年度で186,165人で、横ばい傾向の中で60歳代の割合が増えている、と資料は書いています。小多機の経営悪化・廃止の主な要因では「看護職員・介護職員の確保が困難なため」が52.6%でした（速報値、n=19）。決まれば、本体まで通うのが難しい地域の人や、テレワークを組み合わせたい人に、ケアマネジャーとして声をかけやすくなる可能性があります。小多機の訪問職員の配置は具体案がまだなく、配置が緩むことを前提に採用計画を変えるのは早い、というのが記事の見立てです。 注意点 ：中山間地域等を中心にした議論です。都市部の事業所への影響は、今の資料からは読み取れません。 気になるところを調べました Q：サテライト事業所には事務室が必要？ A：案では、事務室等の区画を自ら確保することは不要とし、貸し会議室の活用やテレワークも認めるとしています。まだ案で、決まってはいません。 Q：小多機の訪問職員は、置かなくてよくなる？ A：まだ決まっていません。資料は「実態に即した配置の在り方をどのように考えるか」と問う形にとどまっています。今の基準では、本体事業所で日中の訪問サービスに常勤換算で1以上の職員が必要です。 出典 ：厚生労働省 第274回社会保障審議会介護給付費分科会（2026-11-06開催、案） ／ 同 資料2「人口減少・サービス需要の変化に応じたサービス提供体制の構築（中山間地域等における加算/地域特性を背景としたサービス提供の効率化/事業者・従事者の不足への対応）」（2026-11-06、案。小多機の訪問職員の配置は論点） → 記事を読む：ケアマネのサテライト事業所を制度化する案、小多機の訪問職員の配置も論点に 特養のケアマネ、併設事業所の一体的な業務との兼務を明確化する案 一言でいうと ：特養の介護支援専門員が、居宅介護支援事業所以外の併設事業所等の業務のうち、本体施設と一体不可分なものを兼務できると明確化する案が出ました。 要点 11月2日の第273回介護給付費分科会で、厚労省が示した 案 です。入所者が減ったときの職員配置の数え方は 論点 の段階です。 入所者が入院したとき、退院の見込みにかかわらず3か月間ベッドを空けることを求める趣旨ではない、と運営基準上明確化する案も示されました。 離島・過疎地域以外の経過的小規模介護老人福祉施設の基本報酬の見直しや、退所支援に関する5つの加算の統合・整理（1年の経過措置つき）も、同じ資料の案です。 介護事業所への影響 ：介護職員等は、入所者数の「前年度の平均値」に応じて配置します。入所者が減っても原則は前年度の平均値で数えるため、実態より手厚く配置しないと人員欠如減算の対象になる可能性がある、と資料は書いています。この解釈をどうするかが論点です。兼務の案は、新しく兼務を認めるというより「兼務できる」と明確にするものです。決まれば、併設事業所を持つ特養で、ケアマネジャーの業務の割り振りを説明しやすくなる、というのが記事の見立てです。職員配置の数え方はまだ論点で、今の段階で採用を減らす判断をするのは早いとしています。 注意点 ：短期入所などを併設し、ケアマネジャーが1人しかいない特養に関係する話です。兼務の範囲が明確になれば、業務の分担を見直す余地が出ます。 気になるところを調べました Q：併設の居宅介護支援事業所との兼務も認められる？ A：案の対象は、居宅介護支援事業所以外の併設事業所等の業務で、本体施設の業務と一体不可分なものです。 Q：入所者が減ったら、職員を減らしてよくなる？ A：まだ決まっていません。「前年度の平均値」の解釈を問う論点で、入所者の増減に応じた柔軟な配置は、横断的事項の分科会で説明・議論する予定とされています。 出典 ：厚生労働省 第273回社会保障審議会介護給付費分科会（2026-11-02開催、案） ／ 同 資料1「介護老人福祉施設・地域密着型介護老人福祉施設入所者生活介護（改定の方向性）」（2026-11-02、案。職員配置の数え方は論点） → 記事を読む：特養のケアマネ、併設事業所の一体的な業務との兼務を明確化する案 そのほかの動き 厚労省は11月2日、10月12日に和歌山県民文化会館で開いた人生会議（ACP）の普及・啓発イベントの開催レポートとアーカイブ動画を公開しました。（出典） 厚労省は11月5日、「第64回技能五輪全国大会」を12月4日から7日まで開くと公表しました。（出典） 厚労省は11月6日、令和9年度全国安全週間（第100回）のスローガンの募集を始めました。募集は1月6日（当日消印有効）までで、テーマの例に転倒や腰痛の予防が含まれています。（出典） 厚労省は11月6日、第42回労働政策審議会労働政策基本部会を11月13日に開くと公表しました。議題は企業・有識者からのヒアリングです。（出典） 株式会社視える化は11月6日、大阪府の訪問看護ステーションとデイサービス1,000事業所の公開情報を同社が確認した「採用広報実態調査2026」の先行調査について公表しました（同社のリリース）。（出典） この週のまとめと各記事は、官公庁の一次情報と照らし合わせて作っています。制度の詳細は必ず出典で確認してください。","topics":["topic-maikin-2026-09-sokuhou","topic-caremane-satellite-shotaki-haichi-an-2026-11","topic-tokuyo-caremane-kenmu-an-2026-11"],"lead":"全産業の賃金の最新値と、令和9年度の介護報酬改定に向けた案が続いて出た週です。","topicTitles":["毎月勤労統計2026年9月分速報","ケアマネのサテライト事業所を制度化する案、小多機の訪問職員の配置も論点に（第274回介護給付費分科会）","特養のケアマネ、併設事業所の一体的な業務との兼務を明確化する案（第273回介護給付費分科会）"]},{"kind":"topic","file":"articles/topic-tokuyo-caremane-kenmu-an-2026-11.html","title":"特養のケアマネ、併設事業所の一体的な業務との兼務を明確化する案（第273回介護給付費分科会）","date":"2026-11-12","period":"2026-11-02〜2026-11-08","summary":"厚労省は第273回介護給付費分科会で、特養の介護支援専門員が、併設事業所等の業務のうち本体施設と一体不可分なものを兼務できると明確化する案を示しました。入所者が減ったときの職員配置の数え方も論点に挙がっています。どちらも決定ではありません。","stage":"案","services":["介護老人福祉施設","地域密着型介護老人福祉施設"],"tags":["人員基準","特養","ケアマネ","令和9年度介護報酬改定"],"text":"要点 特養の介護支援専門員について、居宅介護支援事業所以外の併設事業所等の業務で、本体施設の業務と一体不可分なものは兼務できると明確化する案が示されました。 2026-11-02の第273回社会保障審議会介護給付費分科会の資料1です。段階は 案 です。入所者が減ったときの職員配置の数え方は 論点 の段階です。 当てはまる事業所は注意：短期入所などを併設していて、ケアマネジャーの配置に悩んでいる特養は、今後の資料を確認してください。 対象 介護老人福祉施設、地域密着型介護老人福祉施設入所者生活介護。 何が起きたか 第273回社会保障審議会介護給付費分科会（2026-11-02）の資料1「介護老人福祉施設・地域密着型介護老人福祉施設入所者生活介護（改定の方向性）」で、厚労省が論点と対応案を示しました。 ケアマネジャーの兼務（対応案） 現行の基準では、特養の介護支援専門員は、専らその職務に従事する常勤の者でなければなりません。入所者の処遇に支障がない場合は、その特養の他の職務に従事できます。 併設事業所等での兼務は認められておらず、兼務を認めるべきという意見がある、と資料は書いています。 対応案は、居宅介護支援事業所以外の併設事業所等の業務であって、本体施設の業務と一体不可分なものについて、本体施設の業務と兼務できることを明確化する、というものです。 入院中のベッドの扱い（対応案） 入所者が入院し、おおむね3か月以内に退院が見込まれるときは、再入所できるようにしなければなりません。一部の自治体で、退院の見込みにかかわらず3か月間ベッドを空けるよう求める運用があるとの指摘がある、と資料は書いています。 対応案は、退院の見込みにかかわらず3か月間空床にすることを求める趣旨ではない旨を、運営基準上明確化する、というものです。 入所者が減ったときの職員配置（論点） 介護職員等は、入所者数の前年度の平均値に応じて配置します。入所者が減っても原則は前年度の平均値で配置するため、実態より手厚い配置をしないと人員欠如減算の対象になる可能性がある、と資料は書いています。 「前年度の平均値」の解釈をどう考えるかを問う論点で、入所者の増減に応じた柔軟な配置は、横断的事項の分科会で説明・議論する予定とされています。 そのほかの対応案（同じ資料） 離島・過疎地域以外にある経過的小規模介護老人福祉施設の基本報酬を、経営の安定性・持続性に配慮しつつ見直す。離島・過疎地域にある施設は、令和9年度報酬改定では見直さない。 退所支援に関する5つの加算（退所前訪問相談援助加算など）を統合・整理し、在宅・入所相互利用加算と小規模拠点集合型施設加算は廃止する。経営への影響を考え、1年の経過措置を設ける。 特別通院送迎加算を見直し、透析を継続的に必要とする入所者の受け入れと、送迎を含む一連の支援を総合的に評価する。 採用・定着への影響（編集部の見立て） ケアマネジャーの兼務の案は、新しく兼務を認めるというより、一体不可分な業務について「兼務できる」と明確にするものです。決まれば、併設事業所を持つ特養で、ケアマネジャーの業務の割り振りを説明しやすくなると考えます。 入所者が減ったときの配置の数え方は、職員数を決める前提に関わります。ただ、まだ論点で、どう変わるかは示されていません。今の段階で採用を減らす判断をするのは早いと考えます。 こんな事業所は注意 短期入所生活介護などを併設していて、ケアマネジャーが1人しかいない特養 → 兼務の範囲が明確になれば、業務の分担を見直す余地が出ます。 入所者が前年度より減っている特養 → 職員配置の数え方が論点になっています。今後の横断的事項の資料を確認する必要があります。 経過的小規模介護老人福祉施設（離島・過疎地域以外） → 基本報酬を見直す案が出ています。人件費の見通しに影響する可能性があります。 出典と段階 出典名 URL 公表日 段階 第273回社会保障審議会介護給付費分科会（会議ページ） 2026-11-02（開催日） 案 同 資料1「介護老人福祉施設・地域密着型介護老人福祉施設入所者生活介護（改定の方向性）」 2026-11-02（資料の日付） 案（職員配置の数え方は論点） 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 同じ週の第274回の資料についてはケアマネのサテライト事業所を制度化する案を参照してください。 続報があれば追記します。 更新履歴 2026-11-12 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-maikin-2026-09-sokuhou.html","title":"毎月勤労統計2026年9月分速報：所定内給与3.7%増、パートの時給5.4%増","date":"2026-11-12","period":"2026-11-02〜2026-11-08","summary":"厚労省の毎月勤労統計調査2026年9月分速報で、所定内給与は279,182円（前年同月比3.7%増）、パートタイム労働者の時間当たり給与は1,463円（5.4%増）でした。自社のパートの時給が全産業の伸びに追いついているかを確かめる計算の例も載せます。","stage":"統計","services":["全サービス"],"tags":["賃金","毎月勤労統計","求人票"],"text":"要点 2026年9月の所定内給与は279,182円で、前年同月比3.7%増でした。パートタイム労働者の時間当たり給与は1,463円（5.4%増）です。 厚労省が2026-11-06に公表した毎月勤労統計調査の速報（ 統計 ）です。事業所規模5人以上の数字で、速報値は確報で改訂される場合があります。 当てはまる事業所は注意：今年の賃上げ幅がこれより小さい事業所は、他産業の求人と並べられたときに見劣りしやすくなります。 対象 すべての介護サービス事業所（全産業の賃金の動きとして参考にする数字です）。 何が起きたか 厚労省は2026-11-06、毎月勤労統計調査2026（令和8）年9月分結果速報等を公表しました。報道発表資料の「調査結果のポイント」の主な数字は次のとおりです（事業所規模5人以上、カッコ内は前年同月比）。 項目 金額・指数 現金給与総額（就業形態計） 311,409円（4.6%増） きまって支給する給与 299,151円（3.6%増） 所定内給与 279,182円（3.7%増） 一般労働者の所定内給与 356,516円（4.0%増） パートタイム労働者の時間当たり給与（所定内給与） 1,463円（5.4%増。63か月連続プラス） 実質賃金指数（現金給与総額、持家の帰属家賃を除く総合で実質化） 83.7（2.2%増。9か月連続プラス） 夏季賞与（支給事業所の労働者1人平均） 448,765円（5.3%増） 所定内給与は、基本給・職務手当・地域手当・家族手当など、決まって支給する給与のうち時間外手当などを除いたものです。 2026年1月に調査対象事業所の部分入替えがあり、現金給与総額で−1,582円（−0.5%）の断層が生じている、と資料に注記があります。 産業別（医療,福祉など）の数字は、この記事では確かめていません。 採用・定着への影響（編集部の見立て） 応募者は、介護以外の求人とも給与を比べます。全産業で所定内給与が前年より3.7%、パートの時給が5.4%上がっている中で、自社の上げ幅がどの位置にあるかを把握しておくと、求人の条件を決めやすくなります。 実質賃金がプラスになっている時期は、他産業の求人も条件を上げている可能性があります。給与の見せ方（内訳や昇給の実績）を工夫する余地があると考えます。 数字で見る：自社のパートの時給は、全産業の伸びに追いついているか 何を確かめる計算か ：全産業のパートの時給は、1年で5.4%上がりました。自社のパートの時給も同じ5.4%上げていたらいくらになっていたかを出し、今の時給との差を見ます。差が大きいほど、他産業のパート求人と並べられたときに見劣りしやすくなります。 例 （数字はすべて仮のものです）：昨年の時給が1,200円のパート職員の時給を、今年30円上げて1,230円にした事業所の場合。 全産業と同じ5.4%上げていたら：1,200円 × 1.054 ≒ 1,265円 今の時給との差：1,265円 − 1,230円 ＝ 1時間あたり約35円 月80時間働く人なら：35円 × 80時間 ＝ 月約2,800円 自社で計算するには ：昨年の時給 × 1.054 − 今年の時給 ＝ 1時間あたりの差 注意 ：5.4%は全産業のパートの平均時給の前年同月比で、事業所ごとの賃上げ率とは数え方が違います。目安として使ってください（編集部の試算）。 こんな事業所は注意 パート職員の時給を今年あまり上げていない事業所 → 上の例（編集部の試算）では、月80時間で約2,800円の差になります。他産業のパート求人と比べられたときに見劣りしやすくなります。 求人票の給与を「時給◯円〜」の一行だけで書いている事業所 → 手当や昇給の実績が伝わらず、条件の良い部分が見えにくくなります（編集部の見立て）。 求人票の書き換え例 架空の事業所の例です。 書き換え前 時給1,230円〜 書き換え後 時給1,230円〜（内訳：基本時給1,150円＋処遇改善手当80円） 昇給：今年度は全員が対象で、時給30円アップ。 数字はすべて例です。自社の実際の数字に置き換えてください。 ※これは求人票の一部です。 実際の求人票には、法令で示すことになっている事項をすべて書く必要があります。 昇給の実績など約束にあたる記述は、事実である場合に限ってください。 出典と段階 出典名 URL 公表日 段階 毎月勤労統計調査 2026（令和8）年9月分結果速報等（掲載ページ） 2026-11-06 統計 同 報道発表資料 2026-11-06 統計 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 毎月の速報が出たら、続報として追記します。 更新履歴 2026-11-12 作成 2026-11-12 「数字で見る」を、何を確かめる計算かが分かる形に書き直し 効果は事業所によって異なります。書き換えた日を記録し、前後の応募数を比べて確かめてください。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-kaigo-yuko-kyujin-bairitsu-2026-09.html","title":"介護の有効求人倍率は3.94倍（2026年9月）：職業計1.08倍の約3.6倍","date":"2026-11-11","period":"2026-10-26〜2026-11-01","summary":"厚労省の一般職業紹介状況（令和8年9月分）で、介護サービスの職業の有効求人倍率は3.94倍（常用・パート含む）でした。求職者は前年より減り、就職件数も8.6%減っています。数字の読み方と、事業所が見ておきたい点を整理します。","stage":"統計","services":["全サービス"],"tags":["求人倍率"],"text":"要点 2026年9月の介護サービスの職業の有効求人倍率は3.94倍で、職業計の1.08倍を大きく上回りました（常用・パート含む）。 厚労省の一般職業紹介状況（令和8年9月分、2026-10-30公表）の参考統計表によります。前年同月より0.04ポイント上がっています。 当てはまる事業所は注意：ハローワークの求人だけで採用している事業所は、求職者が減るなか、出しているだけでは応募が集まりにくい状況が続いています。 対象 すべての介護サービス事業所（介護職の採用をしている事業所）。 何が起きたか 厚労省は2026年10月30日、一般職業紹介状況（令和8年9月分）を公表しました。公共職業安定所（ハローワーク）の求人・求職をもとにした統計です。 全体の有効求人倍率（季節調整値）は1.19倍で、前月より0.01ポイント上がりました。 参考統計表の職業別の表（常用・パート含む、実数）では、「介護サービス職業従事者」の数字は次のとおりです。 項目 2026年9月 前年同月との比較 有効求人倍率 3.94倍 ＋0.04ポイント 新規求人倍率 6.49倍 ＋0.65ポイント 有効求人数 205,014人 −1.2% 有効求職者数 52,093人 −2.2% 新規求人数 68,340人 ＋3.5% 新規求職者数 10,534人 −6.8% 就職件数 4,711件 −8.6% 同じ表の職業計は、有効求人倍率1.08倍、新規求人倍率2.10倍です。 パートを除く常用で見ると、介護サービス職業従事者の有効求人倍率は3.54倍（前年同月より＋0.11ポイント）、新規求人倍率は5.71倍（＋0.60ポイント）でした。 参考：同じ表の「社会福祉専門職業従事者」の有効求人倍率は2.55倍（常用・パート含む、前年同月より−0.06ポイント）です。 採用・定着への影響（編集部の見立て） 求人の数は前年とほぼ同じなのに、求職者と就職件数が減っています。ハローワーク経由で決まる採用は、1年前より少なくなっていると読めます。 求職者1人に約4件の求人がある状態なので、応募者は条件を比べて選べます。求人票の中身と、応募後の対応の早さで差がつきやすい局面です。 採れにくい状態が続くほど、今いる職員に辞められたときの穴は埋めにくくなります。定着の取り組みも採用と同じくらい重みが増します。 数字で見る 求人1件あたり、その月にハローワーク経由で就職が決まった件数の目安を、1年前と比べます。 項目 値 種類 2026年9月の有効求人数 205,014人 統計 2026年9月の就職件数 4,711件 統計 前年同月の有効求人数 約207,500人 前年同月比（−1.2%）からの 逆算 前年同月の就職件数 約5,150件 前年同月比（−8.6%）からの 逆算 計算： 2026年9月：4,711 ÷ 205,014 ≒ 2.30% 前年同月：約5,150 ÷ 約207,500 ≒ 2.48% 読み方と注意： 求人を100件出しているとすると、1か月に決まる就職はおよそ2.5件から2.3件に減った計算です。全国平均で見た目安です。 前年同月の値は、公表されている前年同月比（小数第1位まで）から逆算したもので、端数の誤差があります。 就職件数はその月にハローワークの紹介で決まった件数で、有効求人はその月に有効だった求人の数です。1つの求人で何人採用するかは含まれていないので、求人1件が埋まる確率そのものではありません。 職業別の数字は季節調整していない実数で、全体の1.19倍（季節調整値）とは数え方が違います。並べて比べるときは注意してください。 こんな事業所は注意 ハローワークにだけ求人を出している事業所 → 求職者が前年より2.2%減り、就職件数は8.6%減っています。同じやり方のままだと、応募が減ることがあります（編集部の見立て）。 求人票の内容を1年以上変えていない事業所 → 求職者1人に約4件の求人があり、比べられやすい状態です。給与の内訳や休日などの条件が伝わっているかを見直す時期です。 欠員が出てから募集を始める事業所 → 採用までにかかる時間が延びやすく、その間は今いる職員の負担が増えます。 出典と段階 出典名 URL 公表日 段階 厚生労働省 一般職業紹介状況（令和8年9月分）について 2026-10-30 統計 同 参考統計表（参考統計表7-1・7-2・8-1・8-2） 2026-10-30 統計 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 一般職業紹介状況は毎月公表されます。10月分が出たら、介護サービスの職業の数字を追記します。 更新履歴 2026-11-11 作成（下書き） 効果は事業所によって異なります。統計の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-chiiki-kubun-r9-keika-sochi-an.html","title":"介護報酬の地域区分、令和9年度から公務員の地域手当に合わせる案：経過措置は令和11年度末まで","date":"2026-11-11","period":"2026-10-26〜2026-11-01","summary":"第272回介護給付費分科会（2026-10-28）で、厚労省は令和9年度以降の地域区分を公務員の地域手当に合わせて設定し、市町村が望めば従来の上乗せ割合を保てる経過措置を令和11年度末まで設ける案を示しました。1単位の単価で報酬がどれだけ変わるかを試算します。","stage":"案","services":["全サービス"],"tags":["介護報酬改定","地域区分","人件費"],"text":"要点 令和9年度以降の地域区分について、公務員の地域手当に合わせて級地を決め、市町村が望めば従来の上乗せ割合を保てる経過措置を令和11年度末まで設ける案が出ました。 2026-10-28の第272回介護給付費分科会で厚労省が示した 案 で、まだ決まっていません。市町村の意向をもう一度確かめてから設定するとしています。 当てはまる事業所は注意：事業所のある市町村の上乗せ割合が変わると、同じサービスを提供しても入る報酬が変わり、賃金に回せる原資も変わります。 対象 すべての介護サービス事業所。人件費割合の高いサービス（訪問介護、居宅介護支援など）ほど、上乗せ割合の変化の影響が大きくなります。 何が起きたか 地域区分は、人件費の地域差を介護報酬に反映する仕組みです。市町村ごとに級地が決まり、サービスごとの人件費割合（70%・55%・45%）に応じて1単位の単価（10円〜11.40円）が決まります。 公務員の地域手当は、令和7年度から、地域の単位を都道府県単位を基本に広げ、級地を7区分から5区分（20%・16%・12%・8%・4%）にする見直しが段階的に行われています。 厚労省は令和8年2月に、令和9年度以降の地域区分の意向を市町村に聞きました。結果は次のとおりです。 市町村の回答 自治体数 公務員の地域手当に合わせる（上乗せ割合は今と変わらない） 1,088（62.5%） 公務員の地域手当に合わせる（上乗せ割合が今より上がる） 438（25.2%） 今と同じ上乗せ割合を希望（経過措置を希望） 140（8.0%） その他 75（4.3%） この結果を踏まえ、厚労省は次の案を示しました。 原則：最新の民間賃金を反映した公務員（国家・地方）の地域手当に合わせて級地を決める。 経過措置：市町村が望む場合、従来の上乗せ割合と公務員の地域手当の範囲内で級地や上乗せ割合を決められる。期限は令和11年度末までとし、令和12年度以降は令和12年度の報酬改定のときに市町村の意見を聞く。 特例：今の「5級地差ルール」と「4級地差ルール」を見直し、3級地以上離れた地域と隣り合う場合に、2級地差まで引き上げ・引き下げできる「3級地差ルール」にする。「完全囲まれルール」「複数隣接ルール」「広域連合ルール」「他制度との均衡ルール」は続ける。 この特例の見直しを前提に、市町村の意向をもう一度確かめてから、令和9年度以降の地域区分を決める。 分科会の資料には、上乗せ割合が下がる地域での人材確保や賃金への影響を心配する委員や団体の意見も載っています。 採用・定着への影響（編集部の見立て） 地域区分が上がる地域では、同じ提供量でも報酬が増え、賃上げの原資が増えます。隣の市町村と級地の差が大きい地域では、職員が単価の高い側へ流れるのを抑えることにもつながりえます。 下がる地域では、経過措置を市町村が使うかどうかで影響が変わります。経過措置は令和11年度末までの案なので、その先の単価も考えておく必要があります。 自社の市町村がどう回答したかは、資料には載っていません。市町村の介護保険担当に確かめておくと、来年度の賃金計画を立てやすくなります。 数字で見る 人件費割合45%のサービス（通所介護など）で、上乗せ割合が10%から12%に上がった場合の例です。資料にある「5級地（10%）から3級地（12%）へ」の例に合わせています。 項目 値 種類 サービス 人件費割合45%（通所介護など） 資料の区分 1か月の単位数 100,000単位 仮定 上乗せ割合10%の1単位の単価 10.45円 現行の単価表 上乗せ割合12%の1単位の単価 10.54円 現行の単価表 利用者負担分 報酬総額に含めて計算 仮定 計算： 10%のとき：100,000単位 × 10.45円 ＝ 1,045,000円 12%のとき：100,000単位 × 10.54円 ＝ 1,054,000円 差：月9,000円、年108,000円 （×12か月） 読み方と注意： 同じ条件で人件費割合70%のサービス（訪問介護など）なら、単価は10.70円から10.84円に上がり、差は月14,000円、年168,000円です。 上乗せ割合が下がる場合は、同じ計算で報酬が減ります。経過措置を使えば、従来の割合を保てる案になっています。 単価は現行の単価表の値です。令和9年度以降の各級地の上乗せ割合と単価は、まだ示されていません。 報酬全体の改定率や加算の変更は入れていません。地域区分だけを動かしたときの目安です。 こんな事業所は注意 公務員の地域手当の見直しで、級地が下がる市町村にある事業所 → 市町村が経過措置を使わなければ、1単位の単価が下がります。経過措置を使っても、案では令和11年度末までです。 隣の市町村と級地の差が大きい地域の事業所 → 新しい「3級地差ルール」の案で、選べる級地が変わる可能性があります。 人件費割合70%のサービス（訪問介護、訪問看護、居宅介護支援など）を中心にしている事業所 → 上乗せ割合の差が単価に大きく出ます。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第272回社会保障審議会介護給付費分科会 資料3「地域区分（改定の方向性）」 2026-10-28 案 同 会議ページ 2026-10-28 案 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 市町村への意向の再確認の結果や、令和9年度以降の級地の一覧が示されたら追記します。 更新履歴 2026-11-11 作成（下書き） 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W44.html","title":"今週の介護ニュースまとめ（2026年10月26日〜11月1日）：介護の求人倍率3.94倍、地域区分の見直し案ほか","date":"2026-11-11","period":"2026-10-26〜2026-11-01","summary":"10月26日〜11月1日の介護ニュースのまとめ。介護の有効求人倍率3.94倍（2026年9月）、介護報酬の地域区分を公務員の地域手当に合わせる案、新設の「登録施設介護支援」の人員基準の案を、要点・影響・注意点と、気になるところを調べた答えで整理します。","stage":"","services":[],"tags":[],"text":"今週の総括 介護の求人倍率の最新値と、令和9年度の介護報酬改定に向けた2つの案が出た週です。9月の介護サービスの職業の有効求人倍率は3.94倍で、求職者も就職件数も前年より減りました。介護給付費分科会（10月28日）では、報酬の地域差を決める「地域区分」を公務員の地域手当に合わせる案と、新しいケアマネジメント「登録施設介護支援」の人員基準の案が示されました。どちらもまだ案で、決まってはいません。 介護の有効求人倍率は3.94倍（2026年9月） 一言でいうと ：介護職は、求職者1人に求人がおよそ4件ある状態が続き、ハローワーク経由の就職件数は前年より8.6%減りました。 要点 介護サービスの職業の有効求人倍率は3.94倍で、職業計の1.08倍を大きく上回りました（常用・パート含む）。 有効求職者数は52,093人で前年同月より2.2%減、就職件数は4,711件で8.6%減でした。 厚労省の一般職業紹介状況（令和8年9月分、10月30日公表）の数字です。 介護事業所への影響 ：3.94倍＝求職者1人に、求人がおよそ4件。応募者は条件を比べて選べる状態です。求人の数は前年とほぼ同じなのに、求職者と就職件数が減っています。ハローワークに求人を出しているだけでは、応募が集まりにくくなっています。 注意点 ：倍率だけでなく、就職件数が前年より8.6%減っていることも見てください。同じやり方のままだと、応募が減ることがあります（編集部の見立て）。 気になるところを調べました Q：3.94倍は、全体の求人倍率（1.19倍）と比べてよいの？ A：数え方が違います。3.94倍は季節調整をしていない実数、1.19倍は季節調整値です。並べるときは同じ表の職業計（1.08倍）と比べます。 Q：パートを除くとどうなる？ A：常用（パートを除く）の介護サービス職業従事者は3.54倍です。 出典 ：厚生労働省「一般職業紹介状況（令和8年9月分）について」（2026-10-30公表、統計） → 記事を読む：介護の有効求人倍率は3.94倍（2026年9月） 介護報酬の地域区分、公務員の地域手当に合わせる案 一言でいうと ：令和9年度から、報酬の地域差（地域区分）を公務員の地域手当に合わせ、市町村が望めば令和11年度末まで今の上乗せ割合を保てる案が出ました。 要点 10月28日の第272回介護給付費分科会で、厚労省が示した 案 です。まだ決まっていません。 市町村への意向調査では、「公務員の地域手当に合わせる（上乗せ割合は今と変わらない）」が1,088自治体（62.5%）でした。 隣り合う地域との差の特例は、「3級地差ルール」に見直す案です。市町村の意向をもう一度確かめてから決めるとしています。 介護事業所への影響 ：事業所のある市町村の上乗せ割合が変わると、同じサービスでも入る報酬が変わり、賃金に回せる原資も変わります。 注意点 ：自分たちの市町村がどう回答したかは、資料に載っていません。来年度の賃金計画のために、市町村の介護保険の担当に確かめておくとよい、という話です。 気になるところを調べました Q：もう決まったの？ A：まだ案です。市町村の意向をもう一度確かめてから、令和9年度以降の地域区分を決めるとしています。 Q：上乗せ割合が下がる地域はどうなる？ A：市町村が望めば、経過措置で令和11年度末まで従来の割合を保てる案です。 出典 ：厚生労働省 第272回社会保障審議会介護給付費分科会 資料3「地域区分（改定の方向性）」（2026-10-28公表、案） → 記事を読む：地域区分を公務員の地域手当に合わせる案 新設の「登録施設介護支援」、人員基準の案 一言でいうと ：住宅型有料老人ホームの入居者のケアプランを作る新しいサービスで、ケアマネに加えて「地域生活相談員」を1人以上置く案が出ました。ケアマネとの兼務を認める案です。 要点 10月28日の第272回介護給付費分科会で、厚労省が人員・運営基準と報酬の 案 を示しました。 ケアマネは居宅介護支援と同じく常勤1人以上（利用者44人に1人が基準）、人員は居宅介護支援と一体で数える案です。 利用者負担は原則1割を求めると、法改正の概要に示されています。 介護事業所への影響 ：兼務できる案なので、すぐ人を増やさなくても対応できる事業所が多そうです。ただ、地域の情報集めや外出の調整は新しい仕事で、ケアマネ1人あたりの負担は増えます。 注意点 ：住宅型有料老人ホームの入居者を担当している居宅介護支援事業所に関係する話です。担当している事業所は、利用者負担の受け取りなど、新しい事務も増える見込みです。 気になるところを調べました Q：いつから？ A：有料老人ホームの登録制が始まり、既存のホームの移行の経過措置期間が終わるころを想定している、と資料に書かれています。 Q：今の居宅介護支援の指定はどうなる？ A：法律では、施行のときに指定を受けている事業者は、施行日から6年を超えない範囲で政令で定める日まで、登録施設介護支援の指定を受けたものとみなされます。 出典 ：厚生労働省 第272回社会保障審議会介護給付費分科会 資料2「登録施設介護支援・登録施設介護予防支援（改定の方向性）」（2026-10-28公表、案） → 記事を読む：新設の「登録施設介護支援」、人員基準の案 そのほかの動き 厚労省は10月26日、介護報酬改定検証・研究委員会（第33回）で、令和6年度介護報酬改定の効果検証の調査（令和8年度調査）の結果（速報値）を議題にしました。（出典） 厚労省は10月30日、介護給付費等実態統計月報（令和8年7月審査分）を公表しました。（出典） 厚労省は10月30日、令和8年度地域介護・福祉空間整備等施設整備交付金（一次協議分）の追加内示を公表しました。（出典） 厚労省は、11月を「『しわ寄せ』防止キャンペーン月間」としました（10月30日公表）。（出典） 厚労省は、11月を「人材開発促進月間」としました（10月30日公表）。（出典） 厚労省は10月30日、令和9年度「高年齢者活躍企業コンテスト」の事例の募集を始めました。（出典） この週のまとめと各記事は、官公庁の一次情報と照らし合わせて作っています。制度の詳細は必ず出典で確認してください。","topics":["topic-kaigo-yuko-kyujin-bairitsu-2026-09","topic-chiiki-kubun-r9-keika-sochi-an","topic-toroku-shisetsu-kaigo-shien-jinin-kijun-an"],"lead":"介護の求人倍率の最新値と、令和9年度の介護報酬改定に向けた2つの案が出た週です。","topicTitles":["介護の有効求人倍率は3.94倍（2026年9月）","介護報酬の地域区分、令和9年度から公務員の地域手当に合わせる案","新設の「登録施設介護支援」、人員基準の案"]},{"kind":"topic","file":"articles/topic-toroku-shisetsu-kaigo-shien-jinin-kijun-an.html","title":"新設の「登録施設介護支援」、人員基準の案：ケアマネに加え地域生活相談員を1人以上（兼務可）","date":"2026-11-11","period":"2026-10-26〜2026-11-01","summary":"第272回介護給付費分科会（2026-10-28）で、住宅型有料老人ホームの入居者を担当する新しいケアマネジメント「登録施設介護支援」の人員基準・運営基準・報酬の案が示されました。居宅介護支援事業所にとって何が変わりうるかを整理します。","stage":"案","services":["居宅介護支援","介護予防支援"],"tags":["介護報酬改定","ケアマネ","人員基準","有料老人ホーム"],"text":"要点 登録制の対象となる住宅型有料老人ホームの入居者のケアプランを作る新しいサービス「登録施設介護支援」について、ケアマネに加えて「地域生活相談員」を1人以上置く人員基準の案が出ました。地域生活相談員はケアマネとの兼務を認める案です。 2026-10-28の第272回介護給付費分科会で厚労省が示した 案 で、まだ決まっていません。 当てはまる事業所は注意：住宅型有料老人ホームの入居者を担当している居宅介護支援事業所は、新しいサービスの基準・報酬・利用者負担の受け取りに対応することになりそうです。 対象 居宅介護支援事業所・介護予防支援事業所（地域包括支援センターを含む）のうち、登録制の対象となる住宅型有料老人ホームの入居者を担当している、またはこれから担当する事業所。 何が起きたか 社会福祉法等の一部を改正する法律（令和8年法律第51号）で、有料老人ホームの登録制とあわせて、入居者のケアプラン作成と地域とのつながりの支援をまとめて行う「登録施設介護支援」「登録施設介護予防支援」が新しく設けられました。ホームとケアマネの独立性を保つことがねらいです。 法律では、施行のときに居宅介護支援の指定を受けている事業者は、施行日から6年を超えない範囲で政令で定める日まで、登録施設介護支援の指定を受けたものとみなされます（別に申し出た場合を除く）。 第272回分科会で厚労省は、基準と報酬について次の案を示しました。 人員：居宅介護支援と同じくケアマネを常勤で1人以上（利用者44人にケアマネ1人が基準。ケアプランデータ連携システムを使う場合は49人に1人）。加えて地域生活相談員を1人以上置き、ケアマネとの兼務を認める。 地域生活相談員を別に置く場合の資格：ケアマネ、または社会福祉主事などの資格を持つ人。 管理者：居宅介護支援と同じとする。資料の基準案では「実務経験5年以上の常勤専従のケアマネ」と書かれています。 人員の数え方：あわせて行う居宅介護支援の人員と一体で数える。 地域生活相談の内容：地域の支援機関や行事などの情報を集めてリスト化し、入居者に紹介して参加を促す、外出の妨げを取り除く調整をする、行き先などをホームと共有する、などの5項目。 運営基準：居宅介護支援に準じつつ、ホームとの密接な連携に努めること、利用者負担額を受け取ること、ホームから得た情報も踏まえてケアプランを作ること、地域生活相談の内容をケアプランに位置付けて記録すること、を加える。 報酬：居宅介護支援と同じ枠組みを前提に、地域生活相談の実施と集合住宅であることを踏まえて設定する。逓減制は居宅介護支援と合わせた利用者数で判断し、低い単価は登録施設介護支援の利用者全体に分散して当てる。 利用者負担は、介護付きホームとの均衡から原則1割を求めると、法改正の概要に示されています。 施行時期は、有料老人ホームの登録制が始まった後、既存のホームの移行の経過措置期間が終わるころを想定している、と資料に書かれています。 採用・定着への影響（編集部の見立て） 地域生活相談員をケアマネが兼務できる案なので、すぐに人を増やさなくても対応できる事業所が多そうです。ただ、地域の情報集めや外出の調整は新しい仕事で、ケアマネ1人あたりの負担は増えます。分科会でも、ケアマネの負担が増えて人材確保がさらに難しくなるという懸念が出ています。 別に置く場合は社会福祉主事などの資格でもよい案なので、相談員経験のある人をケアマネ以外の職種で採る道も考えられます。 利用者負担の請求・受け取りの事務が加わります。事務職員の配置や、請求ソフトの対応も早めに確かめておくと慌てずにすみます。 数字で見る 居宅介護支援事業所が住宅型有料老人ホームの入居者も担当している場合の、人員の数え方の例です。 項目 値 種類 常勤ケアマネ 2人 仮定 居宅介護支援の利用者 60人 仮定 登録施設介護支援の利用者（ホーム入居者） 20人 仮定 ケアマネ1人あたりの基準 利用者44人 案 地域生活相談員 ケアマネが兼務 仮定 （案では兼務可） 計算： 案では居宅介護支援と一体で数えるので、利用者は60人＋20人＝80人です。 80人 ÷ 44人 ≒ 1.82人 → 常勤ケアマネ2人で基準を満たします。 地域生活相談員をケアマネが兼務すれば、 追加で採用する人数は0人 です。別に置く場合は 1人 増えます。 読み方と注意： 介護予防の利用者の数え方（居宅介護支援では3分の1で数える）や、報酬の逓減制は入れていません。 基準を満たすかどうかの目安で、地域生活相談にかかる時間は入れていません。兼務の場合、ケアマネの業務量は増えます。 基準・報酬はまだ案です。 こんな事業所は注意 住宅型有料老人ホームに併設・隣接している居宅介護支援事業所 → ホームとの独立性を保つ運営基準が加わる案です。ケアプランにホームの情報をどう反映したかを記録で示せるようにしておく必要がありそうです。 ケアマネ1人で運営している事業所 → 地域生活相談を兼務すると、その分の時間を見込む必要があります。 ケアマネ1人あたりの担当件数が、居宅介護支援の逓減制の境目（現行は45件、ケアプランデータ連携システムの活用などで50件）に近い事業所 → 逓減制を居宅介護支援と合わせた利用者数で判断する案なので、ホーム入居者の分を足すと境目を超えることがあります。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第272回社会保障審議会介護給付費分科会 資料2「登録施設介護支援・登録施設介護予防支援（改定の方向性）」 2026-10-28 案 同 会議ページ 2026-10-28 案 出典：厚生労働省ホームページ（ WEEKLY 編集部が要約・加工して作成 この話題の経緯・続報 居宅介護支援の管理者要件の案は居宅介護支援の管理者に主任ケアマネを求めない案を参照してください。 報酬の単位数や施行日が示されたら追記します。 更新履歴 2026-11-11 作成（下書き） 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W43.html","title":"1週間まとめ（10/19〜10/25の動き）","date":"2026-10-27","period":"2026-10-19〜2026-10-25","summary":"居宅の管理者に主任ケアマネを求めない案、ケアマネの定期研修と減算の案、医療・福祉の新卒3年以内離職率（大卒39.1%）を取り上げます。","stage":"","services":[],"tags":[],"text":"ケアマネの採用と配置の前提が変わりうる提案が出た週です。 ケアマネの定期研修：未受講の配置に減算の案 （提案の段階）→ ケアマネの定期研修：人員基準への位置付けと未受講の減算案 新卒の3年以内離職率、医療・福祉は大卒39.1% → 新卒の3年以内離職率：医療・福祉は大卒39.1%、高卒49.4% 今週の数字：管理者の候補が1人から3人に （主任ケアマネ要件の撤廃案。架空の事業所で試算）→ 居宅介護支援の管理者に主任ケアマネを求めない案 運営：採用サイト・採用ページの制作を行う大島健太郎","topics":["topic-kyotaku-kanrisha-shunin-caremane-yoken","topic-caremane-teiki-kenshu-genzan-an","topic-shinsotsu-rishokuritsu-iryo-fukushi-2026"],"lead":"ケアマネの採用と配置の前提が変わりうる提案が出た週です。","topicTitles":["居宅介護支援の管理者に主任ケアマネを求めない案","ケアマネの定期研修","新卒の3年以内離職率"]},{"kind":"topic","file":"articles/topic-caremane-teiki-kenshu-genzan-an.html","title":"ケアマネの定期研修：人員基準への位置付けと未受講の減算案（2027年度改定）","date":"2026-10-27","period":"2026-10-19〜2026-10-25","summary":"更新制の廃止を受け、厚労省は10/19の分科会で、定期研修の受講者の配置を人員基準に位置付け、正当な理由なく未受講の人を配置する場合に減算する案を示しました。ケアマネを置くほかのサービスにも広げる案があります。","stage":"案","services":["居宅介護支援","ケアマネを置くサービス（案）"],"tags":["ケアマネ","研修","報酬改定"],"text":"要点 定期研修の受講者の配置を人員基準に求め、正当な理由のない未受講者を配置した場合に減算する案です。配置と管理者の責務は、ケアマネを置くほかのサービスにも広げる案です。 2026-10-19の介護給付費分科会（資料6 p.45）での「〜してはどうか」という提案の段階です。 当てはまる事業所は注意：ケアマネの研修を勤務扱いにするか、費用を誰が出すかが決まっていない事業所は、案が決まると配置の要件と減算に関わります。 対象 居宅介護支援事業所。研修受講者の配置と管理者の責務については、ケアマネを配置するほかのサービスも対象になりえます。資料にサービス名の列挙はなく、グループホーム・小規模多機能・特養などは編集部の例示です。 何が起きたか 2026年6月の改正介護保険法で、ケアマネの資格の更新制の廃止が決まりました。 それを受けて10/19の分科会で、厚労省は対応案として次の3点を示しました。 人員基準で、定期的な研修を受けている人をケアマネとして配置するよう求めてはどうか。 管理者の責務として、ケアマネに研修の受講を勧めることを位置付けてはどうか。 正当な理由なく研修を受けていない人を配置している場合に、減算の規定を設けてはどうか。 さらに、研修を受けているケアマネの配置と管理者の責務は、ケアマネを配置するほかのサービスにも同様に広げてはどうか、とされています。 採用・定着への影響（編集部の見立て） 研修を受けやすい環境があるかどうかが、ケアマネの採用・定着で比べられる項目になる可能性があります。ここでいう環境とは、研修を勤務扱いにするか、費用を誰が出すか、シフトを調整できるか、です。 居宅介護支援だけでなく、GHや特養でケアマネを置いている事業所も関係します。 こんな事業所は注意 ケアマネの研修を勤務扱いにするか、費用を誰が出すかのルールがない事業所 → 案が決まると、研修を受けていないケアマネの配置が人員基準や減算の対象になりえます。受講を後回しにしやすい体制に注意が必要です。 居宅介護支援以外でケアマネを置いている事業所（GH・小規模多機能・特養などは編集部の例示） → 研修受講者の配置と管理者の責務は、ほかのサービスにも広げる案があります。減算まで広がるかは資料からは読み取れません。 管理者 → 案では、ケアマネに研修の受講を勧めることが管理者の責務になります。 求人票の書き換え例 研修の扱いの書き方は居宅介護支援の管理者に主任ケアマネを求めない案の書き換え例（管理者候補の要件と研修の扱い）を参照してください。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第271回介護給付費分科会 資料6（p.45／PDF46ページ目） 2026-10-19 案 この話題の経緯・続報 同じ第271回分科会（10/19）の管理者要件の案：居宅介護支援の管理者に主任ケアマネを求めない案 GHのケアマネ配置の論点：認知症GHの計画作成担当者（ケアマネ）の配置見直し案 年末に大枠が固まれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-kyotaku-kanrisha-shunin-caremane-yoken.html","title":"居宅介護支援の管理者に主任ケアマネを求めない案：要件は実務5年等に","date":"2026-10-27","period":"2026-10-19〜2026-10-25","summary":"10/19の介護給付費分科会で、厚労省は居宅介護支援事業所の管理者に主任ケアマネであることを求めず、ケアマネで5年の実務経験等を有する者とする案を示しました。管理者候補の層がどう広がるかを試算します。","stage":"案","services":["居宅介護支援"],"tags":["ケアマネ","管理者","報酬改定","求人票"],"text":"要点 管理者の要件を「主任ケアマネ」から「ケアマネで、5年の実務経験等を有する者」に変える案が示されました。 2026-10-19の介護給付費分科会（資料6）での「〜してはどうか」という提案の段階です。 当てはまる事業所は注意：経過措置で管理者を続けている事業所は、令和9年3月31日の期限との関係に注意が必要です。 対象 居宅介護支援事業所。 何が起きたか 10/19の介護給付費分科会で、厚労省は対応案として次の2点を示しました。 居宅介護支援事業所の管理者には、主任ケアマネであることを求めないこととしてはどうか。 管理者の要件は、ケアマネであって5年の実務経験等を有する者としてはどうか。 主任ケアマネの本来の役割（地域の連絡調整や人材育成）と、管理者の業務（労務・財務管理）を分けて考えるため、とされています。 現行の経過措置では、令和3年3月31日時点で主任ケアマネでない人が管理者を続けている事業所は、令和9年3月31日まで要件の適用が猶予されています。 採用・定着への影響（編集部の見立て） 管理者の後任を主任ケアマネに限らず探せるようになれば、後任探しの難しさが和らぐ可能性があります。 経過措置で管理者を続けている事業所にとっては、令和9年3月の期限との関係が気になるところです。決まるまでは今の要件で動く必要があります。 数字で見る ある事業所を例に、管理者になれる人の数を比べます。 前提（架空の事業所） 人数 種類 在籍しているケアマネ 5人 仮定 うち主任ケアマネ 1人（現在の管理者） 仮定 うち実務経験5年以上（主任を含む） 3人 仮定 うち常勤・専従で働ける人 3人とも 仮定 管理者は原則として常勤・専従なので、「実務5年以上」かつ「常勤・専従で働ける」人を候補として数えます。 比べると： 現行 ：管理者になれるのは主任ケアマネの1人だけ。その1人が辞めると、管理者の後任を外から探す必要がある。 案 ：実務5年以上で常勤・専従の3人が候補になる。管理者が辞めても、社内に候補が2人残る。 参考になる公的な数字：厚労省の資料によると、居宅介護支援事業所の管理者（N=977、令和7年10月1日現在）は次のとおりです。 実務経験5年以上：84.3%（うち10年以上が62.4%） 主任ケアマネである：90.3% この数字は、第271回分科会資料6のp.24（PDF25ページ目）に載っています。第259回分科会（R8.6.29）資料6の再掲で、元のデータは令和7年度老人保健健康増進等事業の調査（株式会社三菱総合研究所）です。 注意： 「5年の実務経験等」の「等」の中身は、まだ決まっていません。上の人数は計算のための仮の数字です。 管理者の要件が変わっても、主任ケアマネは特定事業所加算の要件などで引き続き必要です。主任ケアマネを確保する必要がなくなるわけではありません。 自分の事業所で数える式：在籍するケアマネのうち、実務経験5年以上で、常勤・専従で働ける人の人数を数えます。 こんな事業所は注意 管理者が主任ケアマネではなく、経過措置で管理者を続けている事業所 → 現行の猶予は令和9年3月31日までです。案が決まれば要件そのものが変わりますが、決まるまでは今の要件で動く必要があります。 主任ケアマネが1人だけで、その人が管理者の事業所 → 案が決まると、実務5年等で常勤・専従のケアマネも管理者の候補になります。ただし主任ケアマネは、特定事業所加算などで引き続き必要です。 求人票の書き換え例 架空の事業所の例です。 書き換え前 主任介護支援専門員の方、歓迎。将来の管理者候補。 書き換え後 介護支援専門員（ケアマネ）を募集します。実務経験は問いません。経験を積んだ方には、管理者をお任せしたいと考えています（管理者の要件は国の制度に従います。現在、制度の見直しが議論されています）。 法定研修・定期研修は勤務時間として扱い、受講費用は事業所が負担します。研修の日はシフトを調整します。 「主任であること」だけを条件にせず、管理者になる道筋と研修の扱いを書くのがポイントです。決まっていない制度の中身は書かないでください。 ※これは求人票の一部です。 業務内容・就業場所・労働時間・賃金・保険など、明示すべき事項は別にすべて書く必要があります。2024年4月からは、業務と就業場所の変更の範囲も対象です。 約束にあたる記述（研修費の負担など）は、事実である場合に限ってください。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第271回介護給付費分科会 資料6（対応案 p.32／PDF33ページ目） 2026-10-19 案 同 資料6（経過措置 p.23／PDF24ページ目） 同上 2026-10-19 現行制度 同 資料6（管理者の実務経験・主任資格 p.24／PDF25ページ目。第259回資料6の再掲、元は令和7年度老健事業の調査） 同上 2026-10-19 調査 この話題の経緯・続報 同じ第271回分科会（10/19）では、ケアマネの定期研修の扱いも示されました：ケアマネの定期研修と減算の案 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。書き換えた日を記録し、前後の応募数を比べて確かめてください。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-shinsotsu-rishokuritsu-iryo-fukushi-2026.html","title":"新卒の3年以内離職率：医療・福祉は大卒39.1%、高卒49.4%（令和5年3月卒）","date":"2026-10-27","period":"2026-10-19〜2026-10-25","summary":"厚労省の新規学卒就職者の離職状況（令和5年3月卒業者）で、医療・福祉の3年以内離職率は大卒39.1%、高卒49.4%でした。全体の大卒31.2%・高卒36.9%を上回ります。1年目のフォローの考え方を整理します。","stage":"統計","services":["全サービス"],"tags":["定着・離職","新卒採用"],"text":"要点 医療・福祉の新卒の3年以内離職率は、大卒39.1%、高卒49.4%でした。全体は大卒31.2%、高卒36.9%です。 厚労省の統計（令和5年3月卒業者）で、公表は2026-10-23です。 当てはまる事業所は注意：新卒を採っている事業所は、3年以内に大卒で約4割、高卒で約半数が辞める産業だという前提で考える必要があります。 対象 新卒・若手を採用しているすべての事業所。 何が起きたか 厚労省の「新規学卒就職者の離職状況（令和5年3月卒業者）」によると、就職後3年以内の離職率は次のとおりでした。 全体：大卒31.2%、高卒36.9% 医療・福祉：大卒39.1%（前年より1.7ポイント低下）、高卒49.4%（同0.2ポイント上昇） 医療・福祉は、離職率が高い産業の上位5つに入っています。 採用・定着への影響（編集部の見立て） 新卒を採っても、3年のうちに大卒で約4割、高卒で約半数が辞める産業だという前提で、育成を考える必要があります。 入職1年目のフォローは、採用にかけた費用を無駄にしないための手立てです。 こんな事業所は注意 新卒・若手を採用している事業所 → 医療・福祉は、離職率が高い産業の上位5つに入っています。 1年目のフォローの仕組みがない事業所 → 採用にかけた費用が無駄になりやすくなります（編集部の見立て）。 出典と段階 出典名 URL 公表日 段階 厚生労働省 新規学卒就職者の離職状況（令和5年3月卒業者） 2026-10-23 統計 この話題の経緯・続報 採用の側の数字は介護職の有効求人倍率は約3.9倍を参照してください。 新卒採用の動きは介護福祉士養成校の入学者、外国人留学生が初の6割超も参照してください。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W42.html","title":"1週間まとめ（10/12〜10/18の動き）","date":"2026-10-27","period":"2026-10-12〜2026-10-18","summary":"GHの夜勤を2人以上にできる例外を広げる案の報道、10/26に再開する経営情報の報告の期限、入浴介助加算の引き上げ案を取り上げます。","stage":"","services":[],"tags":[],"text":"人員配置と報告の期限、どちらも年内に動きがある話題です。 経営情報の報告が10/26に再開 ：期限は会計年度の終了時期で3区分です。→ 介護の経営情報の報告が2026年10月26日に再開 入浴介助加算の引き上げ案 （提案の段階）→ 通所の入浴介助加算、単価の引き上げ案 今週の数字：夜勤が3人から2人なら、人件費の差84万円から減算約40.5万円を引いて月約43.5万円。1人で見る入居者は9人から13.5人に （10/9の分科会、報道は10/13。仮定で試算）→ 3ユニットGHの夜勤「2人以上」を広げる案 運営：採用サイト・採用ページの制作を行う大島健太郎","topics":["topic-gh-yakin-haichi-kanwa-an","topic-keiei-joho-hokoku-saikai-2026-10","topic-tsusho-nyuyoku-kaijo-kasan-an"],"lead":"人員配置と報告の期限、どちらも年内に動きがある話題です。","topicTitles":["3ユニットGHの夜勤「2人以上」を広げる案","介護の経営情報の報告が2026年10月26日に再開","通所の入浴介助加算、単価の引き上げ案"]},{"kind":"topic","file":"articles/topic-gh-yakin-haichi-kanwa-an.html","title":"3ユニットGHの夜勤「2人以上」を広げる案：人件費と見守り人数の試算","date":"2026-10-27","period":"2026-10-12〜2026-10-18","summary":"厚労省は3ユニットGHの夜勤を「2人以上」とできる例外を広げる案を示しました。今の例外には1日50単位の減算があります。夜勤が3人から2人になった場合の人件費・減算・見守り人数を仮の数字で試算します。","stage":"案","services":["認知症GH"],"tags":["夜勤","報酬改定","求人票"],"text":"要点 3ユニットGHで夜勤を「2人以上」とできる例外を、隣接していないユニットなどにも広げる案です。見守り機器などが条件です。 今の例外で夜勤を2人にすると、利用者1人につき1日50単位の減算があります。案は2026-10-09の分科会（報道は10/13）での提案の段階で、減算の扱いは未定です。 当てはまる事業所は注意：3ユニットで夜勤を3人で回しているGHは、2人体制を選べるようになりえますが、今の例外には減算があります。 対象 認知症グループホーム（3ユニット、または2ユニット＋別の階の1ユニットを一体で運営する事業所）。 何が起きたか 認知症GHの夜勤は、各ユニットに1人以上が基本です。3ユニットが同じ階で隣接し、安全対策を講じている場合に限り、例外として「2人以上」が認められています。 この例外で夜勤を2人にする場合は、報酬が利用者1人につき1日50単位減ります（「3ユニットの場合に夜勤職員を2人とする場合（▲50単位）」。資料4の報酬の一覧）。 10/9の介護給付費分科会で、厚労省はこの例外を広げる案を示しました。 対象：隣接していない3ユニットや、2ユニット＋別の階の1ユニットを一体で運営する場合 条件：見守り機器などで、利用者の状態を継続的に把握できる体制 委員からは、安全性や職員の負担への懸念も出ています。 採用・定着への影響（編集部の見立て） 夜勤に入れる人が足りないことは、GHの採用で最も重い悩みの一つです。決まれば、必要な夜勤要員の数は変わります。 ただし、下の試算のとおり1人あたりの負担は増えます。人数の計算と負担対策を一緒に考える必要があります。 数字で見る 案が実現し、ある3ユニットのGHが夜勤を3人から2人にした場合を、仮の数字で試算します。 前提 値 種類 ユニット数・入居者数 3ユニット × 9人 ＝ 27人 仮定 （満床） 夜勤1回あたりの人件費（賃金＋夜勤手当） 28,000円 仮定 1か月の夜の数 30夜 仮定 職員1人あたりの夜勤回数 月5回 仮定 夜勤2人の場合の減算 利用者1人につき1日50単位 現行の報酬（資料4）。広げる案で同じ減算がかかるかは 未定 。ここでは同じとみなす（ 仮定 ） 1単位の単価 10円 仮定 （地域区分により10円より高い地域があり、その場合は減算額も大きくなる） 計算： 夜勤枠の延べ人件費（月） 3人：3人 × 30夜 × 28,000円 ＝ 2,520,000円 2人：2人 × 30夜 × 28,000円 ＝ 1,680,000円 差：月84万円 減算（月）：27人 × 50単位 × 30日 ＝ 40,500単位。1単位10円で 約40.5万円 （地域によってはこれより多い） 差し引き：84万円 − 約40.5万円 ＝ 月 約43.5万円 （1単位10円の場合。地域区分が高いほど小さくなる） 夜勤1人あたりの見守り人数：27人 ÷ 3人 ＝ 9人 → 27人 ÷ 2人 ＝ 13.5人 夜勤に入れる職員の必要数 3人体制：月90回 ÷ 5回 ＝ 18人 2人体制：月60回 ÷ 5回 ＝ 12人 読み方と注意： 夜勤枠の延べ人件費と、夜勤に入れる人の必要数は減ります。ただし、今の例外と同じ減算がかかれば、人件費の差の半分ほどが減算で相殺されます（上の仮定の場合）。 その代わり、1人で見る入居者は約1.5倍になります。 夜勤から外れた職員を日中に回せば、事業所全体の人件費の総額は減りません。 夜勤の負担が増えて辞める人が出れば、差額は採用費で消えるかもしれません。 見守り機器の費用は別にかかります。案の条件もまだ固まっていません。 自施設で計算する式：差し引き ＝ 減らす人数 × 1か月の夜の数 × 夜勤1回あたりの人件費 − 利用者数 × 50単位 × 1か月の日数 × 自地域の1単位の単価（1人あたりの見守り人数は、入居者数 ÷ 夜勤の人数） こんな事業所は注意 3ユニットで夜勤を3人で回していて、ユニットが隣接していない（または2ユニット＋別の階の1ユニット）事業所 → 案が決まると、2人体制を選べるようになります。ただし今の例外には利用者1人につき1日50単位の減算があり、広げる案での扱いは未定です。 見守り機器をまだ入れていない事業所 → 案では、見守り機器などで利用者の状態を継続的に把握できる体制が条件です。 夜勤者の負担感がすでに強い事業所 → 1人で見る入居者が増える（試算では9人から13.5人）ため、離職につながるおそれがあります。 求人票の書き換え例 架空の事業所の例です。 書き換え前 夜勤あり（月4〜5回程度）。夜勤手当あり。 書き換え後 夜勤は月4回まで（希望により2回からも可）。夜勤手当は1回6,000円。 夜勤は2ユニットを2人で担当し、1人で見るのは最大9名。見守りセンサーを全居室に設置しています。 休憩は2時間（労働基準法上の休憩で、業務から完全に離れられます）。これとは別に仮眠時間があり、専用の休憩室を使えます。夜勤明けの翌日は必ず休みです。 数字はすべて例です。夜勤の回数・手当・1人で見る人数・休憩の4つを、数字で書くのがポイントです。 ※休憩と仮眠は分けて書いてください。仮眠中でも、呼ばれたら対応する義務がある（待機の義務がある）場合は、労働時間に当たり得ます。 ※これは求人票の一部です。 業務内容・就業場所・労働時間・賃金・保険など、明示すべき事項は別にすべて書く必要があります。2024年4月からは、業務と就業場所の変更の範囲も対象です。 約束にあたる記述（「必ず休み」など）は、事実である場合に限ってください。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第269回介護給付費分科会 資料4 2026-10-09 案 同 資料4 PDF（報酬の一覧と算定状況：PDF30〜31ページ目に「3ユニットの場合に夜勤職員を2人とする場合（▲50単位）」） 2026-10-09 現行の報酬 介護ニュースJoint 2026-10-13 報道 この話題の経緯・続報 同じ第269回分科会（10/9）では、GHの計画作成担当者の配置の見直しも論点になりました：認知症GHの計画作成担当者（ケアマネ）の配置見直し案 年内に方向性が固まれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。書き換えた日を記録し、前後の応募数を比べて確かめてください。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-keiei-joho-hokoku-saikai-2026-10.html","title":"介護の経営情報の報告が2026年10月26日に再開：報告期限は3区分","date":"2026-10-27","period":"2026-10-12〜2026-10-18","summary":"厚労省は介護保険最新情報Vol.1546で、介護サービス事業者経営情報データベースシステムの運用を令和8年10月26日に再開すると通知しました。会計年度の終了時期ごとの3つの報告期限を整理します。","stage":"通知","services":["全サービス"],"tags":["経営情報","介護保険最新情報","報告期限"],"text":"要点 介護サービス事業者経営情報データベースシステムへの報告の受付が、令和8年10月26日に再開しました。 厚労省の通知（介護保険最新情報Vol.1546、2026-10-15公表）によるものです。報告期限は会計年度の終了時期で3つに分かれます。 当てはまる事業所は注意：会計年度が令和7年3月〜令和8年2月に終わった事業所は、期限が令和8年12月31日です。 対象 介護サービス事業者（介護保険法第115条の44の2に基づく報告）。 何が起きたか 厚労省は通知（介護保険最新情報Vol.1546、令和8年10月15日）で、介護サービス事業者経営情報データベースシステムの運用を令和8年10月26日に再開すると示しました。 介護保険法第115条の44の2に基づき、介護サービス事業者は経営情報を都道府県知事に報告することになっています。システム対応のため、令和7年4月から受付を止めていました。 報告期限は3つに分かれます。 会計年度が令和7年3月〜令和8年2月に終わった分：令和8年12月31日 令和8年3月〜12月に終わる分：令和9年3月31日 令和9年1月以降に終わる分：会計年度の終了後3か月以内 報告項目に、介護サービスごとの延べ床面積などが加わりました。 採用・定着への影響（編集部の見立て） 直接の採用ニュースではありません。 ただ、報告のために収益・費用を整理するついでに人件費の内訳もまとめておくと、求人票の給与の説明や処遇改善の説明に使い回せます。 こんな事業所は注意 会計年度が令和7年3月〜令和8年2月に終わった事業者 → 期限は令和8年12月31日です。 会計年度が令和8年3月〜12月に終わる事業者 → 期限は令和9年3月31日です。 会計年度が令和9年1月以降に終わる事業者 → 期限は会計年度の終了後3か月以内です。 出典と段階 出典名 URL 公表日 段階 厚生労働省 介護保険最新情報Vol.1546 2026-10-15 通知 この話題の経緯・続報 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-tsusho-nyuyoku-kaijo-kasan-an.html","title":"通所の入浴介助加算、単価の引き上げ案：2027年度改定","date":"2026-10-27","period":"2026-10-12〜2026-10-18","summary":"10/14の介護給付費分科会で、厚労省は通所介護などの入浴介助加算の単価を物価高を反映して引き上げる方向を示しました。加算Ⅱは算定要件の緩和も検討されています。提案の段階です。","stage":"案","services":["通所"],"tags":["入浴介助加算","報酬改定"],"text":"要点 入浴介助加算の単価を、物価高を反映して引き上げる方向が示されました。加算Ⅱは算定要件の緩和も検討されています。 2026-10-14の介護給付費分科会での提案の段階で、年内に大枠を固める予定です。 当てはまる事業所は注意：入浴介助加算Ⅱを算定していない通所は、要件緩和の中身によって算定の可否が変わりえます。 対象 通所介護などの通所系サービス。 何が起きたか 10/14の介護給付費分科会で、厚労省は通所介護などの入浴介助加算について、物価高を反映して単価を引き上げる方向を示しました。 現行は加算Ⅰが40単位/日、加算Ⅱが55単位/日です。 加算Ⅱは、算定要件の緩和も検討されています。 採用・定着への影響（編集部の見立て） 入浴介助は体への負担が大きい業務です。 要件の見直しの中身によっては、機器の導入や人の配置の考え方に影響します。 こんな事業所は注意 入浴介助加算Ⅱを算定していない通所 → 加算Ⅱは、算定要件の緩和が検討されています。 入浴介助の担当者が少ない、または腰痛などの訴えがある事業所 → 要件の見直しの中身によっては、機器の導入や人の配置の考え方に影響します（編集部の見立て）。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第270回介護給付費分科会 2026-10-14 案 介護ニュースJoint 2026-10-14 報道 この話題の経緯・続報 年内に大枠が固まれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W41.html","title":"1週間まとめ（10/5〜10/11の動き）","date":"2026-10-27","period":"2026-10-05〜2026-10-11","summary":"介護の賃上げ率は3.93%で全産業を下回りました。GHのケアマネ配置の見直し案と、施設長の半数が採用目標未達という調査も出ました。","stage":"","services":[],"tags":[],"text":"賃金の差と採用の難しさが、数字で出た週です。 GHの計画作成担当者の配置見直し案 （提案の段階）→ 認知症GHの計画作成担当者（ケアマネ）の配置見直し案 施設長の52.3%が採用目標を達成できず （民間調査）→ 介護施設長298人の調査：採用目標の未達が52.3% 今週の数字：全産業並みとの差は月約2,779円 （平均賃上げ額1万114円・3.93%から試算）→ 介護の賃上げ率は3.93%：全産業5.01%との差を試算 運営：採用サイト・採用ページの制作を行う大島健太郎","topics":["topic-kaigo-chinage-ritsu-2026","topic-gh-keikaku-sakusei-tantosha-haichi","topic-kaigo-shisetsucho-saiyo-chosa-2026-10"],"lead":"賃金の差と採用の難しさが、数字で出た週です。","topicTitles":["介護の賃上げ率は3.93%（2026年・17団体調査）","認知症GHの計画作成担当者（ケアマネ）の配置見直し案","介護施設長298人の調査"]},{"kind":"topic","file":"articles/topic-kaigo-chinage-ritsu-2026.html","title":"介護の賃上げ率は3.93%（2026年・17団体調査）：全産業5.01%との差を試算","date":"2026-10-27","period":"2026-10-05〜2026-10-11","summary":"介護関係17団体の緊急調査で、今年の介護の賃上げ率は3.93%（平均1万114円）でした。全産業並みの5.01%との差を試算し、自社で計算する式と、月給の内訳の書き方の例を示します。","stage":"調査","services":["全サービス"],"tags":["賃金","求人票"],"text":"要点 介護の賃上げ率は3.93%（平均1万114円）で、春闘の全産業平均5.01%を下回りました。 17団体の緊急調査で、公表は2026-10-06（報道は10/07）です。報酬の引き上げを求めている団体の調査です。 当てはまる事業所は注意：求人票の月給を一行だけで書いている事業所は、他産業の求人と比べられたときに条件が伝わりにくくなります。 対象 すべての介護サービス事業所。 何が起きたか 介護関係の17団体が、全国の8,219施設・事業所から回答を得た緊急調査を公表しました（9月実施、10/6公表）。今年の介護の賃上げ率は3.93%でした。 春闘の全産業平均5.01%を1ポイント以上下回っています。 記事は、全産業と介護職員の平均賃金に8.2万円（2025年）の差があるとしています。月額か年額かは記事に書かれていません。 ※報酬の引き上げを求めている団体の調査です。 採用・定着への影響（編集部の見立て） 応募者は、他産業の求人と給与を並べて比べます。 差がすぐには縮まらない前提で、給与の内訳の見せ方と、休日・働き方などの条件の伝え方を工夫すれば、比べられやすくする余地があります。 数字で見る 項目 値 種類 介護の平均賃上げ額 1万114円 17団体の調査。月額かどうか、基本給か、定期昇給を含むかは記事に書かれていない 介護の賃上げ率 3.93% 同上 春闘の全産業平均 5.01% 同上の記事による 賞与 計算に入れない 仮定 賃上げ額は月額とみなす — 仮定 計算： 賃上げ前の平均賃金（逆算）：10,114円 ÷ 3.93% ≒ 257,354円 全産業並み（5.01%）なら：257,354円 × 5.01% ≒ 12,893円 差：月 約2,779円、年 約33,348円 （×12か月） 読み方と注意： 平均で見ると、全産業並みに上がった場合との差は月3千円弱です。同じ差が毎年続けば積み上がりますが、毎年続くかどうか自体が仮定です。 3.93%（17団体の調査）と5.01%（春闘。労働組合のある企業が中心で、定期昇給を含む）は、調べた対象も数え方も違い、同じ物差しではありません。目安として使ってください。 自社で計算する式：自社の平均月給 ×（5.01% − 自社の今年の賃上げ率）で、月あたりの差が出ます。 こんな事業所は注意 今年の賃上げ率が3.93%前後かそれ以下の事業所 → 全産業並みとの差（試算では月約2,779円）が、他産業の求人と比べたときの見劣りになりえます。 求人票の月給を「月給◯万円〜」の一行だけで書いている事業所 → 内訳が見えないと比べにくく、条件の良い部分が伝わりにくくなります（編集部の見立て）。 処遇改善を一時金や賞与で払っている事業所 → 月給に含めて書かないよう注意が必要です。 求人票の書き換え例 架空の事業所の例です。 書き換え前 月給22万円〜30万円（経験・資格により優遇） 書き換え後 月給22万〜30万円（内訳：基本給18万〜23万円＋資格手当1万〜2万円＋処遇改善手当3万〜5万円）。夜勤手当は1回6,000円で別途支給（月4回なら24,000円）。 モデル：介護福祉士・経験5年・夜勤月4回で、月給約28万円。 昇給：昨年度は全員が対象で、平均月6,000円。 数字はすべて例です。自社の実際の数字に置き換えてください。 ※処遇改善手当の書き方： 毎月定額で支給する場合に限って、月給の内訳に含めてください。 一時金や賞与で支払う場合は、月給に含めずに、支給の方法と時期（例：年2回、6月・12月）を別に書きます。 ※これは求人票の一部です。 業務内容・就業場所・労働時間・賃金・保険など、明示すべき事項は別にすべて書く必要があります。2024年4月からは、業務と就業場所の変更の範囲も対象です。 約束にあたる記述（昇給の実績など）は、事実である場合に限ってください。 出典と段階 出典名 URL 公表日 段階 介護ニュースJoint（17団体の緊急調査の報道） 2026-10-07（調査の公表は10/06） 調査 この話題の経緯・続報 採用の現場の数字は介護施設長298人の調査：採用目標の未達52.3%を参照してください。 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。書き換えた日を記録し、前後の応募数を比べて確かめてください。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-kaigo-shisetsucho-saiyo-chosa-2026-10.html","title":"介護施設長298人の調査：採用目標の未達が52.3%（2026年9月・民間調査）","date":"2026-10-27","period":"2026-10-05〜2026-10-11","summary":"民間企業が介護施設の施設長298人に行ったネット調査で、直近の採用目標を達成できなかった施設が52.3%でした。離職対策で「やれていない」取り組みの1位は増員です。企業の発表である点に注意が必要です。","stage":"調査","services":["全サービス"],"tags":["定着・離職"],"text":"要点 直近の採用目標を達成できなかった施設が52.3%でした。離職対策でやれていない取り組みの1位は「増員」です。 民間企業の調査（9/15〜18実施）で、公表は2026-10-08です。自社サービスの紹介を含む企業の発表です。 当てはまる事業所は注意：採用目標を達成できていない事業所は、増員だけに頼る離職対策では止まりやすくなります。 対象 介護施設（調査の対象は施設長）。 何が起きたか 民間企業が、介護施設の施設長298人にネット調査を行いました（9/15〜18）。 直近の採用目標を達成できなかった施設が52.3%でした。 離職対策が必要と考える施設長の9割以上に、まだ実行できていない取り組みがあり、最も多いのは「増員」でした。 ※自社サービスの紹介を含む企業の発表です。 採用・定着への影響（編集部の見立て） 「採れない」と「辞める」が同時に起きているという実感に近い数字です。 増員が難しいなら、今いる職員の負担を減らすところから手を付けるのが現実的です。 こんな事業所は注意 採用目標を達成できていない事業所 → 調査では、半数以上の施設が同じ状況でした。 離職対策を「増員」頼みにしている事業所 → 増員できないと対策が止まります。今いる職員の負担を減らす取り組みから考える余地があります（編集部の見立て）。 出典と段階 出典名 URL 公表日 段階 PR TIMES（民間企業の発表） 2026-10-08 調査（企業PR） この話題の経緯・続報 賃金の面の数字は介護の賃上げ率は3.93%：全産業5.01%との差を試算を参照してください。 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-gh-keikaku-sakusei-tantosha-haichi.html","title":"認知症GHの計画作成担当者（ケアマネ）の配置見直し案：2027年度改定","date":"2026-10-27","period":"2026-10-05〜2026-10-11","summary":"10/9の介護給付費分科会で、厚労省は認知症グループホームの計画作成担当者（ケアマネ）の配置の在り方を論点に挙げました。1ユニットの事業所などが念頭にあります。提案・検討の段階です。","stage":"案","services":["認知症GH"],"tags":["ケアマネ","報酬改定"],"text":"要点 厚労省が、認知症GHの計画作成担当者（ケアマネ）の配置の在り方を論点に挙げました。 2026-10-09の介護給付費分科会（報道も10/9）でのことで、提案・検討の段階です。決定ではありません。 当てはまる事業所は注意：計画作成担当者が1人だけの小規模なGHは、配置の前提が変わりえます（中身は未定）。 対象 認知症グループホーム。とくに1ユニットの事業所など、人材確保が難しい事業所。 何が起きたか 10/9の介護給付費分科会で、厚労省は認知症GHの計画作成担当者（ケアマネ）の配置の在り方を論点に挙げました。 1ユニットの事業所など、人材確保が難しい事業所を念頭に置いています。 現行は、2021年度の改定で「事業所ごとに1人以上」になっています。 複数事業所の兼務や、居宅介護支援事業所との連携も話題に上りました。 採用・定着への影響（編集部の見立て） ケアマネの確保が難しい小規模なGHにとって、採用計画の前提が変わる可能性がある論点です。 ただ、中身はこれから詰められます。 こんな事業所は注意 1ユニットなどで、計画作成担当者（ケアマネ）が1人だけのGH → 案が決まると、兼務や居宅介護支援事業所との連携など、配置の選択肢が変わる可能性があります。中身は年末に向けて詰められます。 計画作成担当者の退職が近い、または後任がいないGH → 決まるまでは今の基準（事業所ごとに1人以上）で動く必要があります。 出典と段階 出典名 URL 公表日 段階 厚生労働省 第269回介護給付費分科会 資料4 2026-10-09 案 介護ニュースJoint 2026-10-09 報道 この話題の経緯・続報 同じ第269回分科会（10/9）では、GHの夜勤配置の見直し案も示されました：3ユニットGHの夜勤「2人以上」を広げる案 ケアマネの配置に関わるほかの案：ケアマネの定期研修と減算の案 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"weekly","file":"articles/weekly-2026-W40.html","title":"1週間まとめ（9/28〜10/4の動き）","date":"2026-10-27","period":"2026-09-28〜2026-10-04","summary":"介護職の有効求人倍率は約3.9倍。10/1からカスハラ対策が全事業主の義務になり、養成校の入学者の6割が留学生になりました。","stage":"","services":[],"tags":[],"text":"求人の取り合いが続くなか、職員を守る体制が義務になった週です。 カスハラ対策が10/1から義務に ：方針・窓口・対応の手順が必要です。求職者へのセクハラ防止も義務になりました。→ カスハラ対策が2026年10月から介護事業者も義務に 養成校の入学者の6割が留学生 ：新卒採用は受け入れの準備が前提になります。→ 介護福祉士養成校の入学者、外国人留学生が初の6割超 今週の数字：介護職の有効求人倍率は約3.89倍 （2026年8月、ハローワーク）→ 介護職の有効求人倍率は約3.9倍 運営：採用サイト・採用ページの制作を行う大島健太郎","topics":["topic-kaigo-yuko-kyujin-bairitsu-2026-08","topic-customer-harassment-gimuka-2026-10","topic-kaigo-fukushishi-yoseiko-ryugakusei-2026"],"lead":"求人の取り合いが続くなか、職員を守る体制が義務になった週です。","topicTitles":["介護職の有効求人倍率は約3.9倍（2026年8月・ハローワーク）","カスハラ対策が2026年10月から介護事業者も義務に","介護福祉士養成校の入学者、外国人留学生が初の6割超（2026年度）"]},{"kind":"topic","file":"articles/topic-customer-harassment-gimuka-2026-10.html","title":"カスハラ対策が2026年10月から介護事業者も義務に：必要な5つの措置","date":"2026-10-27","period":"2026-09-28〜2026-10-04","summary":"改正労働施策総合推進法で、2026年10月1日からカスハラ防止の措置がすべての事業主の義務になりました。同じ日から求職者へのセクハラ防止も義務です。必要な措置と、求人票での伝え方の例をまとめます。","stage":"施行","services":["全サービス"],"tags":["カスハラ","法改正"],"text":"要点 カスタマーハラスメントを防ぐ措置が、すべての事業主の義務になりました。採用の場面での求職者へのセクハラ防止も義務です。 2026年10月1日に施行済みです（改正労働施策総合推進法）。 当てはまる事業所は注意：方針・相談窓口・対応の手順がまだ整っていない事業所は、すでに義務を満たしていない状態です。 対象 すべての介護サービス事業所（全事業主が対象）。 何が起きたか 改正労働施策総合推進法により、2026年10月1日から、カスハラを防ぐための措置がすべての事業主の義務になりました。 求められる措置は、指針（令和8年厚生労働省告示第51号）で次の5つに区分されています（区分の名前は富山労働局の案内ページに合わせた。告示の本文は編集部では未読）。 方針等の明確化と周知・啓発 相談体制の整備 事後の迅速かつ適切な対応 抑止のための措置 併せて講ずべき措置（プライバシーの保護、相談したことを理由とする不利益な取り扱いの禁止など） 同じ日から、採用の場面での求職者へのセクシュアルハラスメントの防止も事業主の義務になっています。 採用・定着への影響（編集部の見立て） 利用者や家族からのハラスメントは、介護職が職場を選ぶときに気にする点の一つです。 義務として整えた体制は、そのまま「職員を守る仕組み」として応募者に説明できます。 こんな事業所は注意 方針・相談窓口・事後対応の手順のどれかが、就業規則や掲示物にない事業所 → 10月1日から義務なので、すでに不足している状態です。 訪問系など、職員が一人で利用者宅に行く事業所 → ハラスメントへの不安は職場選びで気にされやすい点です。体制を求人票で示す意味が大きくなります（編集部の見立て）。 面接・説明会を行う事業所 → 求職者へのセクハラ防止も同じ日から義務です。面接を担当する人への周知が必要です。 求人票の書き換え例 架空の事業所の例です。 書き換え前 アットホームな職場です。困ったことがあれば何でも相談してください。 書き換え後 利用者・ご家族からのハラスメントには、事業所として対応します。相談窓口は管理者と、法人本部の担当者の2か所です。訪問時に困ったことがあれば、その場で事業所に電話してください。担当を一人にしない、記録を残す、必要なら担当を交代する、の順で対応します（2026年10月施行の法改正に沿って体制を整えています）。 ポイントは、「相談してください」で終わらせずに、窓口の数・連絡の方法・対応の順番を書くことです。 ※これは求人票の一部です。 業務内容・就業場所・労働時間・賃金・保険など、明示すべき事項は別にすべて書く必要があります。2024年4月からは、業務と就業場所の変更の範囲も対象です。 約束にあたる記述は、事実である場合に限ってください。 出典と段階 出典名 URL 公表日 段階 厚生労働省 ハラスメント対策のページ 閲覧2026-10-27 施行（2026-10-01） 富山労働局 カスタマーハラスメント指針の案内（措置の区分の参照先。告示第51号の本文は未読） 日付未記録（編集部は未閲覧。監査で示された参照先） 指針（告示） 介護ニュースJoint 2026-10-02 報道 この話題の経緯・続報 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。書き換えた日を記録し、前後の応募数を比べて確かめてください。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-kaigo-yuko-kyujin-bairitsu-2026-08.html","title":"介護職の有効求人倍率は約3.9倍（2026年8月・ハローワーク）","date":"2026-10-27","period":"2026-09-28〜2026-10-04","summary":"厚労省の一般職業紹介状況（令和8年8月分）の参考統計表から、介護サービス職業従事者の有効求人倍率を計算すると約3.89倍。全職業の1.18倍（季節調整値）との違いと、自分の地域で計算する式を示します。","stage":"統計","services":["全サービス"],"tags":["求人倍率"],"text":"要点 ハローワークの介護の求人は、求職者1人あたり約3.9件ありました（2026年8月、202,780件÷52,183人）。 厚労省の統計で、公表は2026-10-02です。全職業の1.18倍（季節調整値）とは別の数字です。 当てはまる事業所は注意：地元の介護職の倍率が全国より高い事業所は、求人条件の差が応募に表れやすくなります。 対象 介護サービス職業従事者を採用するすべての事業所。 何が起きたか 厚労省が「一般職業紹介状況（令和8年8月分）」を公表しました。 全国の有効求人倍率（季節調整値）は1.18倍で、前月と同じ水準でした。 参考統計表の職業別（常用、パート含む、原数値）では、介護サービス職業従事者の有効求人数が202,780件、有効求職者数が52,183人でした。 採用・定着への影響（編集部の見立て） ハローワークに出ている介護の求人は、仕事を探している人1人あたり約3.9件あります。 全国平均では、求職者1人あたり約3.9件の求人があります。 数字で見る 項目 値 出典・注意 介護サービス職業従事者の有効求人数 202,780件 参考統計表（常用、パート含む、原数値） 介護サービス職業従事者の有効求職者数 52,183人 同上 有効求人倍率 202,780 ÷ 52,183 ≒ 3.89倍 （表の値も3.89） 同上 参考：全職業の有効求人倍率 1.06倍（原数値）／1.18倍（季節調整値） 1.18倍はすべての職業の値で、介護の値ではない 注意：ハローワーク経由の数字で、民間の求人サイトや紹介会社は含みません。地域によって大きく違います。 自分の地域で計算する式：地元の労働局の発表から「介護サービス職業従事者」の数字を拾い、有効求人数 ÷ 有効求職者数 を計算します。 注意：労働局によって、介護の区分の名前や範囲（「介護関連」「うち介護関係」など）や、フルタイムとパートの分け方が違います。「介護サービス職業従事者」の行がない局もあります。地元の資料の区分を確かめてから計算し、全国の値とは単純に比べないでください。 こんな事業所は注意 地元の介護職の有効求人倍率が、全国（約3.9倍）より高い地域の事業所 → 求職者が比べる求人がさらに多く、条件の差が応募に表れやすくなります（編集部の見立て）。 民間の求人サイトや紹介会社からの採用が中心の事業所 → この数字はハローワーク経由のもので、そちらの状況は含みません。 出典と段階 出典名 URL 公表日 段階 厚生労働省 一般職業紹介状況（令和8年8月分） 2026-10-02 統計 同 参考統計表 2026-10-02 統計 この話題の経緯・続報 定着の側の数字は新卒の3年以内離職率：医療・福祉は大卒39.1%を参照してください。 毎月の続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"},{"kind":"topic","file":"articles/topic-kaigo-fukushishi-yoseiko-ryugakusei-2026.html","title":"介護福祉士養成校の入学者、外国人留学生が初の6割超（2026年度）","date":"2026-10-27","period":"2026-09-28〜2026-10-04","summary":"日本介護福祉士養成施設協会の調査として、今年度の養成校の入学者7,780人のうち外国人留学生が4,712人（60.6%）と初めて6割を超えました。新卒採用で準備しておきたいことを整理します。","stage":"調査","services":["全サービス"],"tags":["外国人介護人材","新卒採用","養成校"],"text":"要点 養成校の今年度の入学者は7,780人で、そのうち外国人留学生が4,712人（60.6%）でした。 日本介護福祉士養成施設協会の調査で、報道は2026-09-29です。 当てはまる事業所は注意：養成校からの新卒採用に頼っている事業所は、応募者の多くが留学生になる前提で考える必要があります。 対象 養成校から新卒の介護福祉士を採用している、または採用したい事業所。 何が起きたか 日本介護福祉士養成施設協会の調査として、今年度の養成校の入学者は7,780人（前年度より424人増）でした。 そのうち外国人留学生は4,712人で、割合は60.6%です（前年度より638人増）。 採用・定着への影響（編集部の見立て） 養成校から新卒を採るルートでは、応募者の多くが留学生になります。 在留資格の手続き、記録業務の日本語の支援、住まいの確保を、採用の前に用意できるかどうかが分かれ目になります。 こんな事業所は注意 養成校からの新卒採用を続けている事業所 → 応募者の多くが留学生になります。 在留資格の手続き、日本語の支援、住まいの用意がない事業所 → 留学生の採用では、これらを採用の前に用意できるかどうかが分かれ目になります（編集部の見立て）。 出典と段階 出典名 URL 公表日 段階 介護ニュースJoint（日本介護福祉士養成施設協会の調査の報道） 2026-09-29 調査 この話題の経緯・続報 続報があれば追記します。 更新履歴 2026-10-27 作成 効果は事業所によって異なります。制度の詳細は必ず出典の一次情報で確認してください。 運営：採用サイト・採用ページの制作を行う大島健太郎"}];</script><!--/ARTICLES-->
+<script>
+// 今週号と一覧、検索。ARTICLES は build.js が articles/*.md から書き込む。
+var LABEL = { topic: 'ニュース', weekly: '1週間まとめ', guide: '解説' };
+var NEWS_LIMIT = 8;
+var ARROW = '<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>';
+
+// 記事の絵は、タグで決める（上から順に見て、最初に当たったもの）
+var SPOT_RULES = [['カスハラ','kasuhara'],['夜勤','yakin'],['賃金','chingin'],['補助金','hojokin'],['外国人介護人材','gaikoku'],['新卒採用','shinsotsu'],['定着・離職','teichaku'],['ケアマネ','caremane'],['求人票','kyujin'],['通所','tsusho'],['採用ページ','page'],['報酬改定','kaitei']];
+function spotOf(a) {
+  var t = articleTags(a);
+  for (var i = 0; i < SPOT_RULES.length; i++) if (t.indexOf(SPOT_RULES[i][0]) >= 0) return SPOT_RULES[i][1];
+  return a.kind === 'weekly' ? 'weekly' : 'zen';
+}
+
+// 段階の札の色：案は黄、決まったことは赤、数字や調査は緑
+function stageTag(stage) {
+  var s = document.createElement('span');
+  s.className = 'st' + (stage === '案' || stage === '方針' ? ' draft' : (stage === '決定' || stage === '施行' || stage === '通知') ? ' fixed' : '');
+  s.textContent = stage;
+  return s;
+}
+
+function metaOf(a) {
+  var m = document.createElement('div');
+  m.className = 'meta';
+  m.appendChild(stageTag(a.stage || LABEL[a.kind] || ''));
+  var w = document.createElement('span');
+  w.textContent = a.period ? weekLabel(a.period) : a.date;
+  m.appendChild(w);
+  if ((a.services || []).length) { var t = document.createElement('span'); t.textContent = a.services.join('・'); m.appendChild(t); }
+  return m;
+}
+
+function linkCard(a) {
+  var li = document.createElement('li');
+  var el = document.createElement('a');
+  el.className = 'link-card';
+  el.href = a.file;
+  el.innerHTML = '<div><b></b></div>' + ARROW;
+  var body = el.querySelector('div');
+  body.insertBefore(metaOf(a), body.firstChild);
+  el.querySelector('b').textContent = a.title;
+  li.appendChild(el);
+  return li;
+}
+
+function fill(el, items, byWeek) {
+  el.innerHTML = '';
+  el.classList.toggle('grouped', !!byWeek);
+  if (!items.length) { el.innerHTML = '<li class="empty">該当する記事がありません。</li>'; return; }
+  var last = '';
+  items.forEach(function (a) {
+    var wk = a.period ? weekLabel(a.period) : '';
+    if (byWeek && wk && wk !== last) {
+      var h = document.createElement('li');
+      h.className = 'week-row';
+      h.textContent = wk;
+      el.appendChild(h);
+      last = wk;
+    }
+    el.appendChild(linkCard(a));
+  });
+}
+
+// 期間の「2026-10-19〜2026-10-25」を、週の始まりで「10月19日週」と表す
+function weekLabel(p) {
+  var m = String(p || '').match(/(\d{4})-0?(\d+)-0?(\d+)/);
+  if (!m) return String(p || '');
+  // 今年以外の週は、同じ月日と混ざらないように年をつける
+  return (+m[1] === new Date().getFullYear() ? '' : m[1] + '年') + m[2] + '月' + m[3] + '日週';
+}
+
+function renderIssue(w) {
+  var lead = document.getElementById('issue-lead');
+  var cards = document.getElementById('issue-cards');
+  if (!w) { lead.textContent = '今週号はまだありません。'; document.getElementById('issue-all').hidden = true; return; }
+  // 対象の週を日付で示す（例：11月2日〜11月8日のニュース・毎週月曜に前の週の分を更新）
+  var pm = String(w.period || '').match(/(\d{4})-0?(\d+)-0?(\d+)\D+(\d{4})-0?(\d+)-0?(\d+)/);
+  document.getElementById('issue-date').textContent = pm
+    ? pm[2] + '/' + pm[3] + '〜' + pm[5] + '/' + pm[6]
+    : weekLabel(w.period);
+  document.getElementById('issue-all').href = w.file;
+  lead.textContent = w.lead || w.title;
+  (w.topics || []).map(function (slug) {
+    return ARTICLES.filter(function (a) { return a.file === 'articles/' + slug + '.html'; })[0];
+  }).filter(Boolean).forEach(function (a) {
+    var c = document.createElement('li');
+    var el = document.createElement('a');
+    el.className = 'pick';
+    el.href = a.file;
+    el.innerHTML = '<h3></h3><p class="sum"></p>' + ARROW.replace('class="ic"', 'class="ic arrow"');
+    el.insertBefore(metaOf(a), el.querySelector('h3'));
+    el.querySelector('h3').textContent = a.title;
+    el.querySelector('.sum').textContent = a.summary;
+    c.appendChild(el);
+    cards.appendChild(c);
+  });
+}
+
+// 探す対象は話題と解説。週次まとめは話題の再掲なので外す
+function searchable() { return ARTICLES.filter(function (a) { return a.kind !== 'weekly'; }); }
+
+// 一覧は新しい順。今週の3本は真上に出しているので、条件なしの時は外す
+var newsItems = [];
+function byNewest(x, y) { return (y.period || y.date).localeCompare(x.period || x.date) || y.date.localeCompare(x.date); }
+
+function renderSections() {
+  var weeks = ARTICLES.filter(function (a) { return a.kind === 'weekly'; }).sort(byNewest);
+  var now = weeks[0];
+  renderIssue(now);
+  var inIssue = now ? (now.topics || []).map(function (s) { return 'articles/' + s + '.html'; }) : [];
+  // ニュース一覧には、上の注目3本も含めて全部を新しい順に並べる（2026-11-13 経営者の指摘：一覧が前の週で止まって見えたため）
+  newsItems = ARTICLES.filter(function (a) { return a.kind === 'topic'; }).sort(byNewest);
+  // 最新の週も含めて、新しい順に並べる（2026-11-13 経営者の指摘）
+  var issues = document.getElementById('list-weekly');
+  // トップには最新の6週だけを横に並べる。全週は「すべての週のまとめを見る」の一覧ページへ（2026-11-12 経営者の指示）
+  weeks.slice(0, 6).forEach(function (w) {
+    var li = document.createElement('li');
+    li.innerHTML = '<a><span class="when"></span><span class="tt"><span class="wk-lead"></span><span class="wk-titles"></span></span><span class="go">' + ARROW + '</span></a>';
+    li.firstChild.href = w.file;
+    li.querySelector('.when').textContent = weekLabel(w.period) + 'のまとめ';
+    li.querySelector('.wk-lead').textContent = w.lead || w.title;
+    // どんなニュースがあったか（記事の見出しの並び）。2026-11-12 経営者の指示
+    (w.topicTitles || []).forEach(function (t) {
+      var s = document.createElement('span');
+      s.textContent = t;
+      li.querySelector('.wk-titles').appendChild(s);
+    });
+    issues.appendChild(li);
+  });
+  if (!weeks.length) issues.innerHTML = '<li class="empty">1週間まとめはまだありません。</li>';
+  var guides = ARTICLES.filter(function (a) { return a.kind === 'guide'; });
+  fill(document.getElementById('list-guide'), guides);
+  // 解説が1本もないときは、解説の欄とメニューの「解説」を隠す（2026-11-13 補助金の解説を今回は出さない決定）
+  if (!guides.length) {
+    var gsec = document.getElementById('guide').closest('section');
+    if (gsec) gsec.hidden = true;
+    document.querySelectorAll('a[href="#guide"], a[href="index.html#guide"], a[href="../index.html#guide"]').forEach(function (a) { a.hidden = true; });
+  }
+}
+
+// タグは、記事に付いた tags と services から多い順に出す（表記ゆれは build.js でそろえ済み）
+function articleTags(a) {
+  var seen = [];
+  (a.services || []).concat(a.tags || []).forEach(function (t) { if (seen.indexOf(t) < 0) seen.push(t); });
+  return seen;
+}
+function buildChips() {
+  var count = {};
+  searchable().forEach(function (a) {
+    articleTags(a).forEach(function (t) { count[t] = (count[t] || 0) + 1; });
+  });
+  // 「全サービス」は ALL と紛らわしいので並べない
+  var tags = Object.keys(count).filter(function (t) { return t !== '全サービス'; }).sort(function (x, y) { return count[y] - count[x] || x.localeCompare(y, 'ja'); }).slice(0, 6);
+  var box = document.getElementById('chips');
+  ['ALL'].concat(tags).forEach(function (t) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = t;
+    b.dataset.tag = t === 'ALL' ? '' : t;
+    b.setAttribute('aria-pressed', 'false');
+    // ALL は検索語も含めて条件をすべて解除する
+    b.onclick = function () {
+      if (!b.dataset.tag) { clearFilters(); return; }
+      state.tag = state.tag === b.dataset.tag ? '' : b.dataset.tag; apply();
+    };
+    box.appendChild(b);
+  });
+}
+
+var state = { q: '', tag: '' };
+var expanded = false;
+
+// 条件を消し、再読み込みで戻らないようURLの q・tag も外す
+function clearFilters() {
+  state.q = ''; state.tag = ''; document.getElementById('q').value = ''; apply();
+  var u = new URLSearchParams(location.search);
+  if (!u.has('q') && !u.has('tag')) return;
+  u.delete('q'); u.delete('tag');
+  var rest = u.toString();
+  try { history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash); } catch (e) {}
+}
+
+// 条件があれば全記事から探し、なければ一覧を新しい順に出す
+function apply() {
+  document.querySelectorAll('#chips button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.tag === state.tag ? 'true' : 'false'); });
+  var active = state.q || state.tag;
+  var list = document.getElementById('list-news');
+  var more = document.getElementById('more-news');
+  var note = document.getElementById('result-note');
+  note.hidden = !active;
+  if (!active) {
+    fill(list, expanded ? newsItems : newsItems.slice(0, NEWS_LIMIT), true);
+    more.hidden = expanded || newsItems.length <= NEWS_LIMIT;
+    return;
+  }
+  more.hidden = true;
+  var words = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  var hits = searchable().filter(function (a) {
+    // 題・要約・タグに加えて本文（a.text）も探す。日本語は単語の区切りがないので、部分一致で探す
+    var hay = [a.title, a.summary, a.stage, a.text || ''].concat(articleTags(a)).join(' ').toLowerCase();
+    var okTag = !state.tag || articleTags(a).indexOf(state.tag) >= 0;
+    return okTag && words.every(function (w) { return hay.indexOf(w) >= 0; });
+  }).sort(byNewest);
+  fill(list, hits);
+  note.innerHTML = '';
+  note.appendChild(document.createTextNode(hits.length + '件' + (state.tag ? '（' + state.tag + '）' : '') + '　'));
+  var clear = document.createElement('button');
+  clear.type = 'button';
+  clear.textContent = '条件をクリア';
+  clear.onclick = clearFilters;
+  note.appendChild(clear);
+}
+</script>
+<script>
+var ARTICLES = window.ARTICLES || [];
+renderSections();
+buildChips();
+var params = new URLSearchParams(location.search);
+state.tag = params.get('tag') || '';
+state.q = (params.get('q') || '').trim();
+document.getElementById('q').value = state.q;
+document.getElementById('q').addEventListener('input', function (e) { state.q = e.target.value.trim(); apply(); });
+document.getElementById('search').addEventListener('submit', function (e) { e.preventDefault(); });
+// 記事から戻ったときは、もっと見るを開いた状態と読んでいた位置をそのまま残す
+var OPEN_KEY = 'kaigoweekly-news-open';
+var navEntry = performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+var cameBack = !!navEntry && navEntry.type === 'back_forward';
+try {
+  if (cameBack) expanded = sessionStorage.getItem(OPEN_KEY) === '1';
+  else sessionStorage.removeItem(OPEN_KEY);
+} catch (e) {}
+document.querySelector('#more-news button').addEventListener('click', function () {
+  expanded = true;
+  try { sessionStorage.setItem(OPEN_KEY, '1'); } catch (e) {}
+  apply();
+  var next = document.querySelectorAll('#list-news a')[NEWS_LIMIT];
+  if (next) next.focus();
+});
+apply();
+
+// 一覧を入れると高さが変わるので、#guide などで開いたときは入れ終わってから位置を合わせ直す
+var userMoved = false;
+function goHash() {
+  // 記事のタグから来たときは、結果の出る一覧の位置を開く
+  var id = location.hash ? location.hash.slice(1) : (state.q || state.tag ? 'news' : '');
+  var t = id && document.getElementById(id);
+  if (!t) return;
+  t.scrollIntoView();
+  // キーボードの次の移動先も、飛んだ先からにする
+  if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+  t.focus({ preventScroll: true });
+}
+function settle() { if (!userMoved && !cameBack) goHash(); }
+history.scrollRestoration = !cameBack && (location.hash || state.q || state.tag) ? 'manual' : 'auto';
+settle();
+window.addEventListener('hashchange', goHash);
+// 読み終わるまでに利用者が動かしたら、位置を合わせ直さない
+['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.addEventListener(e, function () { userMoved = true; }, { once: true, passive: true }); });
+window.addEventListener('load', settle);
+// 文字の読み込みでも高さが変わるので、読み込み後にもう一度合わせる
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
+// 相談フォームが見えている間は PAGE TOP を隠す（送信ボタンと重ならないように）
+(function(){ var f=document.getElementById('svc-form'), t=document.querySelector('.page-top'); if(!f||!t||!('IntersectionObserver' in window)) return; new IntersectionObserver(function(e){ t.classList.toggle('is-hidden', e[0].isIntersecting); }).observe(f); })();
+
+// ご要望のポップアップ
+(function () {
+  var modal = document.getElementById('modal');
+  var fab = document.getElementById('fab');
+  // showModal は背景を操作不可にし、Escで閉じる
+  function open() { if (!modal.open) modal.showModal(); }
+  fab.addEventListener('click', open);
+  document.getElementById('foot-voice').addEventListener('click', open);
+  // 「準備中」の枠の「ほしい！」は、対応する選択肢にチェックを入れた状態で開く
+  document.querySelectorAll('[data-want]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var box = modal.querySelector('input[type=checkbox][value="' + b.getAttribute('data-want') + '"]');
+      if (box) box.checked = true;
+      open();
+    });
+  });
+  document.getElementById('modal-close').addEventListener('click', function () { modal.close(); });
+  // 背景（ダイアログの外側）を押したときだけ閉じる。ダイアログ内の余白のクリックでは閉じない
+  modal.addEventListener('click', function (e) {
+    if (e.target !== modal) return;
+    var r = modal.getBoundingClientRect();
+    var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!inside) modal.close();
+  });
+  if (location.hash === '#voice') open();
+})();
+</script>
+<script>
+// 2026-11-11 サービス診断（4問を1問ずつ）と、全メニューの開閉。
+// 作りは baby-media のベビーカー診断に合わせた（進行の帯・質問 n/4・一つ戻る・最初からやり直す・見出しへフォーカス）。
+(function () {
+  var entry = document.getElementById('svc-entry'), quiz = document.getElementById('svc-quiz'), menu = document.getElementById('svc-menu');
+  var qBtn = document.getElementById('quiz-open'), mBtn = document.getElementById('menu-open');
+  if (!entry || !quiz || !menu) return;
+  entry.hidden = false;
+  menu.hidden = true; mBtn.setAttribute('aria-expanded', 'false');
+
+  function setMenu(open) {
+    menu.hidden = !open;
+    mBtn.setAttribute('aria-expanded', String(open));
+    mBtn.querySelector('b').textContent = open ? '全メニューを閉じる' : '全メニューを見る';
+  }
+  mBtn.addEventListener('click', function () { setMenu(menu.hidden); });
+
+  // メニュー。名前は全メニューのカードの見出しと同じにし、説明文はカードから読む。k はフォームの興味欄、makes は質問2の「今あるもの」
+  var ITEMS = {
+    site: { n: '採用サイト・ページ制作', k: 'site', makes: 'page' },
+    kyujin: { n: '求人原稿作成', k: 'kyujin' },
+    corpmovie: { n: '企業動画制作', k: 'corpmovie', makes: 'video' },
+    snsrec: { n: 'SNS運用代行（採用向け）', k: 'snsrec' },
+    sns: { n: 'SNSの立ち上げ・運用代行', k: 'sns', makes: 'sns' },
+    aidraft: { n: 'SNS投稿・施設だよりの作成効率化（AI下書き）', k: 'ai-draft', ai: 1 },
+    tools: { n: '各種採用ツール', k: 'tools' },
+    mendan: { n: '入職後の面談シート', k: 'mendan' },
+    hp: { n: 'コーポレートサイト', k: 'hp', makes: 'hp' },
+    hpup: { n: 'ホームページの更新サポート', k: 'hp', uses: 'hp' },
+    print: { n: 'パンフレット・チラシ', k: 'print' },
+    photo: { n: '写真撮影', k: 'photo' },
+    fmovie: { n: '施設紹介動画', k: 'movie', makes: 'video' },
+    smovie: { n: 'スタッフ紹介動画', k: 'staffmovie', makes: 'video' },
+    mmovie: { n: '介助手順のマニュアル動画', k: 'manualmovie', makes: 'manual' },
+    nmovie: { n: '新人研修動画', k: 'manualmovie' },
+    okuri: { n: '申し送りのAI化', k: 'ai-okuri', ai: 1 },
+    sougei: { n: '送迎表づくりの効率化', k: 'ai-sougei', ai: 1 },
+    aimanual: { n: 'AIマニュアル・研修', k: 'ai-manual', ai: 1, makes: 'manual' },
+    kyuka: { n: '有給・休暇管理', k: 'ai-kyuka', ai: 1 },
+    car: { n: '送迎車の点検・期限管理', k: 'ai-car', ai: 1 },
+    zaiko: { n: '介護用品の在庫管理', k: 'ai-zaiko', ai: 1 },
+    setsubi: { n: '設備・防災の点検表', k: 'ai-setsubi', ai: 1 },
+    kaigi: { n: '会議・日報のAI整理', k: 'ai-kaigi', ai: 1 },
+    board: { n: '職員の掲示板・目安箱', k: 'ai-board', ai: 1 },
+    monthly: { n: 'パートナー契約', k: 'monthly' }
+  };
+  var THING = { hp: 'ホームページ', page: '採用ページ', sns: 'SNS', video: '紹介動画', manual: 'マニュアル' };
+
+  var QS = [
+    { text: 'いちばんの困りごとは？', opts: [
+      { label: '人が集まらない', short: '人が集まらない', base: ['site', 'kyujin', 'corpmovie', 'snsrec', 'smovie', 'photo'] },
+      { label: '入ってもすぐ辞める', short: 'すぐ辞める', base: ['mendan', 'aimanual', 'board', 'kyuka', 'nmovie'] },
+      { label: '施設のことが伝わらない', short: '施設のことが伝わらない', base: ['hp', 'fmovie', 'print', 'sns', 'aidraft', 'hpup'] },
+      { label: '事務や記録に時間がかかる', short: '事務や記録に時間がかかる', base: ['okuri', 'kaigi', 'kyuka', 'sougei', 'zaiko', 'car', 'setsubi'] },
+      { label: '教える・引き継ぐのが大変', short: '教える・引き継ぐのが大変', base: ['aimanual', 'mmovie', 'mendan', 'nmovie', 'okuri'] } ] },
+    { text: '今あるものは？', multi: true, note: '当てはまるものをすべて選んで、「次へ」を押してください。', opts: [
+      { label: 'ホームページ', v: 'hp' }, { label: '採用ページ', v: 'page' }, { label: 'SNS', v: 'sns' },
+      { label: '紹介動画', v: 'video' }, { label: 'マニュアル', v: 'manual' }, { label: 'どれもない', v: 'none' } ] },
+    { text: '使える時間は？', opts: [
+      { label: 'ほとんどない', sub: '任せたい', v: 'makase' },
+      { label: '少しならある', sub: '一緒にやりたい', v: 'issho' } ] },
+    { text: '事業所の種類は？', opts: [
+      { label: '通所', sub: 'デイサービスなど', v: 'tsusho', name: '通所', extra: ['sougei', 'car'] },
+      { label: '訪問', sub: '訪問介護など', v: 'houmon', name: '訪問', extra: ['okuri', 'board'] },
+      { label: '入所・居住系', sub: '特養・グループホームなど', v: 'nyusho', name: '入所・居住系', extra: ['setsubi', 'zaiko'] },
+      { label: '複数', sub: '種類の違う事業所がある', v: 'fukusu', name: '複数の種類がある', extra: ['board', 'kaigi'] } ] }
+  ];
+
+  var answers = [], draft = [], picked = [];
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 判定。質問1の並び順に点（15・12・9…）をつけ、質問2で「まだないもの」を作るメニューに+2、
+  // 「もうあるもの」を作るメニューに−3、今あるものを生かすメニューに+7。質問3で代行か効率化かに+1。
+  // 質問4の種類に合うものは、質問1が「事務や記録」のときだけ+7（それ以外は「あわせて」に出すだけで、質問1の主分類を崩さない）。
+  // 加点は質問1で候補に入ったメニューだけ。点が同じなら質問1の並び順。
+  function judge() {
+    var q1 = QS[0].opts[answers[0]], have = answers[1], mode = QS[2].opts[answers[2]].v, kind = QS[3].opts[answers[3]];
+    var missing = have.indexOf('none') >= 0 ? Object.keys(THING) : Object.keys(THING).filter(function (t) { return have.indexOf(t) < 0; });
+    var rows = q1.base.map(function (id, i) {
+      var it = ITEMS[id], s = Math.max(15 - i * 3, 3), why = ['「' + q1.short + '」へのご提案'];
+      if (it.makes && missing.indexOf(it.makes) >= 0) { s += 2; why.push(THING[it.makes] + 'がまだないため'); }
+      else if (it.makes) s -= 3;
+      if (it.uses && missing.indexOf(it.uses) < 0) { s += 7; why.push('今の' + THING[it.uses] + 'を生かせるため'); }
+      if ((mode === 'makase') !== !!it.ai) s += 1;
+      if (answers[0] === 3 && kind.extra.indexOf(id) >= 0) { s += 7; why.push(kind.name + 'の事業所に合うため'); }
+      return { id: id, s: s, i: i, why: why };
+    });
+    rows.sort(function (a, b) { return b.s - a.s || a.i - b.i; });
+    var top = rows.slice(0, 3).map(function (r) { return r.id; });
+    // 「こちらも合いそうです」：質問1の4番目以降と、質問4の種類に合うのに3件に入らなかったもの（合わせて最大4件）
+    var also = kind.extra.filter(function (id) { return top.indexOf(id) < 0; }).slice(0, 2).map(function (id) {
+      var hit = rows.filter(function (x) { return x.id === id; })[0];
+      var why = hit ? hit.why.slice() : [];
+      if (why.join().indexOf(kind.name) < 0) why.push(kind.name + 'の事業所に合うため');
+      return { id: id, why: why };
+    });
+    var rest = rows.slice(3).filter(function (x) { return !also.some(function (a) { return a.id === x.id; }); }).slice(0, 4 - also.length);
+    return { top: rows.slice(0, 3), more: rest.concat(also), mode: mode, kind: kind };
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function card(id) {
+    var h = Array.prototype.filter.call(menu.querySelectorAll('.svc-cards h4'), function (x) { return x.textContent === ITEMS[id].n; })[0];
+    var g = h && h.closest('.svc-group').querySelector('.svc-cat');
+    return { name: ITEMS[id].n, desc: h ? h.nextElementSibling.textContent : '', cat: g ? g.getAttribute('data-name') + '（' + g.querySelector('small').textContent + '）' : '' };
+  }
+
+  function navHtml(first) {
+    return '<div class="qz-nav"><button type="button" class="qz-sub" data-act="back"' + (first ? ' disabled' : '') + '>一つ戻る</button>' +
+      '<button type="button" class="qz-sub" data-act="restart">最初からやり直す</button></div>';
+  }
+  function bindNav() {
+    quiz.querySelectorAll('[data-act=back]').forEach(function (b) { b.addEventListener('click', function () {
+      if (!answers.length) return;
+      var last = answers.pop(); if (answers.length === 1) draft = last.slice ? last.slice() : [];
+      show(true);
+    }); });
+    quiz.querySelectorAll('[data-act=restart]').forEach(function (b) { b.addEventListener('click', function () { answers = []; draft = []; show(true); }); });
+  }
+  function focusHead(sel) {
+    var h = quiz.querySelector(sel);
+    h.focus({ preventScroll: true });
+    var top = quiz.getBoundingClientRect().top;
+    if (top < 60 || top > innerHeight * .6) quiz.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  function showQuestion(focus) {
+    var step = answers.length, q = QS[step];
+    var bars = QS.map(function (_, i) { return '<i class="' + (i <= step ? 'on' : '') + '"></i>'; }).join('');
+    var html = '<div class="qz-bar" aria-hidden="true">' + bars + '</div>' +
+      '<p class="qz-step" aria-hidden="true">質問 ' + (step + 1) + '/' + QS.length + '</p>' +
+      '<h3 class="qz-q" id="qz-q" tabindex="-1"><span class="qz-vh">質問' + (step + 1) + '/' + QS.length + '、</span>' + q.text + (q.note ? '<span class="qz-vh">' + q.note + '</span>' : '') + '</h3>' +
+      (q.note ? '<p class="qz-note" aria-hidden="true">' + q.note + '</p>' : '') +
+      '<div class="qz-opts' + (q.opts.length === 2 ? ' two' : '') + '" role="group" aria-labelledby="qz-q">' + q.opts.map(function (o, i) {
+        var on = q.multi && draft.indexOf(o.v) >= 0;
+        return '<button type="button" class="qz-opt" data-i="' + i + '"' + (q.multi ? ' aria-pressed="' + on + '"' : '') + '><b>' + o.label + '</b>' + (o.sub ? '<span>' + o.sub + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+      (q.multi ? '<button type="button" class="qz-next" data-act="next"' + (draft.length ? '' : ' disabled') + '>次へ</button>' : '') +
+      navHtml(step === 0);
+    quiz.innerHTML = html;
+    quiz.querySelectorAll('.qz-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = q.opts[+b.getAttribute('data-i')];
+        if (!q.multi) { answers.push(+b.getAttribute('data-i')); show(true); return; }
+        // 複数選択。「どれもない」は他と同時に選べない
+        var k = draft.indexOf(o.v);
+        if (k >= 0) draft.splice(k, 1);
+        else if (o.v === 'none') draft = ['none'];
+        else draft = draft.filter(function (v) { return v !== 'none'; }).concat(o.v);
+        quiz.querySelectorAll('.qz-opt').forEach(function (x) { x.setAttribute('aria-pressed', String(draft.indexOf(q.opts[+x.getAttribute('data-i')].v) >= 0)); });
+        quiz.querySelector('.qz-next').disabled = !draft.length;
+      });
+    });
+    var next = quiz.querySelector('.qz-next');
+    if (next) next.addEventListener('click', function () { if (!draft.length) return; answers.push(draft.slice()); show(true); });
+    bindNav();
+    if (focus) focusHead('.qz-q');
+  }
+
+  function showResult(focus) {
+    var r = judge();
+    var lead = r.mode === 'makase'
+      ? 'なるべく手間をかけずに進められるよう、こちらで受け持てる作業と分担を、ご相談のうえで決めます。'
+      : 'いまの業務に合わせて、手間が減るやり方を一緒に考えます。';
+    // 「相談したい」の印。上の3件と下のカードすべてに最初から付け、外したいものだけ外してもらう（取りこぼしを減らす。経営者承認 2026-11-11）
+    var all = r.top.concat(r.more);
+    picked = all.map(function (x) { return x.id; });
+    // パートナー契約は、どの診断結果にも出す（2026-11-12 経営者の指示）。ほかのカードと同じく最初から「相談したい」を付ける
+    picked.push('monthly');
+    // カードそのものを押して付け外しする（2026-11-12 経営者の指示：「相談したい」ボタンは場所を取り、問い合わせに飛ぶと誤解されるためやめた）。
+    // 選んだカードは太い囲みとチェックの印。理由の行はなくし、「こちらも合いそうです」は名前だけにして詰める
+    function cardsHtml(list, cls, brief) {
+      return '<ul class="qz-cards' + cls + '" role="list">' + list.map(function (row) {
+        var c = card(row.id);
+        return '<li><button type="button" class="qz-pick qz-card" data-id="' + esc(row.id) + '" aria-pressed="true">' +
+          '<span class="qz-check" aria-hidden="true"></span><span class="qz-cat">' + esc(c.cat) + '</span><span class="qz-name">' + esc(c.name) + '</span>' +
+          (brief ? '' : '<span class="qz-desc">' + esc(c.desc) + '</span>') + '<span class="qz-vh">（相談したいものに選ぶ）</span></button></li>';
+      }).join('') + '</ul>';
+    }
+    var html = '<div class="qz-bar done" aria-hidden="true">' + QS.map(function () { return '<i class="on"></i>'; }).join('') + '</div>' +
+      '<p class="qz-step">診断の結果</p><h3 class="qz-q qz-res" tabindex="-1">まずはこの3つ</h3><p class="qz-lead">' + lead + '</p>' +
+      '<p class="qz-hint">相談したいものに<span class="qz-hint-mark" aria-hidden="true"></span>が付いています。カードを押すと、付け外しできます。</p>' +
+      cardsHtml(r.top, '') +
+      (r.more.length ? '<h4 class="qz-more-h">こちらも合いそうです</h4>' + cardsHtml(r.more, ' qz-cards-more', true) : '') +
+      '<button type="button" class="qz-pick qz-card qz-plan" data-id="monthly" aria-pressed="true"><span class="qz-check" aria-hidden="true"></span>' +
+        '<span class="qz-plan-h">いくつかの施策を続けて進めたいときは</span><span class="qz-name">' + esc(ITEMS.monthly.n) + '<small>月額</small></span>' +
+        '<span class="qz-desc">施策ごとに個別にご依頼いただくのではなく、複数の施策の導入を並行して進め、導入したしくみの運営・改善までお手伝いします。内容は、ご相談のうえでご提案します。</span>' +
+        '<span class="qz-vh">（相談したいものに選ぶ）</span></button>' +
+      '<div class="qz-pickbar"><p class="qz-count" aria-live="polite"></p><button type="button" class="qz-sub qz-clear" data-act="clear">チェックをすべて外す</button></div>' +
+      '<p class="qz-note">印が付いたものを、相談フォームに入れます。診断は目安です。ご相談のうえで、内容と進める順番を一緒に決めます。料金は内容をうかがってお見積もりします。</p>' +
+      '<button type="button" class="qz-next" data-act="consult">この内容で相談する</button>' +
+      navHtml(false) + '<button type="button" class="qz-sub qz-all" data-act="menu">全メニューを見る</button>';
+    quiz.innerHTML = html;
+    var count = quiz.querySelector('.qz-count'), go = quiz.querySelector('[data-act=consult]'), clear = quiz.querySelector('[data-act=clear]');
+    function sync() {
+      count.textContent = picked.length ? '相談したいもの：' + picked.length + '件' : '相談したいものを、カードを押して1つ以上選んでください';
+      go.disabled = !picked.length;
+      clear.disabled = !picked.length;
+    }
+    clear.addEventListener('click', function () {
+      picked = [];
+      quiz.querySelectorAll('.qz-pick').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      sync();
+    });
+    quiz.querySelectorAll('.qz-pick').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-id'), k = picked.indexOf(id);
+        if (k >= 0) picked.splice(k, 1); else picked.push(id);
+        b.setAttribute('aria-pressed', String(k < 0));
+        sync();
+      });
+    });
+    sync();
+    go.addEventListener('click', function () { if (picked.length) consult(); });
+    quiz.querySelector('[data-act=menu]').addEventListener('click', function () {
+      setMenu(true);
+      mBtn.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+      mBtn.focus({ preventScroll: true });
+    });
+    bindNav();
+    if (focus) focusHead('.qz-res');
+  }
+
+  // 「この内容で相談する」：「相談したい」が付いたものをフォームの興味欄に入れて、フォームへ移る（フォーム側でも外せる前提）
+  // 相談フォームへの引き継ぎ。診断で選んだものと、全メニューで選んだものを合わせて入れる（重複なし。2026-11-12 経営者の指示）
+  var chosen = { quiz: [], menu: [] }; // それぞれ { k: フォームの選択肢, n: 名前 } の並び
+  function applyToForm() {
+    var all = chosen.quiz.concat(chosen.menu), keys = [], names = [];
+    all.forEach(function (x) {
+      if (keys.indexOf(x.k) < 0) keys.push(x.k);
+      if (names.indexOf(x.n) < 0) names.push(x.n);
+    });
+    document.querySelectorAll('#svc-form .sv-checks input[data-k]').forEach(function (c) { c.checked = keys.indexOf(c.getAttribute('data-k')) >= 0; });
+    var st = document.getElementById('sv-from-quiz');
+    st.textContent = names.length ? '選んだ「' + names.join('」「') + '」を、下の選択肢に入れました。不要なものは外してください。' : '';
+    st.hidden = !names.length;
+    document.getElementById('svc-form').scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+    if (names.length) st.focus({ preventScroll: true });
+  }
+  function consult() {
+    chosen.quiz = picked.map(function (id) { return { k: ITEMS[id].k, n: ITEMS[id].n }; });
+    applyToForm();
+  }
+
+  // 全メニューでも、カードを押して選べるようにする（最初は何も選ばない。選び方は診断の結果と同じ）
+  // フォームの選択肢と名前が1対1でないメニューは、ここで対応させる
+  var EXTRA_K = { 'AI導入支援': 'ai', '感染対策・防災訓練の動画': 'manualmovie', 'ご家族向けの説明動画': 'movie', '施設だより・広報誌': 'print', 'LINE公式アカウントの配信代行': 'sns' };
+  var nameToK = {};
+  Object.keys(ITEMS).forEach(function (id) { nameToK[ITEMS[id].n] = ITEMS[id].k; });
+  Object.keys(EXTRA_K).forEach(function (n) { nameToK[n] = EXTRA_K[n]; });
+  var menuCards = Array.prototype.slice.call(menu.querySelectorAll('.svc-cards > li'));
+  var bar = document.createElement('div');
+  bar.className = 'menu-bar'; bar.hidden = true;
+  bar.innerHTML = '<p class="menu-count" aria-live="polite"></p><button type="button" class="qz-sub menu-clear">チェックをすべて外す</button><button type="button" class="qz-next menu-go"></button>';
+  menu.appendChild(bar);
+  var hint = document.createElement('p');
+  hint.className = 'menu-hint';
+  hint.textContent = '気になるメニューのカードを押すと、印が付きます。選んだものをまとめて相談フォームに入れられます。';
+  menu.insertBefore(hint, menu.firstChild);
+  // 選んだ件数と相談ボタンの帯は、全メニューが見え始めてから相談フォームが画面に入るまで、画面の下に出す
+  // （2026-11-12 経営者の指摘：キャンペーンのあたりで消えていた。一覧より下でも出し続け、フォームが見えたら隠す）
+  var menuInView = false, formSec = document.getElementById('svc-form'), barTick = false;
+  function barPlace() {
+    barTick = false;
+    var mt = menu.getBoundingClientRect().top, ft = formSec ? formSec.getBoundingClientRect().top : Infinity;
+    var nv = !menu.hidden && mt < innerHeight && ft > innerHeight;
+    if (nv !== menuInView) { menuInView = nv; menuSync(); }
+  }
+  function barQueue() { if (!barTick) { barTick = true; requestAnimationFrame(barPlace); } }
+  addEventListener('scroll', barQueue, { passive: true });
+  addEventListener('resize', barQueue);
+  function menuSync() {
+    if (!barTick) { var mt = menu.getBoundingClientRect().top, ft = formSec ? formSec.getBoundingClientRect().top : Infinity; menuInView = !menu.hidden && mt < innerHeight && ft > innerHeight; }
+    var on = menuCards.filter(function (li) { return li.getAttribute('aria-checked') === 'true'; });
+    bar.hidden = !(on.length && menuInView);
+    document.body.classList.toggle('menu-bar-on', !bar.hidden);
+    bar.querySelector('.menu-count').textContent = on.length ? '選んだもの：' + on.length + '件' : '';
+    bar.querySelector('.menu-go').textContent = '選んだ' + on.length + '件で相談する';
+  }
+  menuCards.forEach(function (li) {
+    var h = li.querySelector('h4'), name = h ? h.textContent : '', k = nameToK[name];
+    if (!k) return;
+    li.setAttribute('data-k', k);
+    li.setAttribute('role', 'checkbox');
+    li.setAttribute('aria-checked', 'false');
+    li.setAttribute('tabindex', '0');
+    li.setAttribute('aria-label', name + '（相談したいものに選ぶ）');
+    li.classList.add('pickable');
+    var mark = document.createElement('span');
+    mark.className = 'qz-check'; mark.setAttribute('aria-hidden', 'true');
+    li.appendChild(mark);
+    function toggle() { li.setAttribute('aria-checked', String(li.getAttribute('aria-checked') !== 'true')); menuSync(); }
+    li.addEventListener('click', function (e) { if (e.target.closest('a, button, input, select, textarea')) return; toggle(); });
+    li.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
+  });
+  menuCards = menuCards.filter(function (li) { return li.hasAttribute('data-k'); });
+  // 一覧で選んだカードと、キャンペーンの求人一式を、いつも合わせて集める
+  var setChosen = false, demoChosen = false;
+  function collectMenu() {
+    var list = menuCards.filter(function (li) { return li.getAttribute('aria-checked') === 'true'; })
+      .map(function (li) { return { k: li.getAttribute('data-k'), n: li.querySelector('h4').textContent }; });
+    if (setChosen) list.push({ k: 'set', n: '求人ツール一式（キャンペーン）' });
+    if (demoChosen) list.push({ k: 'demo', n: '業務効率化アプリのデモ作成（無料）' });
+    return list;
+  }
+  bar.querySelector('.menu-clear').addEventListener('click', function () {
+    menuCards.forEach(function (li) { li.setAttribute('aria-checked', 'false'); });
+    setChosen = false; demoChosen = false;
+    chosen.menu = [];
+    menuSync();
+  });
+  bar.querySelector('.menu-go').addEventListener('click', function () {
+    chosen.menu = collectMenu();
+    applyToForm();
+  });
+  // キャンペーンの「求人一式」は、ボタンを押すと一式を加えて、ほかに選んだものと一緒にフォームへ入れる
+  var demoLink = document.querySelector('#svc-demo .camp-link');
+  if (demoLink) demoLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    demoChosen = true;
+    chosen.menu = collectMenu();
+    applyToForm();
+  });
+  var setLink = document.querySelector('#svc-set .camp-link');
+  if (setLink) setLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    setChosen = true;
+    chosen.menu = collectMenu();
+    applyToForm();
+  });
+
+  function show(focus) { if (answers.length < QS.length) showQuestion(focus); else showResult(focus); }
+
+  qBtn.addEventListener('click', function () {
+    var open = quiz.hidden;
+    quiz.hidden = !open;
+    qBtn.setAttribute('aria-expanded', String(open));
+    qBtn.querySelector('b').textContent = open ? '診断を閉じる' : '診断する';
+    if (open) show(true);
+  });
+  window.__svcQuiz = { judge: function (a) { var keep = answers; answers = a.slice(); var r = judge(); answers = keep; return r.top.map(function (x) { return ITEMS[x.id].n; }).concat(r.more.map(function (x) { return '+' + ITEMS[x.id].n; })); } };
+})();
+</script>
+<script>
+// 2026-11-11 控えめな動き：ふわっと現れる・背景がゆっくり動く。動きを減らす設定の人には使わない
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+  try {
+    // ふわっと現れる。現れ終わったら rv を外し、元のスタイル（ホバーの動きなど）に戻す
+    var sel = '.sec-head, .svc-hero, .svc-movie, .svc-cards > li, .steps > li, .issue-sum, #issue-cards > li, .mail-card, .issues, .camp, .contact-head, .contact-box';
+    var show = function (el) {
+      if (!el.classList.contains('rv') || el.classList.contains('in')) return;
+      el.classList.add('in'); io.unobserve(el);
+      setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, 1300);
+    };
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) show(e.target); });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    var targets = Array.prototype.slice.call(document.querySelectorAll(sel));
+    targets.forEach(function (el) {
+      var n = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      if (el.matches('.svc-cards > li, .steps > li, #issue-cards > li')) el.style.setProperty('--d', (n % 3) * 90 + 'ms');
+      el.classList.add('rv'); io.observe(el);
+    });
+    // キーボードで移った先が見えないままにならないように
+    document.addEventListener('focusin', function (e) { for (var el = e.target; el && el.nodeType === 1; el = el.parentElement) show(el); });
+    root.classList.add('fx');
+
+    // 背景の英字と淡い形を、スクロールよりゆっくり動かす（読み取り→書き込みの順）
+    var px = [];
+    document.querySelectorAll('.sec-head, .contact-head').forEach(function (el) { px.push({ el: el, k: -.12, self: false, y: 0 }); });
+    document.querySelectorAll('[data-speed]').forEach(function (el) { px.push({ el: el, k: parseFloat(el.getAttribute('data-speed')) || 0, self: true, y: 0 }); });
+    var ticking = false, vh = innerHeight;
+    var update = function () {
+      ticking = false;
+      var i, p, r, vals = [];
+      for (i = 0; i < px.length; i++) {
+        p = px[i]; r = p.el.getBoundingClientRect();
+        // 自分自身を動かす要素は、動かす前の位置で計算する
+        var top = r.top - (p.self ? p.y : 0);
+        vals.push(top + r.height < -400 || top > vh + 400 ? null : (top + r.height / 2 - vh / 2) * p.k);
+      }
+      for (i = 0; i < px.length; i++) {
+        if (vals[i] === null) continue;
+        px[i].y = vals[i]; px[i].el.style.setProperty('--py', vals[i].toFixed(1) + 'px');
+      }
+    };
+    var req = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    addEventListener('scroll', req, { passive: true });
+    addEventListener('resize', function () { vh = innerHeight; req(); });
+    update();
+  } catch (err) {
+    // 途中で失敗したら、隠したままにしない
+    root.classList.remove('fx');
+  }
+})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+// 相談フォームとご要望の送信（送り先は同じサイトの /api/…。受け取った内容の扱いはプライバシーポリシー）
+(function () {
+  function send(form) {
+    var st = form.querySelector('.form-status'), btn = form.querySelector('button[type=submit]');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var fd = new FormData(form), data = {};
+      fd.forEach(function (v, k) { if (k === 'interest' || k === 'want') { (data[k] = data[k] || []).push(v); } else { data[k] = v; } });
+      data.turnstile = fd.get('cf-turnstile-response') || '';
+      if (!data.turnstile) { st.textContent = 'いたずら防止の確認が終わるまで、少しお待ちください。'; return; }
+      btn.disabled = true; st.textContent = '送信しています…';
+      fetch(form.getAttribute('data-api'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) {
+          if (x.ok) {
+            form.reset(); st.textContent = x.j.message || '送信しました。ありがとうございました。';
+            try { document.dispatchEvent(new CustomEvent('kw:submitted', { detail: { form: form.id } })); } catch (e) {}
+          }
+          else { st.textContent = x.j.error || '送信できませんでした。時間をおいて、もう一度お試しください。'; }
+        })
+        .catch(function () { st.textContent = '送信できませんでした。通信を確かめて、もう一度お試しください。'; })
+        .then(function () { btn.disabled = false; if (window.turnstile) try { turnstile.reset(form.querySelector('.cf-turnstile')); } catch (e) {} });
+    });
+  }
+  ['contact-form', 'voice-form', 'subscribe-form'].forEach(function (id) { var f = document.getElementById(id); if (f) send(f); });
+})();
+</script>
+</body>
+</html>

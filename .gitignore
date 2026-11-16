@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.wrangler/
+worker/www/.wrangler/
+tools/news/logs/
+_selftest_canary.txt
+.dev.vars
+.env*

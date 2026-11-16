@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>採用の制作サービスのご案内｜ケアジン</title>
+<meta name="description" content="介護事業所の求人原稿・採用ページ・見学面接の点検表・入職後の面談シートをつくるサービスのご案内です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261110c">
+<link rel="stylesheet" href="../assets/service.css?v=20261110c">
+</head>
+<body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></symbol>
+</svg>
+<a class="skip" href="#main">本文へ移動</a>
+<div class="sample-bar" role="note">非公開の試作です。公開・配信はしていません。申し込み・登録・送信は動きません。</div>
+
+<header class="site-head">
+  <div class="head-top">
+    <a class="logo" href="../index.html"><span>ケアジン<small>週刊・介護ニュースダイジェスト</small></span></a>
+    <a class="head-find" href="../index.html#news"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>記事をさがす</a>
+  </div>
+</header>
+<nav class="head-nav" aria-label="サイトの案内">
+  <a href="../index.html#picks">今週の注目ニュース</a><a href="../index.html#news">ニュース一覧</a><a href="../index.html#guide">解説</a><a href="../index.html#weekly">1週間まとめ</a><a class="nav-mail" href="../index.html#mail">メールで受け取る</a><a class="nav-cta" href="#form">ご依頼はこちら</a>
+</nav>
+
+<main class="sv-wrap" id="main">
+
+  <!-- 冒頭 -->
+  <section class="panel sv-hero">
+    <div>
+      <p class="sv-eyebrow">ケアジン運営者の制作サービス</p>
+      <h1><span class="nb">介護の採用に使うものを、</span><span class="nb">まとめてつくります。</span></h1>
+      <p class="sv-sub">求人原稿から入職後の面談シートまで。貴施設のホームページに置けるファイルでお渡しします。</p>
+      <ul class="sv-free">
+        <li>ご相談は無料</li>
+        <li>3営業日以内にご連絡</li>
+        <li>月額料金なし</li>
+      </ul>
+      <div class="sv-btns"><a class="sv-btn main" href="#form">無料で相談する</a></div>
+    </div>
+    <div class="sv-hero-pic"><img src="../assets/collage-2.webp" alt="介護職員が高齢の利用者の手に触れながら話している写真（生成したイメージ）" width="800" height="600"></div>
+  </section>
+
+  <!-- キャンペーン -->
+  <section class="sv-camp" aria-label="キャンペーン">
+    <a class="sv-camp-main" href="#set">
+      <span class="sv-camp-tag">月3社限定</span>
+      <span class="sv-camp-h">求人一式 <b>50,000円</b><small>（税別）</small></span>
+      <span class="sv-camp-p">求人原稿・採用ページ・見学面接の点検表・入職後の面談シートを、まとめて。</span>
+      <span class="sv-camp-go">一式の中身を見る<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+    </a>
+    <a class="sv-camp-sub" href="#form" data-interest="tenken">
+      <span class="sv-camp-tag free">無料</span>
+      <span class="sv-camp-h">求人原稿の無料点検</span>
+      <span class="sv-camp-p">URLを送るだけ。抜けている項目と直す順番をお返しします。</span>
+      <span class="sv-camp-go">申し込む<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+    </a>
+  </section>
+
+  <!-- お悩みチェック：1問ずつ進む -->
+  <section class="panel" id="check">
+    <h2 class="big-h">採用のお悩み<em>チェック</em></h2>
+    <p class="sv-lead">6つの質問に「はい・いいえ」で答えると、合いそうなサービスが分かります。</p>
+    <div class="qz" id="qz">
+      <div class="qz-bar" aria-hidden="true"><span id="qz-fill"></span></div>
+      <div class="qz-card" id="qz-card" aria-live="polite">
+        <p class="qz-step" id="qz-step">1 / 6</p>
+        <p class="qz-q" id="qz-q" tabindex="-1"></p>
+        <div class="qz-ans">
+          <button type="button" class="qz-yes" data-a="1">はい</button>
+          <button type="button" class="qz-no" data-a="0">いいえ</button>
+        </div>
+        <button type="button" class="qz-back" id="qz-back" hidden>ひとつ前に戻る</button>
+      </div>
+      <div class="qz-result" id="qz-result" aria-live="polite" hidden>
+        <p class="qz-step">結果</p>
+        <p class="qz-q" id="qz-head" tabindex="-1"></p>
+        <ul class="qz-recs" id="qz-recs"></ul>
+        <div class="qz-ans">
+          <a class="sv-btn main" href="#form">この内容で相談する</a>
+          <button type="button" class="qz-again" id="qz-again">もう一度チェックする</button>
+        </div>
+      </div>
+      <p class="sv-note">簡単なチェックです。効果や応募・採用の結果をお約束するものではありません。</p>
+    </div>
+  </section>
+
+  <!-- 一式の図解 -->
+  <section class="panel" id="set">
+    <p class="sv-eyebrow">月3社限定・求人一式 50,000円（税別）</p>
+    <h2 class="sv-h2">採用の流れに沿って、<br><em>使う道具が一度にそろう。</em></h2>
+    <ol class="steps">
+      <li><span class="st-no">01</span><b>求人を出す</b><p>求人原稿</p><small>Indeedなどに載せる原稿</small></li>
+      <li><span class="st-no">02</span><b>応募の前に知ってもらう</b><p>採用ページ</p><small>ホームページに置く1枚</small></li>
+      <li><span class="st-no">03</span><b>見学・面接</b><p>点検表と返信文例</p><small>当日までの段取りと文例</small></li>
+      <li><span class="st-no">04</span><b>入職後3か月</b><p>面談シート・教える人の表</p><small>定着のための書式</small></li>
+    </ol>
+    <p class="sv-cond">税込55,000円・1施設1職種・修正1回・買い切り（月額なし）</p>
+    <div class="sv-btns center"><a class="sv-btn main" href="#form">一式について相談する</a></div>
+  </section>
+
+  <!-- サービスメニュー一覧 -->
+  <section class="panel" id="menu">
+    <h2 class="big-h">サービス<em>メニュー一覧</em></h2>
+    <p class="sv-lead">1つから頼めます。料金は内容をうかがってお見積もりします。</p>
+    <ul class="sv-menu">
+      <li><h3>求人原稿をつくる</h3><p>応募の前に知りたいことを漏れなく書いた原稿</p><span class="sv-price">個別相談</span></li>
+      <li><h3>採用ページをつくる</h3><p>スマホでも読める1枚。ファイルでお渡し</p><span class="sv-price">個別相談</span></li>
+      <li><h3>写真の撮り方ガイド</h3><p>何をどう撮るかの手引き（撮影はしません）</p><span class="sv-price">個別相談</span></li>
+      <li><h3>見学・面接の段取り表</h3><p>当日までの点検表と、案内・返信の文例</p><span class="sv-price">個別相談</span></li>
+      <li><h3>入職後の面談シート</h3><p>3か月の面談シートと、教える人の表</p><span class="sv-price">個別相談</span></li>
+      <li class="soon"><h3>求人票の事例集・ひな形</h3><p>書き換え前→後の例と、Word・Excelのひな形</p><span class="sv-price">準備中</span></li>
+      <li class="soon"><h3>週刊ニュースメール</h3><p>毎週月曜に1週間のニュースをお届け</p><span class="sv-price">準備中</span></li>
+    </ul>
+  </section>
+
+  <!-- 進み方 -->
+  <section class="panel" id="flow">
+    <h2 class="sv-h2">ご相談から<em>お渡しまで</em></h2>
+    <ol class="steps">
+      <li><span class="st-no">01</span><b>ご相談</b><small>フォームから。オンライン30分・無料</small></li>
+      <li><span class="st-no">02</span><b>お見積もり</b><small>料金と条件の書類をお送りします</small></li>
+      <li><span class="st-no">03</span><b>質問票と資料</b><small>個人が分かる情報は除いてお送りください</small></li>
+      <li><span class="st-no">04</span><b>確認・お渡し</b><small>修正1回のあと、ファイルでお渡し</small></li>
+    </ol>
+  </section>
+
+  <!-- よくある質問：質問だけ見せ、押すと答えが開く -->
+  <section class="panel" id="faq">
+    <h2 class="big-h">よくある<em>質問</em></h2>
+    <div class="sv-faq">
+      <details><summary>ホームページがなくても頼めますか</summary><p>頼めます。置く場所がなければ、採用ページの文面をお渡しします。</p></details>
+      <details><summary>写真は必要ですか</summary><p>使う場合は貴施設の実物をお送りください。写っている方の了解は貴施設で取ってください。</p></details>
+      <details><summary>料金のほかに費用はかかりますか</summary><p>月額や更新料はありません。求人サイトの掲載料などは施設のご負担です。</p></details>
+      <details><summary>応募は増えますか</summary><p>結果はお約束できません。応募の前に知りたいことが伝わる原稿とページを目指します。</p></details>
+      <details><summary>相談だけでもよいですか</summary><p>はい。オンライン相談（30分）は無料です。</p></details>
+      <details><summary>社会福祉法人・NPO法人・医療法人でも頼めますか</summary><p>頼めます。法人の種類は問いません。</p></details>
+      <details><summary>個人情報を預けることはありますか</summary><p>応募された方や職員の個人情報は送らないでください。当社は応募の受付をしません。</p></details>
+    </div>
+  </section>
+
+  <!-- 相談フォーム -->
+  <section class="panel" id="form">
+    <h2 class="big-h">無料<em>相談</em></h2>
+    <p class="sv-lead">オンライン30分・無料。3営業日以内に日程をご連絡します。</p>
+    <form class="sv-form" onsubmit="return false">
+      <div class="sv-grid">
+        <label class="sv-field"><span>法人名<span class="req">必須</span></span><input type="text" autocomplete="organization" required></label>
+        <label class="sv-field"><span>お名前<span class="req">必須</span></span><input type="text" autocomplete="name" required></label>
+        <label class="sv-field"><span>メールアドレス<span class="req">必須</span></span><input type="email" autocomplete="email" required></label>
+        <label class="sv-field"><span>電話番号<span class="opt">任意</span></span><input type="tel" autocomplete="tel"></label>
+        <label class="sv-field"><span>事業所名<span class="opt">任意</span></span><input type="text"></label>
+        <label class="sv-field"><span>サービスの種類<span class="opt">任意</span></span>
+          <select><option value="">選んでください</option><option>訪問介護</option><option>通所介護（デイサービス）</option><option>認知症グループホーム</option><option>特別養護老人ホーム</option><option>介護老人保健施設</option><option>有料老人ホーム・サ高住</option><option>居宅介護支援</option><option>その他</option></select></label>
+      </div>
+      <fieldset class="sv-field">
+        <legend>興味のあるもの<span class="opt">任意・複数可</span></legend>
+        <div class="sv-checks" id="interest">
+          <label><input type="checkbox" value="set"> 求人一式（月3社限定）</label>
+          <label><input type="checkbox" value="tenken"> 無料点検</label>
+          <label><input type="checkbox" value="genko"> 求人原稿</label>
+          <label><input type="checkbox" value="page"> 採用ページ</label>
+          <label><input type="checkbox" value="photo"> 写真の撮り方ガイド</label>
+          <label><input type="checkbox" value="kengaku"> 見学・面接の段取り表</label>
+          <label><input type="checkbox" value="mendan"> 入職後の面談シート</label>
+        </div>
+      </fieldset>
+      <label class="sv-field"><span>無料点検する求人原稿・採用ページのURL<span class="opt">無料点検の場合</span></span><input type="url" placeholder="https://"></label>
+      <label class="sv-field"><span>ご相談内容<span class="opt">任意</span></span><textarea rows="3" placeholder="例：パートの介護職の応募が月1件ほどしかない"></textarea></label>
+      <p class="sv-warn">応募された方や職員の個人情報は書かないでください。</p>
+      <label class="sv-agree"><input type="checkbox" required> プライバシーポリシー（準備中）に同意する</label>
+      <button class="sv-btn main" type="submit" disabled>送信する（試作のため無効）</button>
+    </form>
+  </section>
+</main>
+
+<a class="page-top" href="#top"><span aria-hidden="true"></span>PAGE TOP</a>
+
+<footer class="site-foot">
+  <div class="foot-logo"><a class="logo" href="../index.html"><span>ケアジン<small>週刊・介護ニュースダイジェスト</small></span></a></div>
+  <div class="foot-main">
+    <p>掲載の写真はイメージとして生成したもので、実在の人物・施設ではありません。</p>
+    <p><a href="../articles/about.html">運営者情報</a>｜<a href="../articles/editorial-policy.html">編集方針・AIの使い方</a></p>
+  </div>
+</footer>
+
+<script>
+// 無料点検のバナーから来たら、フォームの「無料点検」に印を付けておく
+document.querySelectorAll('[data-interest]').forEach(function (a) {
+  a.addEventListener('click', function () {
+    var c = document.querySelector('#interest input[value="' + a.dataset.interest + '"]');
+    if (c) c.checked = true;
+  });
+});
+
+// お悩みチェック：1問ずつ「はい・いいえ」で進み、最後におすすめを出す（効果の判定ではない）
+var QS = [
+  { q: '求人を出しても、応募が少ない', rec: 'genko' },
+  { q: '応募はあるのに、見学や面接に来ない', rec: 'kengaku' },
+  { q: '入職して3か月以内に辞める人がいる', rec: 'mendan' },
+  { q: 'ホームページに採用の案内がない、または古い', rec: 'page' },
+  { q: '求人原稿を、しばらく見直していない', rec: 'tenken' },
+  { q: '面接の案内や返信を、毎回その場で考えている', rec: 'kengaku' }
+];
+var RECS = {
+  set: ['求人一式（月3社限定）', '4点をまとめて整えます', '#set'],
+  genko: ['求人原稿をつくる', '応募の前に知りたいことを書いた原稿に', '#menu'],
+  kengaku: ['見学・面接の段取り表', '当日までの段取りと返信の文例', '#menu'],
+  mendan: ['入職後の面談シート', '3か月の面談の書式', '#menu'],
+  page: ['採用ページをつくる', 'ホームページに置ける1枚', '#menu'],
+  tenken: ['求人原稿の無料点検', 'まず今の原稿の抜けを確かめる', '#form']
+};
+var answers = [];
+var el = function (id) { return document.getElementById(id); };
+function showQ() {
+  var n = answers.length;
+  el('qz-step').textContent = (n + 1) + ' / ' + QS.length;
+  el('qz-q').textContent = QS[n].q;
+  el('qz-fill').style.width = (n / QS.length * 100) + '%';
+  el('qz-back').hidden = n === 0;
+  var card = el('qz-card');
+  card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
+}
+function showResult() {
+  el('qz-fill').style.width = '100%';
+  el('qz-card').hidden = true;
+  el('qz-result').hidden = false;
+  var yes = answers.filter(Boolean).length;
+  var keys = [];
+  if (yes >= 3) keys.push('set');
+  QS.forEach(function (x, i) { if (answers[i] && keys.indexOf(x.rec) < 0) keys.push(x.rec); });
+  if (keys.indexOf('tenken') < 0) keys.push('tenken');
+  el('qz-head').textContent = yes === 0 ? '当てはまるものはありませんでした。まずは無料点検で、今の原稿を確かめてみませんか。'
+    : yes >= 3 ? yes + '個当てはまりました。まとめて整える「求人一式」が合いそうです。'
+    : yes + '個当てはまりました。次のサービスが合いそうです。';
+  var ul = el('qz-recs');
+  ul.innerHTML = '';
+  keys.forEach(function (k) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = RECS[k][2];
+    a.innerHTML = '<b></b><span></span>';
+    a.querySelector('b').textContent = RECS[k][0];
+    a.querySelector('span').textContent = RECS[k][1];
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  el('qz-result').classList.remove('in'); void el('qz-result').offsetWidth; el('qz-result').classList.add('in');
+  el('qz-head').focus();
+}
+document.querySelectorAll('#qz-card [data-a]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    answers.push(b.dataset.a === '1');
+    if (answers.length < QS.length) showQ(); else showResult();
+  });
+});
+el('qz-back').addEventListener('click', function () { answers.pop(); showQ(); });
+el('qz-again').addEventListener('click', function () {
+  answers = [];
+  el('qz-result').hidden = true;
+  el('qz-card').hidden = false;
+  showQ();
+  el('qz-q').focus();
+});
+showQ();
+</script>
+</body>
+</html>

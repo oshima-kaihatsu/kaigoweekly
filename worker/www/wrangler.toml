@@ -1,0 +1,7 @@
+# www.kaigoweekly.jp → kaigoweekly.jp の転送だけを行う小さな Worker（2026-11-13）
+name = "kaigoweekly-www"
+main = "index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+preview_urls = false
+routes = [ { pattern = "www.kaigoweekly.jp", custom_domain = true } ]

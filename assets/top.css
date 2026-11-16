@@ -1,0 +1,525 @@
+/* トップのレイアウト（2026-11-10 v4）。福祉らしい柔らかさを、書体・色・余白で出す。
+   節の見出しは「英字の小ラベル＋大きな見出し＋短い説明」に、薄い英字を背景に敷く。
+   考え方は _design/20261110_参考サイトの分析.md。site.css と service.css の後に読む */
+:root {
+  --band-pad: 104px;
+  --ink: #3a4842; --strong: #24332d; --muted: #67766f;
+  --soft: #f0f7f2; --warm: #fbf8f1; --deep: #1f6b51;
+  --card-line: #e3ece6;
+  --r: 8px;
+}
+body { background: #fff; color: var(--ink); line-height: 1.8; }
+html { scroll-padding-top: 64px; }
+
+/* 角は小さく丸める（大きな角丸にはしない） */
+.pick, .link-card, .issue-sum, .issues, .mail-card, .svc-cards > li, .camp, .camp-item, .contact-box,
+.find, .signup input, .signup button, .sv-btn, .more button, .sv-field input, .sv-field select, .sv-field textarea,
+.sv-checks label, .sv-warn, .head-find { border-radius: var(--r) !important; }
+.sv-price, .camp-tag, .chips button, .st { border-radius: 4px !important; }
+
+/* ロゴ */
+.logo-img img { width: auto; height: 28px; }
+.foot-logo .logo-img img { height: 24px; }
+
+/* 帯と中身の幅 */
+.band { position: relative; padding: var(--band-pad) 0; background: #fff; overflow: hidden; }
+.band-soft { background: var(--soft); }
+.band-warm { background: var(--warm); }
+.band-deep { background: var(--deep); color: #fff; }
+.wrap { position: relative; width: min(var(--wide), calc(100% - 48px)); margin: 0 auto; }
+
+/* 節の見出し */
+.sec-head { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px 56px; align-items: end; margin-bottom: 52px; padding-top: 28px; }
+.sec-head.one { grid-template-columns: minmax(0, 1fr); margin-bottom: 36px; }
+.sec-head::before, .contact-head::before {
+  content: attr(data-en); position: absolute; left: -.04em; top: -.18em; z-index: 0;
+  font-family: var(--font-en); font-weight: 700; font-size: clamp(64px, 9.4vw, 132px); line-height: 1; letter-spacing: .01em;
+  color: var(--green); opacity: .07; white-space: nowrap; pointer-events: none;
+}
+.sec-head > *, .contact-head > * { position: relative; z-index: 1; }
+.sec-label { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-family: var(--font-en); font-size: 14px; font-weight: 700; letter-spacing: .16em; color: var(--green); }
+.sec-label::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+.sec-head h2, .contact-head h2, .mail-card h2 { margin: 0; font-size: clamp(28px, 3vw, 38px); font-weight: 700; line-height: 1.5; letter-spacing: .04em; color: var(--strong); }
+.sec-head h2 em, .contact-head h2 em { font-style: normal; color: var(--green); }
+.sec-desc { margin: 0; max-width: 28em; font-size: 15.5px; line-height: 2; color: var(--muted); }
+
+/* 今週の注目 */
+.issue-sum { margin: 0 0 24px; padding: 18px 22px 18px 28px; background: var(--soft); border: 0; }
+.issue-tag { font-family: var(--font-en); }
+#issue-cards { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; margin: 0; }
+.pick { gap: 10px; padding: 26px 28px; border: 1px solid var(--card-line); background: #fff; box-shadow: none; }
+.pick:hover { border-color: var(--green); }
+#issue-cards > li:first-child .pick { padding: 40px 40px 34px; background: var(--soft); border-color: var(--soft); }
+#issue-cards > li:first-child h3 { font-size: clamp(23px, 2.3vw, 29px); line-height: 1.6; }
+#issue-cards > li:first-child .sum { font-size: 15.5px; line-height: 2; max-width: 34em; }
+#issue-cards > li:nth-child(n + 2) h3 { font-size: 17px; line-height: 1.65; }
+#issue-cards > li:nth-child(n + 2) .sum { font-size: 14px; line-height: 1.85; }
+.pick .meta { font-size: 13px; }
+
+/* 記事の一覧 */
+.tools { margin-bottom: 28px; }
+.find { background: #fff; border: 1px solid #d6e5dc; }
+.links.two { gap: 12px 16px; }
+.link-card { padding: 18px 22px; border: 1px solid var(--card-line); background: #fff; box-shadow: none; }
+.band-soft .link-card { border-color: #fff; }
+.link-card:hover, .band-soft .link-card:hover { border-color: var(--green); }
+.link-card b { font-size: 16px; line-height: 1.7; }
+.links > li.week-row { margin-top: 20px; font-size: 17px; }
+.more { margin-top: 32px; text-align: center; }
+.more button { padding: 10px 36px; }
+
+/* 過去の1週間まとめとメール */
+.mail-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.issues { margin: 0; background: #fff; padding: 6px 28px; }
+.issues a { padding: 18px 0; border-bottom: 1px solid #ecf1ee; }
+.issues li:last-child a { border-bottom: 0; }
+.mail-card { padding: 36px 36px 32px; background: #fff; color: var(--ink); }
+.mail-card .sec-label { margin-bottom: 10px; }
+.mail-card h2 { font-size: clamp(23px, 2.3vw, 28px); }
+.mail-card > p { margin: 14px 0 20px; font-size: 15px; }
+.mail-card .signup input { border-color: #d6e5dc; }
+.mail-card .signup button { background: var(--green); color: #fff; opacity: .85; }
+.mail-card .point-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.75; color: var(--muted); }
+
+/* サービス：分類ごとのカード */
+.svc-group + .svc-group { margin-top: 44px; }
+.svc-cat { display: flex; align-items: baseline; gap: 12px; margin: 0 0 16px; font-size: 19px; font-weight: 700; color: var(--strong); }
+.svc-cat span { font-family: var(--font-en); font-size: 13px; letter-spacing: .14em; color: var(--green); order: 2; }
+.svc-cat::after { content: ""; flex: 1; order: 3; height: 1px; align-self: center; background: var(--card-line); }
+.svc-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.svc-cards > li { display: flex; flex-direction: column; gap: 8px; padding: 24px 24px 20px; background: #fff; border: 1px solid var(--card-line); }
+.svc-cards h4 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--green-deep); }
+.svc-cards p { margin: 0; font-size: 14px; line-height: 1.85; color: var(--muted); }
+.svc-cards .sv-price { align-self: flex-start; margin-top: auto; grid-column: auto; grid-row: auto; background: var(--soft); }
+.svc-note { margin: 28px 0 0; font-size: 13px; color: var(--muted); }
+
+/* キャンペーン：控えめな「お得なおまけ」 */
+.camp { margin-top: 72px; padding: 36px 36px 32px; background: var(--warm); }
+.camp-h { display: flex; align-items: baseline; gap: 12px; margin: 0 0 20px; font-size: 19px; font-weight: 700; color: var(--strong); }
+.camp-h span { font-family: var(--font-en); font-size: 13px; letter-spacing: .14em; color: #b0861a; order: 2; }
+.camp-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.camp-item { display: flex; flex-direction: column; gap: 6px; padding: 24px 26px; background: #fff; }
+.camp-tag { align-self: flex-start; margin: 0; padding: 0 10px; background: var(--yellow); color: #5d4a00; font-size: 12.5px; font-weight: 700; }
+.camp-item h4 { margin: 4px 0 0; font-size: 19px; font-weight: 700; color: var(--strong); }
+.camp-item h4 small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.camp-item > p:not(.camp-tag) { margin: 0; font-size: 14px; line-height: 1.85; color: var(--muted); }
+.camp-link { margin-top: auto; padding-top: 6px; font-weight: 700; }
+.camp-item .signup { margin-top: 10px; gap: 8px; }
+.camp-item .signup input { flex: 1 1 100%; border-color: #d6e5dc; }
+.camp-item .signup button { width: 100%; background: var(--green); color: #fff; opacity: .85; }
+
+/* 相談の流れ */
+.flow { margin-top: 112px; }
+#service .steps { margin: 0; }
+#service .steps b { font-size: 18px; margin-top: 2px; }
+#service .steps small { display: block; margin-top: 4px; padding-right: 8px; font-size: 14px; line-height: 1.85; color: var(--muted); }
+
+/* 無料相談の帯 */
+.contact-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
+.contact-head { position: relative; padding-top: 28px; }
+.contact-head::before { color: #fff; opacity: .08; }
+.contact-head .sec-label { color: #c8ead7; }
+.contact-head h2 { color: #fff; }
+.contact-head p { margin: 18px 0 0; font-size: 15.5px; line-height: 2; }
+.contact-head .contact-note { margin-top: 28px; font-size: 12.5px; line-height: 1.85; color: #d4ecdf; }
+.contact-box { padding: 40px; background: #fff; color: var(--ink); }
+.contact-box .sv-form { margin: 0; max-width: none; }
+.contact-box .sv-btn { min-width: 0; width: 100%; }
+
+@media (max-width: 1000px) {
+  .mail-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  #issue-cards { grid-template-columns: minmax(0, 1fr); }
+  .svc-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  :root { --band-pad: 64px; }
+  .wrap { width: calc(100% - 32px); }
+  .logo-img img { height: 20px; }
+  .sec-head { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 32px; padding-top: 18px; }
+  .sec-desc { font-size: 14.5px; }
+  .issue-sum { padding: 16px 18px; }
+  #issue-cards > li:first-child .pick { padding: 26px 22px; }
+  #issue-cards > li:nth-child(n + 2) .pick { padding: 20px; }
+  .link-card { padding: 16px 18px; }
+  .issues { padding: 4px 18px; }
+  .mail-card { padding: 28px 22px 24px; }
+  .svc-cards, .camp-list { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .svc-cards > li { padding: 20px; }
+  .camp { margin-top: 56px; padding: 26px 18px; }
+  .flow { margin-top: 80px; }
+  .contact-box { padding: 26px 18px; }
+}
+
+/* 2026-11-10 ロゴの色（淡い黄緑 #95be74 → 深い緑 #105f38）に合わせて全体の緑を寄せる */
+:root {
+  --green: #2a7d40; --green-deep: #17603a; --green-soft: #eef6e6; --green-mid: #d3e8c2; --link: #24733b;
+  --leaf: #95be74; --leaf-mid: #6faf40;
+  --soft: #f3f8ec; --deep: #1f6a3c; --card-line: #e2ebd9;
+  --grad: linear-gradient(90deg, #6faf40, #17603a);
+}
+.sec-label::before { width: 30px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--leaf), var(--green)); }
+.sec-head::before { color: var(--leaf-mid); opacity: .12; }
+.sec-head h2 em { background: linear-gradient(transparent 68%, #e3f0d2 68%); }
+.svc-cat::before { content: ""; order: 0; width: 8px; height: 8px; border-radius: 50%; align-self: center; background: var(--leaf); }
+.svc-cards > li { border-top: 3px solid var(--green-mid); }
+.svc-cards > li:hover { border-color: var(--leaf); }
+.camp-h span { color: #9a7a1e; }
+
+/* ボタンの濃い緑もロゴの深緑に */
+:root { --grad2: linear-gradient(90deg, #17603a, #2a7d40); }
+.nw { display: inline-block; }
+.camp-h span { color: #7a5f12; }
+.page-top.is-hidden { opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+.sv-off { margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--muted); }
+.sv-form :disabled:not(button) { background: #f6f8f4; cursor: not-allowed; }
+
+/* ===== 2026-11-11 サービスの節：ニュースの節から雰囲気を変える ===== */
+/* ページ内リンクは滑らかに。動きを減らす設定の人には無効 */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* 節全体：角の丸い、ロゴ色の淡いグラデーションの面が下からせり上がる */
+.band-svc { margin-top: -40px; padding-top: 112px; border-radius: 48px 48px 0 0 !important; overflow: hidden;
+  background: radial-gradient(120% 60% at 50% 0%, #eaf4dc 0%, #f6faef 45%, #fff 100%); z-index: 1; }
+
+/* 見出し：中央ぞろえ・大きめ（ニュースの節の左右2列と違う見せ方） */
+.svc-hero { display: block; text-align: center; max-width: 760px; margin: 0 auto 48px; padding: 0; border: 0; }
+.svc-hero p { color: inherit; }
+.svc-hero .sec-label { justify-content: center; }
+.svc-hero .sec-label::after { content: ""; width: 30px; height: 3px; border-radius: 2px !important; background: linear-gradient(90deg, var(--green), var(--leaf)); }
+.svc-hero h2 { margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.45; letter-spacing: .05em; color: var(--strong); }
+.svc-hero h2 em { font-style: normal; color: var(--green); background: linear-gradient(transparent 66%, #dcedc8 66%); }
+.svc-hero-lead { margin: 22px auto 0; max-width: 40em; font-size: 16px; line-height: 2; color: var(--ink); }
+.svc-concept { margin: 22px auto 0; padding: 14px 26px; display: inline-block; border-radius: 9999px !important; background: #fff; box-shadow: 0 6px 20px rgba(111,175,64,.14);
+  font-size: 14.5px; line-height: 1.9; color: var(--muted); }
+.svc-concept b { color: var(--green-deep); font-weight: 700; }
+
+/* 紹介動画の枠（16:9） */
+.svc-movie { margin: 0 auto 72px; max-width: 820px; }
+.svc-movie-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 24px !important; overflow: hidden; background: linear-gradient(135deg, #f3f8ec, #e2efd4); box-shadow: 0 14px 40px rgba(31,106,60,.12); }
+.svc-movie-frame video, .svc-movie-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.svc-movie-wait { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; color: var(--muted); }
+.svc-movie-wait p { margin: 0; font-size: 14.5px; }
+.svc-movie-play { width: 64px; height: 64px; border-radius: 50% !important; background: rgba(255,255,255,.85); position: relative; }
+.svc-movie-play::after { content: ""; position: absolute; left: 26px; top: 20px; border-left: 18px solid var(--leaf); border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.svc-movie figcaption { margin-top: 14px; text-align: center; font-size: 14px; color: var(--muted); }
+
+/* サービスのカード：丸みを少し強め、浮かせる */
+.svc-intro { margin: 0 0 36px; text-align: center; font-size: 20px; font-weight: 700; color: var(--green-deep); letter-spacing: .04em; }
+.band-svc .svc-cards > li { border: 0; border-radius: 16px !important; background: #fff; box-shadow: 0 4px 18px rgba(31,106,60,.08); transition: transform .2s, box-shadow .2s; }
+.band-svc .svc-cards > li:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(31,106,60,.13); }
+
+/* キャンペーン：特別感（濃い緑の枠＋淡い光、価格を大きく） */
+.camp { position: relative; margin-top: 80px; padding: 3px; border-radius: 28px !important; background: linear-gradient(135deg, var(--leaf), var(--green-deep)); box-shadow: 0 18px 44px rgba(31,106,60,.18); }
+.camp > .camp-top, .camp > .camp-list { position: relative; }
+.camp::before { content: ""; position: absolute; inset: 3px; border-radius: 25px !important; background: radial-gradient(90% 70% at 15% 0%, #fff7d6 0%, #fbfdf6 55%, #fff 100%); }
+.camp-top { padding: 40px 40px 8px; text-align: center; }
+.camp-badge { display: inline-block; margin: 0 0 10px; padding: 4px 20px; border-radius: 9999px !important; background: linear-gradient(90deg, var(--green), var(--green-deep)); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: .12em; }
+.camp-h { display: block; margin: 0; font-size: clamp(26px, 3vw, 34px); font-weight: 700; letter-spacing: .08em; color: var(--strong); }
+.camp-h span { display: block; margin-top: 4px; font-family: var(--font-en); font-size: 13px; letter-spacing: .2em; color: #7a5f12; }
+.camp-sub { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); }
+.camp-list { padding: 24px 40px 40px; }
+.camp-item { border: 1px solid #ecf2e3; border-radius: 18px !important; box-shadow: 0 4px 16px rgba(31,106,60,.07); }
+.camp-tag { background: #ffe9a0; color: #5d4a00; }
+.camp-price { font-size: 1.6em; color: var(--green-deep); letter-spacing: .02em; }
+.camp-price span { font-size: .55em; margin-left: 2px; }
+.camp-item .signup button { opacity: 1; background: var(--grad2); }
+.camp-link { display: inline-flex; align-self: flex-start; padding: 10px 22px; border-radius: 9999px !important; background: var(--grad2); color: #fff; text-decoration: none; }
+
+@media (max-width: 760px) {
+  .band-svc { margin-top: -24px; padding-top: 72px; border-radius: 28px 28px 0 0 !important; }
+  .svc-hero { margin-bottom: 36px; text-align: left; }
+  .svc-hero .sec-label { justify-content: flex-start; }
+  .svc-hero .sec-label::after { display: none; }
+  .svc-concept { display: block; border-radius: 16px !important; padding: 14px 18px; }
+  .svc-movie { margin-bottom: 52px; }
+  .svc-movie-frame { border-radius: 16px !important; }
+  .svc-intro { text-align: left; font-size: 18px; margin-bottom: 24px; }
+  .camp { margin-top: 56px; border-radius: 22px !important; }
+  .camp::before { border-radius: 19px !important; }
+  .camp-top { padding: 28px 18px 4px; }
+  .camp-list { padding: 18px 14px 18px; }
+}
+.svc-concept-wrap { text-align: center; margin: 0 0 18px; }
+.svc-concept-wrap .svc-concept { margin-top: 0; }
+@media (max-width: 760px) { .svc-concept-wrap { text-align: left; } }
+
+/* ===== 2026-11-11 その2：控えめな動き（背景がゆっくり動く・ふわっと現れる）。動きを減らす設定の人には無効 ===== */
+/* 背景の淡い形（サービスの節） */
+.svc-orb { position: absolute; z-index: 0; border-radius: 50% !important; pointer-events: none; transform: translate3d(0, var(--py, 0), 0); will-change: transform;
+  background: radial-gradient(closest-side, rgba(149,190,116,.28), rgba(149,190,116,0)); }
+.svc-orb.o1 { width: 520px; height: 520px; left: -160px; top: 280px; }
+.svc-orb.o2 { width: 420px; height: 420px; right: -140px; top: 1100px; background: radial-gradient(closest-side, rgba(246,220,143,.32), rgba(246,220,143,0)); }
+.svc-orb.o3 { width: 480px; height: 480px; left: 30%; top: 2600px; }
+.band-svc > .wrap { position: relative; z-index: 1; }
+/* 節見出しの背景の英字 */
+.sec-head::before, .contact-head::before { transform: translate3d(0, var(--py, 0), 0); will-change: transform; }
+
+/* ふわっと現れる（JSが動いている時だけ） */
+.fx .rv { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0ms); }
+.fx .rv.in { opacity: 1; transform: none; }
+
+@media (max-width: 760px) {
+  .svc-orb.o1 { width: 320px; height: 320px; }
+  .svc-orb.o2 { width: 280px; height: 280px; top: 900px; }
+  .svc-orb.o3 { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-orb, .sec-head::before, .contact-head::before { transform: none !important; }
+  .rv { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+@media print {
+  .fx .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .svc-orb { display: none; }
+}
+
+/* ===== 2026-11-11 その3 ===== */
+/* 見出しの後ろの大きな英字が、隣の枠の上に出ないように（枠を前面へ） */
+.mail-card, .issues, .issue-sum, #issue-cards, .contact-box, .links, .tools, .camp { position: relative; z-index: 1; }
+
+/* 「施設運営のお悩み、ご相談ください。」は1行で。狭い画面では文字を小さくして収める */
+.svc-hero { max-width: 880px; }
+.svc-hero h2 { white-space: nowrap; font-size: clamp(18px, calc((100vw - 32px) / 18.5), 48px); }
+
+/* キャンペーン：濃い緑の地に明るい文字（反転）、強めの影 */
+.camp { padding: 0; background: #1f6a3c;
+  box-shadow: 0 26px 60px rgba(23,96,58,.34), 0 8px 18px rgba(23,96,58,.2); }
+.camp::before { display: none; }
+.camp-badge { background: #ffe9a0; color: #5d4a00; }
+.camp-h { color: #fff; font-size: clamp(30px, 3.6vw, 42px); letter-spacing: .1em; }
+.camp-h span { color: #d8ecb8; }
+.camp-sub { color: #e3f0da; }
+
+/* ===== 2026-11-11 その4 ===== */
+/* 一式の内訳 */
+.camp-set { list-style: none; margin: 4px 0 2px; padding: 0; display: grid; gap: 6px; }
+.camp-set li { position: relative; padding-left: 26px; font-size: 14.5px; font-weight: 700; line-height: 1.6; color: var(--strong); }
+.camp-set li::before { content: ""; position: absolute; left: 2px; top: .3em; width: 16px; height: 16px; border-radius: 50% !important; background: var(--green-soft); }
+.camp-set li::after { content: ""; position: absolute; left: 7px; top: calc(.3em + 4px); width: 5px; height: 8px; border: solid var(--green); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.camp-terms { margin: 4px 0 0 !important; font-size: 13px !important; }
+
+/* 特別キャンペーンに、さりげない「キラーン」（数秒おきに光が枠全体を横切る。文字やカードの背面を通す） */
+.camp { position: relative; overflow: hidden; }
+.camp > .camp-top, .camp > .camp-list { position: relative; z-index: 1; }
+.camp::after { content: ""; position: absolute; z-index: 0; top: -20%; bottom: -20%; left: -40%; width: 18%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.2) 40%, rgba(255,255,255,.34) 50%, rgba(255,255,255,.2) 60%, rgba(255,255,255,0) 100%);
+  transform: skewX(-12deg); animation: camp-shine 5s ease-in-out 1.2s infinite; }
+@keyframes camp-shine { 0% { left: -40%; } 28%, 100% { left: 120%; } }
+@media (prefers-reduced-motion: reduce) { .camp::after { display: none; } }
+@media print { .camp::after { display: none; } }
+.camp-set li small { display: block; font-size: 12.5px; font-weight: 400; color: var(--muted); }
+
+/* ===== 2026-11-11 その5：サービス診断と全メニューの開閉 ===== */
+.svc-entry { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 820px; margin: 0 auto; }
+.svc-entry[hidden], .svc-quiz[hidden], .svc-menu[hidden] { display: none; }
+.svc-entry-btn { display: grid; gap: 6px; padding: 22px 24px; text-align: left; font: inherit; cursor: pointer; border: 2px solid var(--green); border-radius: 16px !important; background: #fff; color: var(--green-deep); box-shadow: 0 4px 18px rgba(31,106,60,.08); }
+.svc-entry-btn b { font-size: 20px; font-weight: 700; }
+.svc-entry-btn small { font-size: 13.5px; line-height: 1.7; color: var(--muted); }
+.svc-entry-btn.main { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
+.svc-entry-btn.main small { color: #e3f0da; }
+.svc-entry-btn:hover { border-color: var(--leaf); }
+.svc-entry-btn:focus-visible, .qz-opt:focus-visible, .qz-next:focus-visible, .qz-sub:focus-visible { outline: 3px solid #f2b631; outline-offset: 3px; }
+.svc-menu { margin-top: 56px; }
+
+.svc-quiz { max-width: 820px; margin: 24px auto 0; padding: 28px 28px 24px; background: #fff; border-radius: 20px !important; box-shadow: 0 10px 30px rgba(31,106,60,.12); scroll-margin-top: 90px; }
+.qz-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 0 0 12px; }
+.qz-bar i { height: 8px; border-radius: 99px !important; background: var(--card-line); }
+.qz-bar i.on { background: var(--green); }
+.qz-step { margin: 0; font-size: 13.5px; font-weight: 700; color: var(--muted); }
+.qz-q { margin: 4px 0 14px; font-size: 24px; font-weight: 700; line-height: 1.45; color: var(--strong); }
+.qz-q:focus { outline: none; }
+.qz-q:focus-visible { outline: 3px solid #f2b631; outline-offset: 4px; border-radius: 4px !important; }
+.qz-vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.qz-note { margin: -6px 0 14px; font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+.qz-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.qz-opt { display: block; width: 100%; min-height: 64px; padding: 14px 18px; text-align: left; font: inherit; cursor: pointer; background: var(--soft); border: 2px solid var(--card-line); border-radius: 14px !important; color: var(--strong); }
+.qz-opt b { display: block; font-size: 17px; font-weight: 700; line-height: 1.5; }
+.qz-opt span { display: block; margin-top: 2px; font-size: 13px; color: var(--muted); }
+.qz-opt:hover { border-color: var(--green); }
+.qz-opt[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); box-shadow: inset 0 0 0 1px var(--green); }
+.qz-opt[aria-pressed] b::before { content: ""; display: inline-block; width: 18px; height: 18px; margin-right: 10px; vertical-align: -3px; border: 2px solid var(--green); border-radius: 4px !important; background: #fff; }
+.qz-opt[aria-pressed="true"] b::before { background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.qz-next { display: block; width: 100%; margin: 16px 0 0; padding: 14px; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; border: 0; border-radius: 9999px !important; background: var(--green-deep); color: #fff; }
+.qz-next[disabled] { opacity: .4; cursor: default; }
+.qz-nav { display: flex; justify-content: space-between; gap: 8px; margin: 14px 0 0; }
+.qz-sub { min-height: 44px; padding: 4px 18px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid var(--card-line); border-radius: 9999px !important; background: #fff; color: var(--strong); }
+.qz-sub[disabled] { opacity: .4; cursor: default; }
+.qz-lead { margin: -6px 0 16px; font-size: 15px; line-height: 1.9; color: var(--ink); }
+.qz-cards { margin-bottom: 14px !important; }
+.band-svc .qz-cards > li { background: var(--soft); box-shadow: none; }
+.band-svc .qz-cards > li:hover { transform: none; box-shadow: none; }
+.qz-cat { font-size: 12.5px; font-weight: 700; color: var(--green); }
+.svc-cards .qz-why { font-size: 12.5px; line-height: 1.7; color: var(--green-deep); }
+.qz-also { margin: 0 0 10px; font-size: 14px; line-height: 1.8; color: var(--ink); }
+
+.sv-checks-h { margin: 14px 0 8px; font-size: 13.5px; font-weight: 700; }
+.sv-checks + .sv-checks { margin-top: 8px; }
+.sv-from-quiz { margin: 0 0 10px; padding: 10px 14px; border-radius: var(--r) !important; background: #fff8dc; color: #4a3d00; font-size: 14px; line-height: 1.7; }
+.sv-from-quiz:focus { outline: 3px solid #f2b631; outline-offset: 2px; }
+.sv-from-quiz[hidden] { display: none; }
+
+@media (max-width: 760px) {
+  .svc-entry { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .svc-entry-btn { padding: 18px 20px; }
+  .svc-menu { margin-top: 40px; }
+  .svc-quiz { padding: 20px 16px 18px; border-radius: 16px !important; }
+  .qz-q { font-size: 21px; }
+  .qz-opts { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .qz-opts.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.sv-checks-h.first { margin-top: 0; }
+
+/* ===== 2026-11-11 その6：診断の結果を2段に（まずはこの3つ／こちらも合いそうです）と「相談したい」 ===== */
+.qz-pick { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; margin-top: 4px; padding: 8px 12px; font: inherit; font-size: 14.5px; font-weight: 700; cursor: pointer; border: 2px solid var(--green); border-radius: 9999px !important; background: #fff; color: var(--green-deep); }
+.qz-pick::before { content: ""; width: 18px; height: 18px; flex: none; border: 2px solid var(--green); border-radius: 4px !important; background: #fff; }
+.qz-pick[aria-pressed="true"] { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
+.qz-pick[aria-pressed="true"]::before { border-color: #fff; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%2317603a' stroke-width='2.4'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.qz-pick:focus-visible { outline: 3px solid #f2b631; outline-offset: 3px; }
+.qz-more-h { margin: 28px 0 12px; font-size: 19px; font-weight: 700; color: var(--strong); }
+.qz-cards-more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.band-svc .qz-cards-more > li { background: #fff; border: 1px solid var(--card-line); }
+.qz-count { margin: 0; font-size: 14px; font-weight: 700; color: var(--green-deep); }
+.qz-all { display: block; width: 100%; margin-top: 14px; }
+@media (max-width: 760px) { .qz-cards-more { grid-template-columns: minmax(0, 1fr); } }
+
+/* ===== 2026-11-11 その7：上部のメニューと「今週の注目ニュース」の間を詰める（この節の上だけ。ほかの節の余白は変えない） ===== */
+#picks { padding-top: 48px; }
+@media (max-width: 760px) { #picks { padding-top: 32px; } }
+
+/* ===== 2026-11-11 その8：サービスを4分類（現場がまわる／人が集まる／長く働ける／選ばれる）。見出しの横に中身の短い名前 ===== */
+.svc-cat small { order: 1; font-size: 14px; font-weight: 700; color: var(--muted); }
+
+/* 過去の1週間まとめ：横にずらすカードにして縦幅をとらない。右のメール登録枠と上下をそろえる（2026-11-12 経営者の指示） */
+.mail-grid { align-items: stretch; }
+.back-card { display: flex; flex-direction: column; min-width: 0; padding: 36px 36px 28px; background: #fff; border-radius: 4px; }
+.back-card .sec-label { margin-bottom: 10px; }
+.back-card h2 { margin: 0; font-size: clamp(23px, 2.3vw, 28px); font-weight: 700; line-height: 1.5; letter-spacing: .04em; color: var(--strong); }
+.back-note { margin: 10px 0 14px; font-size: 13.5px; color: var(--muted); }
+.issues.issues-slide { display: flex; gap: 14px; margin: 0 -4px; padding: 4px 4px 14px; background: none; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; }
+.issues-slide li { flex: 0 0 min(250px, 78%); scroll-snap-align: start; }
+.issues-slide a { display: flex; flex-direction: column; align-items: stretch; gap: 8px; height: 100%; padding: 16px 18px; border: 1px solid #dbe8e0 !important; border-radius: 10px; background: #fbfdfb; }
+.issues-slide .when { white-space: normal; }
+.issues-slide .tt { flex: 1; }
+.issues-slide .go { align-self: flex-end; }
+.issues-slide .empty { flex-basis: 100%; }
+.back-all { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 14px; font-weight: 700; color: var(--green-deep); text-decoration: none; }
+.back-all .go { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; }
+.back-all .go .ic { width: 15px; height: 15px; }
+.back-all:hover { text-decoration: underline; }
+@media (max-width: 900px) { .back-card { padding: 28px 22px 22px; } }
+.mail-card .sec-label { margin-top: 0; }
+.issues-slide .tt { align-content: start; }
+
+/* 伴走パートナー（月額）：一覧の5つ目の分類。単発メニューと少し違って見えるよう、このカードだけごく薄い緑の背景（2026-11-12 経営者の指示） */
+.svc-cards.svc-cards-plan { grid-template-columns: minmax(0, 1fr); }
+.band-svc .svc-cards > li.svc-plan { padding: 28px 30px 24px; background: #eaf5ec; border: 1.5px solid #bfdcc8; box-shadow: none; }
+.svc-plan h4 { font-size: 21px; }
+.svc-plan > p { line-height: 1.9; }
+.svc-plan .plan-steps li { background: #fff; }
+.svc-plan .plan-note { margin: 14px 0 12px; }
+.plan { margin-top: 56px; padding: 34px 36px 30px; border: 2px solid var(--green); border-radius: 24px; background: #fff; box-shadow: 0 10px 30px rgba(31,106,60,.10); }
+.plan-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 6px 24px; }
+.plan-tag { grid-column: 1 / -1; justify-self: start; margin: 0; padding: 2px 12px; border-radius: 9999px !important; background: var(--green); color: #fff; font-size: 12.5px; font-weight: 700; }
+.plan-h { margin: 6px 0 0; font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; color: var(--strong); line-height: 1.4; }
+.plan-h small { display: block; margin-top: 4px; font-size: 14.5px; font-weight: 500; color: var(--muted); }
+.plan-price { margin: 0; color: var(--green-deep); font-weight: 700; white-space: nowrap; }
+.plan-price b { font-family: var(--font-en); font-size: clamp(30px, 3.4vw, 40px); }
+.plan-price span { margin-left: 2px; font-size: 16px; }
+.plan-price small { margin-left: 4px; font-size: 13px; font-weight: 400; color: var(--muted); }
+.plan-lead { margin: 16px 0 18px; line-height: 1.9; }
+.plan-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.plan-steps li { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 14px; background: #eaf5ec; }
+.plan-steps b { color: var(--green-deep); }
+.plan-steps span { font-size: 14px; line-height: 1.8; }
+.plan-note { margin: 16px 0 18px; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
+.plan-link { display: inline-block; padding: 12px 26px; border-radius: 9999px; background: var(--green-deep); color: #fff; font-weight: 700; text-decoration: none; }
+.plan-link:hover { opacity: .9; }
+.qz-plan { margin: 20px 0 6px; padding: 18px 20px; border: 2px solid var(--green); border-radius: 16px; background: #fff; }
+.qz-plan-h { margin: 0; font-size: 13px; font-weight: 700; color: var(--green-deep); }
+.qz-plan h4 { margin: 4px 0 6px; font-size: 18px; color: var(--strong); }
+.qz-plan h4 small { margin-left: 10px; font-size: 14px; font-weight: 500; color: var(--green-deep); }
+.qz-plan p { margin: 0 0 10px; font-size: 14px; line-height: 1.8; }
+@media (max-width: 760px) {
+  .plan-head { grid-template-columns: minmax(0, 1fr); }
+  .plan { padding: 26px 20px 24px; } .plan-steps { grid-template-columns: minmax(0, 1fr); }
+}
+.svc-plan .plan-steps li { border-radius: 12px !important; }
+.issues-slide a { border-radius: var(--r) !important; }
+.back-card { border-radius: var(--r) !important; }
+/* パートナー契約の使い方の流れ：横に3段＋矢印、スマホは縦（2026-11-12 経営者の指示） */
+.svc-plan .plan-steps { counter-reset: none; gap: 34px; margin-top: 16px; }
+.svc-plan .plan-steps li { position: relative; }
+.svc-plan .plan-steps li + li::before { content: "→"; position: absolute; left: -26px; top: 50%; transform: translateY(-50%); font-size: 18px; font-weight: 700; color: var(--green); border-radius: 0 !important; }
+.svc-plan .plan-steps b { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--muted); font-weight: 700; }
+.svc-plan .plan-steps b em { font-style: normal; font-size: 17px; color: var(--green-deep); }
+@media (max-width: 760px) {
+  .svc-plan .plan-steps { gap: 30px; }
+  .svc-plan .plan-steps li + li::before { content: "↓"; left: 50%; top: -24px; transform: translateX(-50%); }
+}
+.svc-plan .sv-price { margin-top: 18px; }
+.qz-plan { border-radius: 16px !important; margin-bottom: 14px; }
+
+/* 診断の結果：カードそのものを押して選ぶ（2026-11-12 経営者の指示）。選んだものは太い囲みとチェックの印 */
+.qz-hint { margin: 4px 0 12px; font-size: 14px; color: var(--ink); }
+.qz-hint-mark { display: inline-block; width: 16px; height: 16px; margin: 0 3px; vertical-align: -2px; border-radius: 50% !important; background: var(--green-deep) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.6L12 5.6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.qz-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0 0 14px; padding: 0; }
+.qz-cards.qz-cards-more { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.qz-cards > li { display: flex; }
+.qz-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; margin: 0; padding: 14px 44px 14px 16px; font: inherit; text-align: left; color: var(--ink); cursor: pointer; border: 1.5px solid #d6e5dc; border-radius: 14px !important; background: #fff; transition: border-color .15s; }
+.qz-card:hover { border-color: var(--green); }
+.qz-card[aria-pressed="true"] { border: 3px solid var(--green-deep); padding: 12.5px 42.5px 12.5px 14.5px; background: #f7fbf5; }
+.qz-card .qz-check { position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border: 2px solid #b9cfc2; border-radius: 50% !important; background: #fff; }
+.qz-card[aria-pressed="true"] .qz-check { border-color: var(--green-deep); background: var(--green-deep) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.6L12 5.6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.qz-card .qz-cat { font-size: 12px; }
+.qz-name { font-size: 16.5px; font-weight: 700; color: var(--strong); line-height: 1.5; }
+.qz-name small { margin-left: 8px; font-size: 13px; font-weight: 500; color: var(--green-deep); }
+.qz-desc { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+.qz-cards-more .qz-card { padding-top: 10px; padding-bottom: 10px; }
+.qz-cards-more .qz-card[aria-pressed="true"] { padding-top: 8.5px; padding-bottom: 8.5px; }
+.qz-cards-more .qz-name { font-size: 15px; }
+.qz-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.qz-card:focus-visible { outline: 3px solid #f2b631; outline-offset: 3px; }
+/* 結果のパートナー契約：サービス一覧と同じ、ごく薄い緑の背景 */
+.qz-card.qz-plan { margin: 18px 0 6px; background: #eaf5ec; border-color: #bfdcc8; }
+.qz-card.qz-plan[aria-pressed="true"] { background: #eaf5ec; border-color: var(--green-deep); }
+.qz-plan .qz-plan-h { font-size: 12.5px; font-weight: 700; color: var(--green-deep); }
+.qz-pickbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin: 14px 0 4px; }
+.qz-clear[disabled] { opacity: .45; cursor: default; }
+@media (max-width: 760px) { .qz-cards, .qz-cards.qz-cards-more { grid-template-columns: minmax(0, 1fr); } }
+.band-svc .qz-cards > li, .band-svc .qz-cards-more > li { padding: 0; border: 0; background: none; box-shadow: none; }
+.qz-card::before, .qz-card[aria-pressed="true"]::before { content: none; display: none; }
+
+/* 全メニューでも選べる（2026-11-12 経営者の指示）。選び方は診断の結果と同じ：太い緑の囲みと、右上のチェックの印 */
+.menu-hint { margin: 0 0 22px; font-size: 14px; color: var(--ink); }
+.band-svc .svc-menu .svc-cards > li.pickable { position: relative; cursor: pointer; padding-right: 44px; outline-offset: 3px; }
+.band-svc .svc-menu .svc-cards > li.pickable:focus-visible { outline: 3px solid #f2b631; }
+.band-svc .svc-menu .svc-cards > li.pickable[aria-checked="true"] { box-shadow: 0 0 0 3px var(--green-deep); background: #f7fbf5; }
+.band-svc .svc-menu .svc-cards > li.svc-plan.pickable[aria-checked="true"] { background: #eaf5ec; }
+.svc-menu li.pickable .qz-check { position: absolute; top: 14px; right: 14px; width: 22px; height: 22px; border: 2px solid #b9cfc2; border-radius: 50% !important; background: #fff; }
+.svc-menu li.pickable[aria-checked="true"] .qz-check { border-color: var(--green-deep); background: var(--green-deep) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.6L12 5.6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.menu-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(760px, calc(100% - 24px)); z-index: 30; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 14px; margin-top: 22px; padding: 12px 16px; border-radius: 16px !important; background: #fff; box-shadow: 0 8px 28px rgba(31,106,60,.22); }
+.menu-bar[hidden] { display: none; }
+.menu-count { margin: 0 auto 0 0; font-weight: 700; color: var(--green-deep); }
+.menu-bar .menu-go { width: auto; margin: 0; padding: 0 24px; min-height: 46px; }
+@media (max-width: 760px) { .menu-bar { bottom: 8px; padding: 10px 12px; } .menu-bar .menu-go { flex: 1 1 100%; } }
+body.menu-bar-on .page-top { bottom: 100px; }
+@media (max-width: 760px) { body.menu-bar-on .page-top { bottom: 132px; } }
+
+/* メールの枠：受付の準備中は、届く中身の案内と1週間まとめへの入口を出す（2026-11-13） */
+.mail-card { display: flex; flex-direction: column; }
+.mail-points { margin: 0 0 20px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.mail-points li { position: relative; padding: 12px 14px 12px 38px; background: var(--green-soft, #eef5ef); border-radius: 10px; font-size: 14.5px; line-height: 1.6; }
+.mail-points li::before { content: ""; position: absolute; left: 14px; top: 1.15em; width: 12px; height: 7px; border-left: 2px solid var(--green, #2f7a4f); border-bottom: 2px solid var(--green, #2f7a4f); transform: rotate(-45deg); }
+.mail-card .more-link { margin-top: auto; }
+/* メール登録の欄（2026-11-13） */
+.mail-form { margin: 0 0 20px; }
+.mail-agree { display: block; margin: 10px 0 0; font-size: 13px; line-height: 1.7; color: var(--ink); }
+.mail-agree input { margin-right: 4px; vertical-align: -2px; }
+.mail-card .signup input { min-width: 0; }
+.mail-card .signup button { opacity: 1; }
+.mail-card .signup button:not([disabled]) { cursor: pointer; }
+.mail-card .signup button[disabled] { cursor: progress; }
+.camp-example { margin: 6px 0 0 !important; font-size: 13.5px !important; color: var(--muted); }
+/* タグを2つ並べる（2026-11-15） */
+.camp-tags { display: flex; gap: 6px; align-self: flex-start; }
+.camp-tag.free { background: var(--green, #2f7a4f); color: #fff; }

@@ -1,0 +1,56 @@
+# KAIGO WEEKLY（Cloudflare Workers：静的ファイル＋受付の /api）。
+# 2026-11-13 公開済み。毎週の自動公開は tools/news/run-week.mjs から。
+# 配置の前に（どれか欠けたら配置しない）：
+#  1. D1 を作って database_id を入れる（済み）。schema.sql を流す（済み）
+#  2. Turnstile のサイトキーと秘密鍵を用意する（秘密鍵は wrangler secret）
+#  3. kaigoweekly.jp で Email Routing を有効にする（送信元 noreply@kaigoweekly.jp からの send_email に必要）
+#  4. 運営者のGmailを Email Routing の送り先に登録し、確認済みにする。NOTIFY_TO に入れる
+#  5. 配置後すぐ、相談フォームから試しに送り、お知らせがGmailに届くことを確かめる。届かなければ受付を止める（NOTIFY_TO を空にして配置し直すと 503 になる）
+name = "kaigoweekly"
+main = "worker/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false          # 〜.workers.dev の住所では出さない
+preview_urls = false
+
+routes = [
+  { pattern = "kaigoweekly.jp", custom_domain = true },
+]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+html_handling = "none"        # .html のURLのまま返す（/ と拡張子なしは worker で処理）
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kaigoweekly"
+database_id = "49dc8f13-3564-412f-9d87-d66a29596110"
+
+# 送信回数の制限：IPアドレスごとに1分5回まで（IPアドレスは保存しない）
+[[ratelimits]]
+name = "LIMIT"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
+
+[[send_email]]
+name = "NOTIFY"
+# destination_address は Email Routing で確認済みの、運営者のGmail（配置の時に入れる）
+
+[vars]
+ALLOWED_ORIGINS = "https://kaigoweekly.jp"
+TURNSTILE_HOSTNAME = "kaigoweekly.jp"
+NOTIFY_FROM = "noreply@kaigoweekly.jp"
+NOTIFY_TO = "kaigoweekly@gmail.com"   # 運営者のGmail（Email Routing で確認済みにする。サイトには載せない）
+
+MAIL_SIGNUP = "1"               # "1"＝受付（登録欄を表示）、"test"＝試し登録だけ（登録欄は隠し、https://kaigoweekly.jp/#mailtest でだけ出す）、"0"＝止める。2026-11-14 経営者承認で "1"
+# メール配信（Brevo）。名簿とひな形の番号は秘密ではない。API キーは secret（BREVO_API_KEY）、確認リンクの署名の鍵も secret（CONSENT_SIGNING_KEY）
+BREVO_LIST_ID = "5"              # 名簿（リスト）の番号。空の間は登録を受け付けない
+BREVO_DOI_TEMPLATE_ID = "1"      # 登録確認メールのひな形の番号
+NEWS_FROM = "news@kaigoweekly.jp"
+WEEKLY_AUTO_SEND = "0"          # "1" にすると下書きではなく自動で送る（経営者の承認が要る）
+
+[triggers]
+crons = ["0 18 * * *", "30 0 * * 1"]   # 毎日 日本時間3時：保存期間を過ぎた記録を消す／月曜 9:30：週のまとめの配信
+
+# 秘密鍵は `npx wrangler secret put TURNSTILE_SECRET` で入れる（ファイルに書かない）
