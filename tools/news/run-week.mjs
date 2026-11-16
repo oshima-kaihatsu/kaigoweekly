@@ -1,6 +1,6 @@
 // run-week.mjs — 1週間分のニュースを、1コマンドで「ネタ集め→下書き→一次情報との照合→組み立て」まで進める。
 // 使い方: node tools/news/run-week.mjs 2026-W45 [--no-publish]
-//        2026-11-16 から GitHub Actions（.github/workflows/weekly-news.yml）で毎週月曜 6:30 に動かす。
+//        2026-11-16 から GitHub Actions（.github/workflows/weekly-news.yml）で毎週月曜 5:30 に動かす。
 //        Actions では --no-publish で記事づくりまでを行い、公開（make-dist と wrangler deploy）は別の手順で行う（Cloudflare の鍵を AI の手順に渡さないため）
 //        週を省くと「先週」（実行日の前の月〜日、日本時間）を対象にする。
 // 公開・投稿・送信はしない。組み立て（node build.js）はこのPCの中の html を作るだけ。
@@ -400,7 +400,9 @@ async function main() {
         const wh = sha(path.join(v2, 'drafts', wname + '.md'));
         claude('verify-weekly.md', v2, '週のまとめの照合');
         if (sha(path.join(v2, 'drafts', wname + '.md')) !== wh) throw new Error('照合の間に週のまとめが書き換えられました');
-        const wcheck = JSON.parse(fs.readFileSync(path.join(v2, 'check-weekly.json'), 'utf8'));
+        // 照合の結果が読めないときは、週のまとめだけを不合格にして続ける（記事と配信は進める。2026-11-16 Codex の指摘）
+        let wcheck = null;
+        try { wcheck = JSON.parse(fs.readFileSync(path.join(v2, 'check-weekly.json'), 'utf8')); } catch (e) { log('週のまとめの照合の結果が読めないため、不合格として扱う：' + e.message); }
         weeklyJudge = judgeWeekly(wcheck, wsrc, topicsAdded);
         if (weeklyJudge.pass) { fs.copyFileSync(wsrc, wdst); added.push(wname); }
         else log(`週のまとめは照合で不合格のため入れない（${weeklyJudge.why.join('、')}）`);

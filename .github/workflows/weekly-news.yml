@@ -1,5 +1,5 @@
 # 毎週のニュース更新（2026-11-16、PC のタスク スケジューラから移した）
-# 毎週月曜 6:30（日本時間）に、前の週のニュースを集めて記事にし、kaigoweekly.jp へ公開する。
+# 毎週月曜 5:30（日本時間）に、前の週のニュースを集めて記事にし、kaigoweekly.jp へ公開する。
 # 週のまとめのメールは、Cloudflare の worker が月曜 8:30 に公開済みの dist/mail/weekly-latest.json を読んで送る。
 # 鍵（Secrets）：
 #   CLAUDE_CODE_OAUTH_TOKEN … 記事づくりの手順だけに渡す（Cloudflare の鍵は渡さない）
@@ -8,7 +8,7 @@ name: 毎週のニュース更新
 
 on:
   schedule:
-    - cron: '30 21 * * 0'   # UTC 日曜 21:30 ＝ 日本時間 月曜 6:30
+    - cron: '30 20 * * 0'   # UTC 日曜 20:30 ＝ 日本時間 月曜 5:30（GitHub の開始の遅れと実行時間を見込み、8:30 の配信の3時間前）
   workflow_dispatch:
     inputs:
       week:
@@ -30,7 +30,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 140   # 5:30 開始でも 7:50 までに必ず終わる（8:30 の配信に間に合わせる）
     steps:
       - uses: actions/checkout@v4
         with:
@@ -67,8 +67,8 @@ jobs:
           node -e "const m=require('./dist/mail/weekly-latest.json');console.log('配信の準備：',m.week,m.kind,m.subject)"
           npx wrangler deploy
 
-      - name: 記事と照合の記録をリポジトリに残す
-        if: always()
+      - name: 記事と照合の記録をリポジトリに残す（成功したときだけ。失敗した実行の途中の状態は残さない）
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
           WEEK: ${{ github.event.inputs.week }}

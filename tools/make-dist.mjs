@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { weekRange } from './news/collect.mjs';
 
 const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(SITE, 'dist');
@@ -116,7 +117,7 @@ if (!checkOnly) {
 // 配信するメールの対象の週：実行した日の前の週（月〜日、日本時間）。worker の expectedWeek と同じ計算
 // （MAIL_WEEK=2026-W46 のように環境変数で指定もできる。やり直しのとき用）
 function targetWeek() {
-  if (/^\d{4}-W\d{2}$/.test(process.env.MAIL_WEEK || '')) return process.env.MAIL_WEEK;
+  if (process.env.MAIL_WEEK) { weekRange(process.env.MAIL_WEEK); return process.env.MAIL_WEEK; } // ない週（W00・W54 など）は止める
   const d = new Date(Date.now() + 9 * 3600e3);
   d.setUTCDate(d.getUTCDate() - 7);
   const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
@@ -191,17 +192,22 @@ function watchlistMail(week, docs) {
   const item = (d) => `<li style="margin:0 0 12px;"><a href="${SITE_ORIGIN}/articles/${d.slug}.html" style="color:#2f7a4f;font-weight:bold;">${mailEsc(d.title)}</a><br><span style="font-size:13px;color:#666;">${mailEsc(d.date)} の記事</span><br>${mailEsc(firstSentence(d.summary))}</li>`;
   // この週の新着（週のまとめにはならなかったが、照合に合格して公開した記事）
   const fresh = docs.filter((d) => d.slug.startsWith('topic-') && d.period.startsWith(ymd(mon))).sort((a, b) => b.date.localeCompare(a.date));
-  const watch = docs.filter((d) => d.slug.startsWith('topic-') && d.stage === '案' && !fresh.includes(d)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
-  if (!watch.length && !fresh.length) return null;
+  let watch = docs.filter((d) => d.slug.startsWith('topic-') && d.stage === '案' && !fresh.includes(d)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+  // 審議中の案件も新着もない週は、最近の記事を並べる（メールを必ず用意する。2026-11-16 Codex の指摘）
+  let watchTitle = '審議中の案件リスト';
+  if (!watch.length && !fresh.length) { watch = docs.filter((d) => d.slug.startsWith('topic-')).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5); watchTitle = '最近の記事'; }
+  if (!watch.length && !fresh.length) throw new Error('配信するメールを作れません（公開している記事がない）');
   const parts = [];
   if (fresh.length) {
     parts.push(`<p style="margin:0 0 20px;">今週の新着記事と、いま審議中の案件をまとめました。</p>`);
     parts.push(`<h2 style="font-size:17px;margin:20px 0 10px;">今週の新着記事</h2>\n<ul style="margin:0;padding-left:20px;">\n${fresh.map(item).join('\n')}\n</ul>`);
+  } else if (watchTitle !== '審議中の案件リスト') {
+    parts.push(`<p style="margin:0 0 20px;">今週の新着記事はありません。代わりに、最近の記事をまとめました。</p>`);
   } else {
     parts.push(`<p style="margin:0 0 20px;">今週の新着記事はありません。代わりに、いま審議中の案件をまとめました。記事を書いた時点では、どれも案の段階で、まだ決まっていません。続報が出たら、この配信でお知らせします。</p>`);
   }
-  if (watch.length) parts.push(`<h2 style="font-size:17px;margin:20px 0 10px;">審議中の案件リスト</h2>\n<ul style="margin:0;padding-left:20px;">\n${watch.map(item).join('\n')}\n</ul>`);
-  const subject = (fresh.length ? `KAIGO WEEKLY ${range}：${fresh[0].title.split('：')[0]}${fresh.length > 1 ? 'ほか' : ''}` : `KAIGO WEEKLY ${range}：今週の新着記事はありません／審議中の案件リスト`).slice(0, 120);
+  if (watch.length) parts.push(`<h2 style="font-size:17px;margin:20px 0 10px;">${watchTitle}</h2>\n<ul style="margin:0;padding-left:20px;">\n${watch.map(item).join('\n')}\n</ul>`);
+  const subject = (fresh.length ? `KAIGO WEEKLY ${range}：${fresh[0].title.split('：')[0]}${fresh.length > 1 ? 'ほか' : ''}` : `KAIGO WEEKLY ${range}：今週の新着記事はありません／${watchTitle}`).slice(0, 120);
   return { week, kind: fresh.length ? 'fresh+watchlist' : 'watchlist', generatedAt: new Date().toISOString(), subject, html: mailFrame(range, parts.join('\n'), { url: `${SITE_ORIGIN}/articles/weekly-list.html`, label: 'これまでの記事を見る' }) };
 }
 
