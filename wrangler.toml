@@ -1,5 +1,5 @@
 # KAIGO WEEKLY（Cloudflare Workers：静的ファイル＋受付の /api）。
-# 2026-11-13 公開済み。毎週の自動公開は tools/news/run-week.mjs から。
+# 2026-11-13 公開済み。毎週の自動公開は GitHub Actions（.github/workflows/weekly-news.yml）から。
 # 配置の前に（どれか欠けたら配置しない）：
 #  1. D1 を作って database_id を入れる（済み）。schema.sql を流す（済み）
 #  2. Turnstile のサイトキーと秘密鍵を用意する（秘密鍵は wrangler secret）
@@ -48,9 +48,9 @@ MAIL_SIGNUP = "1"               # "1"＝受付（登録欄を表示）、"test"�
 BREVO_LIST_ID = "5"              # 名簿（リスト）の番号。空の間は登録を受け付けない
 BREVO_DOI_TEMPLATE_ID = "1"      # 登録確認メールのひな形の番号
 NEWS_FROM = "news@kaigoweekly.jp"
-WEEKLY_AUTO_SEND = "0"          # "1" にすると下書きではなく自動で送る（経営者の承認が要る）
+WEEKLY_AUTO_SEND = "1"          # "1"＝確認なしで自動で送る（2026-11-16 経営者承認）／"0"＝下書きだけ作って知らせる
 
 [triggers]
-crons = ["0 18 * * *", "30 0 * * 1"]   # 毎日 日本時間3時：保存期間を過ぎた記録を消す／月曜 9:30：週のまとめの配信
+crons = ["0 18 * * *", "30 23 * * 0"]   # 毎日 日本時間3時：保存期間を過ぎた記録を消す／月曜 8:30（UTC 日曜 23:30）：週のまとめの配信（2026-11-16 9:30→8:30）
 
 # 秘密鍵は `npx wrangler secret put TURNSTILE_SECRET` で入れる（ファイルに書かない）

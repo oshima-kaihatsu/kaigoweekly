@@ -108,45 +108,101 @@ if (!checkOnly) {
     .map((rel) => `  <url><loc>${SITE_ORIGIN}/${rel === 'index.html' ? '' : rel}</loc>${lastmod(rel)}</url>`);
   fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`);
   fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /mail/\n\nSitemap: ${SITE_ORIGIN}/sitemap.xml\n`);
-  // メール配信用：最新の週のまとめから、配信するメールの中身を作る（worker が月曜 9:30 に読む）
+  // メール配信用：対象の週のメールの中身を作る（worker が月曜 8:30 に読む）
   const mail = weeklyMail();
   if (mail) { fs.mkdirSync(path.join(DIST, 'mail'), { recursive: true }); fs.writeFileSync(path.join(DIST, 'mail', 'weekly-latest.json'), JSON.stringify(mail)); }
 }
 
-// 最新の週のまとめ（公開しているもの）から、メールの件名・本文を作る。特定電子メール法の表示を末尾に入れる
-function weeklyMail() {
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const plain = (s) => String(s).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim();
-  const files = fs.readdirSync(path.join(DIST, 'articles')).filter((f) => /^weekly-\d{4}-W\d{2}\.html$/.test(f)).sort();
-  if (!files.length) return null;
-  const name = files[files.length - 1].replace(/\.html$/, '');
-  const md = fs.readFileSync(path.join(SITE, 'articles', name + '.md'), 'utf8');
-  const period = (/^period:\s*(.+)$/m.exec(md) || [])[1] || '';
-  const pm = /(\d{4})-0?(\d+)-0?(\d+)\D+\d{4}-0?(\d+)-0?(\d+)/.exec(period);
-  const range = pm ? `${pm[2]}/${pm[3]}〜${pm[4]}/${pm[5]}` : '';
-  const lead = plain(((md.split(/^## 今週の総括\s*$/m)[1] || '').split(/^## /m)[0] || '').trim().split(/\n/)[0] || '');
-  const items = [...md.matchAll(/^## (\d+)\.\s*(.+)\n+\*\*一言でいうと\*\*：(.+)$/gm)].map((m) => ({ title: plain(m[2]), one: plain(m[3]) }));
-  if (!items.length) return null;
-  const url = `${SITE_ORIGIN}/articles/${name}.html`;
-  const subject = `KAIGO WEEKLY ${range}：${items[0].title}${items.length > 1 ? 'ほか' : ''}`.slice(0, 120);
-  const html = `<!doctype html><html lang="ja"><body style="margin:0;padding:0;background:#f5f5f0;">
+// 配信するメールの対象の週：実行した日の前の週（月〜日、日本時間）。worker の expectedWeek と同じ計算
+// （MAIL_WEEK=2026-W46 のように環境変数で指定もできる。やり直しのとき用）
+function targetWeek() {
+  if (/^\d{4}-W\d{2}$/.test(process.env.MAIL_WEEK || '')) return process.env.MAIL_WEEK;
+  const d = new Date(Date.now() + 9 * 3600e3);
+  d.setUTCDate(d.getUTCDate() - 7);
+  const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  t.setUTCDate(t.getUTCDate() + 3 - ((t.getUTCDay() + 6) % 7));
+  const y = t.getUTCFullYear(), jan4 = new Date(Date.UTC(y, 0, 4));
+  const wk = 1 + Math.round(((t - jan4) / 864e5 - 3 + ((jan4.getUTCDay() + 6) % 7)) / 7);
+  return `${y}-W${String(wk).padStart(2, '0')}`;
+}
+function mailEsc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function mailPlain(s) { return String(s).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').trim(); }
+// メールの外枠（見出し・本文・ボタン・特定電子メール法の表示）
+function mailFrame(range, inner, button) {
+  return `<!doctype html><html lang="ja"><body style="margin:0;padding:0;background:#f5f5f0;">
 <div style="max-width:600px;margin:0 auto;padding:24px 20px;background:#ffffff;font-family:sans-serif;color:#222;line-height:1.8;font-size:15px;">
 <p style="margin:0 0 4px;color:#2f7a4f;font-weight:bold;">KAIGO WEEKLY｜週刊・介護ニュースダイジェスト</p>
-<p style="margin:0 0 16px;color:#666;font-size:13px;">${esc(range)} のニュース</p>
-<p style="margin:0 0 20px;">${esc(lead)}</p>
-${items.map((it, i) => `<h2 style="font-size:17px;margin:20px 0 6px;">${i + 1}. ${esc(it.title)}</h2>\n<p style="margin:0 0 6px;">${esc(it.one)}</p>`).join('\n')}
-<p style="margin:24px 0;"><a href="${url}" style="display:inline-block;padding:12px 20px;background:#2f7a4f;color:#fff;text-decoration:none;border-radius:6px;">要点・影響・注意点をまとめて読む</a></p>
+<p style="margin:0 0 16px;color:#666;font-size:13px;">${mailEsc(range)} のニュース</p>
+${inner}
+<p style="margin:24px 0;"><a href="${button.url}" style="display:inline-block;padding:12px 20px;background:#2f7a4f;color:#fff;text-decoration:none;border-radius:6px;">${mailEsc(button.label)}</a></p>
 <hr style="border:0;border-top:1px solid #ddd;margin:24px 0;">
 <p style="margin:0;font-size:12px;color:#666;line-height:1.7;">
 このメールは、KAIGO WEEKLY のメール配信に登録された方にお送りしています。<br>
 配信の停止：<a href="{{ unsubscribe }}">こちらから配信を停止する</a>（またはこのメールに「停止」と返信してください）<br>
-送信者：KAIGO WEEKLY（運営：${esc(OPERATOR.name)}）<br>
-住所：${esc(OPERATOR.address)}<br>
+送信者：KAIGO WEEKLY（運営：${mailEsc(OPERATOR.name)}）<br>
+住所：${mailEsc(OPERATOR.address)}<br>
 お問い合わせ：info@kaigoweekly.jp<br>
 <a href="${SITE_ORIGIN}/articles/privacy.html">プライバシーポリシー</a>
 </p>
 </div></body></html>`;
-  return { week: name.replace(/^weekly-/, ''), generatedAt: new Date().toISOString(), subject, html };
+}
+// 公開している記事の front-matter と本文
+function publishedDocs() {
+  return fs.readdirSync(path.join(DIST, 'articles')).filter((f) => /^(topic-[a-z0-9-]+|weekly-\d{4}-W\d{2})\.html$/.test(f)).map((f) => {
+    const slug = f.replace(/\.html$/, '');
+    const md = fs.readFileSync(path.join(SITE, 'articles', slug + '.md'), 'utf8').replace(/\r\n/g, '\n');
+    const fm = (/^---\n([\s\S]*?)\n---\n/.exec(md) || [])[1] || '';
+    const get = (k) => ((new RegExp(`^${k}:\\s*(.+)$`, 'm').exec(fm) || [])[1] || '').trim().replace(/^["']|["']$/g, '');
+    return { slug, md, title: get('title'), date: get('date'), period: get('period'), summary: get('summary'), stage: get('stage') };
+  });
+}
+function rangeOf(period) { const pm = /(\d{4})-0?(\d+)-0?(\d+)\D+\d{4}-0?(\d+)-0?(\d+)/.exec(period || ''); return pm ? `${pm[2]}/${pm[3]}〜${pm[4]}/${pm[5]}` : ''; }
+
+// 配信するメールの中身。対象の週の週のまとめがあれば、それを元に作る。
+// なければ（照合に合格した記事が0本だった週など）、「審議中の案件リスト」を送る（2026-11-16 経営者決定）。
+// 審議中の案件リストは、公開済みで照合に合格した記事（段階：案）だけで作り、新しい事実は足さない。
+function weeklyMail() {
+  const week = targetWeek();
+  const docs = publishedDocs();
+  const weekly = docs.find((d) => d.slug === `weekly-${week}`);
+  if (weekly) {
+    const items = [...weekly.md.matchAll(/^## (\d+)\.\s*(.+)\n+\*\*一言でいうと\*\*：(.+)$/gm)].map((m) => ({ title: mailPlain(m[2]), one: mailPlain(m[3]) }));
+    if (items.length) {
+      const range = rangeOf(weekly.period);
+      const lead = mailPlain(((weekly.md.split(/^## 今週の総括\s*$/m)[1] || '').split(/^## /m)[0] || '').trim().split(/\n/)[0] || '');
+      const subject = `KAIGO WEEKLY ${range}：${items[0].title}${items.length > 1 ? 'ほか' : ''}`.slice(0, 120);
+      const inner = `<p style="margin:0 0 20px;">${mailEsc(lead)}</p>
+${items.map((it, i) => `<h2 style="font-size:17px;margin:20px 0 6px;">${i + 1}. ${mailEsc(it.title)}</h2>\n<p style="margin:0 0 6px;">${mailEsc(it.one)}</p>`).join('\n')}`;
+      return { week, kind: 'weekly', generatedAt: new Date().toISOString(), subject, html: mailFrame(range, inner, { url: `${SITE_ORIGIN}/articles/weekly-${week}.html`, label: '要点・影響・注意点をまとめて読む' }) };
+    }
+  }
+  return watchlistMail(week, docs);
+}
+
+function watchlistMail(week, docs) {
+  const m = /^(\d{4})-W(\d{2})$/.exec(week);
+  // 週の始まり（月曜）と終わり（日曜）
+  const jan4 = new Date(Date.UTC(+m[1], 0, 4));
+  const mon = new Date(jan4); mon.setUTCDate(jan4.getUTCDate() - ((jan4.getUTCDay() + 6) % 7) + (+m[2] - 1) * 7);
+  const sun = new Date(mon); sun.setUTCDate(mon.getUTCDate() + 6);
+  const ymd = (d) => d.toISOString().slice(0, 10);
+  const range = rangeOf(`${ymd(mon)}〜${ymd(sun)}`);
+  const firstSentence = (s) => (String(s).match(/^.*?。/) || [String(s)])[0];
+  const item = (d) => `<li style="margin:0 0 12px;"><a href="${SITE_ORIGIN}/articles/${d.slug}.html" style="color:#2f7a4f;font-weight:bold;">${mailEsc(d.title)}</a><br><span style="font-size:13px;color:#666;">${mailEsc(d.date)} の記事</span><br>${mailEsc(firstSentence(d.summary))}</li>`;
+  // この週の新着（週のまとめにはならなかったが、照合に合格して公開した記事）
+  const fresh = docs.filter((d) => d.slug.startsWith('topic-') && d.period.startsWith(ymd(mon))).sort((a, b) => b.date.localeCompare(a.date));
+  const watch = docs.filter((d) => d.slug.startsWith('topic-') && d.stage === '案' && !fresh.includes(d)).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+  if (!watch.length && !fresh.length) return null;
+  const parts = [];
+  if (fresh.length) {
+    parts.push(`<p style="margin:0 0 20px;">今週の新着記事と、いま審議中の案件をまとめました。</p>`);
+    parts.push(`<h2 style="font-size:17px;margin:20px 0 10px;">今週の新着記事</h2>\n<ul style="margin:0;padding-left:20px;">\n${fresh.map(item).join('\n')}\n</ul>`);
+  } else {
+    parts.push(`<p style="margin:0 0 20px;">今週の新着記事はありません。代わりに、いま審議中の案件をまとめました。記事を書いた時点では、どれも案の段階で、まだ決まっていません。続報が出たら、この配信でお知らせします。</p>`);
+  }
+  if (watch.length) parts.push(`<h2 style="font-size:17px;margin:20px 0 10px;">審議中の案件リスト</h2>\n<ul style="margin:0;padding-left:20px;">\n${watch.map(item).join('\n')}\n</ul>`);
+  const subject = (fresh.length ? `KAIGO WEEKLY ${range}：${fresh[0].title.split('：')[0]}${fresh.length > 1 ? 'ほか' : ''}` : `KAIGO WEEKLY ${range}：今週の新着記事はありません／審議中の案件リスト`).slice(0, 120);
+  return { week, kind: fresh.length ? 'fresh+watchlist' : 'watchlist', generatedAt: new Date().toISOString(), subject, html: mailFrame(range, parts.join('\n'), { url: `${SITE_ORIGIN}/articles/weekly-list.html`, label: 'これまでの記事を見る' }) };
 }
 
 // GA4 のタグと、主な行動のイベント（相談・ご要望の送信、メール登録欄へのクリック、記事へのクリック）

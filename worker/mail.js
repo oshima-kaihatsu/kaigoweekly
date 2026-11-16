@@ -107,7 +107,8 @@ async function tell(env, h, week, subject, body) {
   catch (e) { console.log('notify failed', String(e)); }
 }
 
-// 毎週月曜 9:30（日本時間）
+// 毎週月曜 8:30（日本時間）。2026-11-16 から確認なしで自動送信（WEEKLY_AUTO_SEND="1"）。
+// 記事が0本の週は、make-dist.mjs が「審議中の案件リスト」を同じ週の番号で用意するので、そのまま送る
 export async function weeklyCampaign(env, h) {
   if (!mailReady(env)) { console.log('weekly: mail not ready'); return; }
   const want = expectedWeek(Date.now());
@@ -115,7 +116,7 @@ export async function weeklyCampaign(env, h) {
   const m = res.ok ? await res.json().catch(() => null) : null;
   if (!m || m.week !== want || !m.subject || !m.html) {
     await tell(env, h, null, `【要確認】週のまとめ（${want}）の配信の準備ができませんでした`,
-      `公開されている最新の週のまとめが ${m && m.week ? m.week : '（なし）'} で、${want} ではありません。月曜の自動公開が失敗したか、照合に合格した記事がなかった可能性があります。今週の配信は作りません。`);
+      `公開されている最新の週のまとめが ${m && m.week ? m.week : '（なし）'} で、${want} ではありません。月曜朝の自動更新（GitHub Actions の「毎週のニュース更新」）が失敗したか、まだ終わっていない可能性があります。今週の配信は送りません。GitHub の Actions の画面で失敗していないか確かめ、Claude に「週のまとめの配信が届かなかった」と伝えてください。`);
     return;
   }
   // 先に週の行を確保する（同時に動いても、2つ目はここで止まる）

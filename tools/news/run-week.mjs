@@ -1,5 +1,7 @@
 // run-week.mjs — 1週間分のニュースを、1コマンドで「ネタ集め→下書き→一次情報との照合→組み立て」まで進める。
-// 使い方: node tools/news/run-week.mjs 2026-W45
+// 使い方: node tools/news/run-week.mjs 2026-W45 [--no-publish]
+//        2026-11-16 から GitHub Actions（.github/workflows/weekly-news.yml）で毎週月曜 6:30 に動かす。
+//        Actions では --no-publish で記事づくりまでを行い、公開（make-dist と wrangler deploy）は別の手順で行う（Cloudflare の鍵を AI の手順に渡さないため）
 //        週を省くと「先週」（実行日の前の月〜日、日本時間）を対象にする。
 // 公開・投稿・送信はしない。組み立て（node build.js）はこのPCの中の html を作るだけ。
 //
@@ -86,7 +88,9 @@ function prepare(dir, extra = {}) {
     fs.copyFileSync(path.join(ART, f), path.join(dir, 'articles', f));
   }
   fs.copyFileSync(path.join(DIR, 'prompts', 'weekly-sample.md'), path.join(dir, 'articles', 'weekly-sample.md'));
-  const crit = fs.readFileSync(path.join(SITE, '..', '保育介護_週次ネタ集計', '00_候補一覧と集計.md'), 'utf8').split('## 情報源と取り方')[0];
+  // 関連度の基準：リポジトリに入れた写し（tools/news/関連度の基準.md、2026-11-16 GitHub Actions 移行で追加）。なければ元のPCのファイル
+  const critCopy = path.join(DIR, '関連度の基準.md');
+  const crit = fs.existsSync(critCopy) ? fs.readFileSync(critCopy, 'utf8') : fs.readFileSync(path.join(SITE, '..', '保育介護_週次ネタ集計', '00_候補一覧と集計.md'), 'utf8').split('## 情報源と取り方')[0];
   fs.writeFileSync(path.join(dir, '関連度の基準.md'), crit);
   for (const [name, src] of Object.entries(extra)) fs.copyFileSync(src, path.join(dir, name));
 }
@@ -283,7 +287,8 @@ function build() {
 const addedThisRun = [];
 function publish() {
   if (args.includes('--no-publish')) { log('公開：--no-publish のため上げない'); return; }
-  if (!addedThisRun.length) { log('公開：入れた記事が0本のため上げない'); return; }
+  // 入れた記事が0本でも上げる：その週の配信メール（審議中の案件リスト）を dist/mail に入れるため（2026-11-16 経営者決定）
+  if (!addedThisRun.length) log('公開：入れた記事は0本。審議中の案件リストのメールを届けるため、同じ記事のまま上げ直す');
   const d = spawnSync(process.execPath, [path.join(SITE, 'tools', 'make-dist.mjs')], {cwd: SITE, encoding: 'utf8'});
   log((d.stdout || '').trim());
   if (d.status !== 0) throw new Error('公開用フォルダの点検に不合格のため上げない：' + ((d.stderr || '').trim() || '上の点検結果を参照'));
@@ -300,7 +305,7 @@ function publish() {
     log('配信中の版：\n' + ((s.stdout || '') + (s.stderr || '')).trim());
     throw new Error('Cloudflare への公開に失敗しました。配信中の版は上のログのとおり（通常は前の版のまま）。Cloudflare のログイン切れの可能性があります。戻すときは npx wrangler rollback');
   }
-  log(`公開：https://kaigoweekly.jp/ に上げた（${addedThisRun.join(', ')}）`);
+  log(`公開：https://kaigoweekly.jp/ に上げた（${addedThisRun.join(', ') || '新しい記事なし'}）`);
 }
 
 async function main() {
