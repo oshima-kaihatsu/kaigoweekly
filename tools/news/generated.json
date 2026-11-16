@@ -98,10 +98,21 @@
   "judged": [],
   "checkFile": "tools/news/checks/2026-W46.md",
   "lastAttempt": {
-   "runId": "20261116T000131-9d0b8e",
-   "at": "2026-11-16T00:04:14.525Z",
-   "judged": [],
-   "checkFile": "tools/news/checks/2026-W46_20261116T000131-9d0b8e.md"
+   "runId": "20261116T035634-02dd75",
+   "at": "2026-11-16T03:59:10.353Z",
+   "judged": [
+    {
+     "file": "topic-kaigo-fukushoku-ishiki-chosa-2026-11.md",
+     "pass": false,
+     "why": [
+      "問題の指摘が2件"
+     ],
+     "claims": 18,
+     "bad": 2,
+     "aiVerdict": "合格"
+    }
+   ],
+   "checkFile": "tools/news/checks/2026-W46_20261116T035634-02dd75.md"
   }
  }
 }
