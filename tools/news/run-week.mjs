@@ -95,6 +95,13 @@ function prepare(dir, extra = {}) {
   for (const [name, src] of Object.entries(extra)) fs.copyFileSync(src, path.join(dir, name));
 }
 
+// 照合の「問題の指摘」のうち、公開を止める本物の問題だけを数える（2026-11-18 経営者決定）
+// - 「〇〇：問題なし」のような確認済みのメモは数えない
+// - 「（軽微）」「（参考）」で始まるメモは数えない（W46 で、一致18件・AI判定合格の記事がこのメモ2件で落ちたため）
+// 事実の不一致・確認できない記述は、claims の側でこれまでどおり不合格にする
+const NOTE_ONLY = /^[（(【\[]\s*(軽微|参考)\s*[）)】\]]|^(軽微|参考)\s*[：:]/;
+const realIssues = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).trim()).filter((x) => x && !/^[^：:]{1,12}[：:]\s*問題なし/.test(x) && !NOTE_ONLY.test(x));
+
 // 照合の結果を、このプログラムが確かめ直す
 function judge(check, drafts, info) {
   if (!check || check.week !== WEEK || !Array.isArray(check.articles)) throw new Error('照合の結果の形が想定と違います（週が違う、または articles がない）');
@@ -104,8 +111,8 @@ function judge(check, drafts, info) {
     const why = [];
     if (!a) why.push('照合の結果に入っていない');
     const claims = a && Array.isArray(a.claims) ? a.claims : [];
-    // 照合の側が「〇〇：問題なし」のような確認済みのメモを issues に書くことがあるため、それは問題として数えない
-    const issues = a && Array.isArray(a.issues) ? a.issues.filter((x) => String(x).trim() && !/^[^：:]{1,12}[：:]\s*問題なし/.test(String(x).trim())) : [];
+    // 確認済みのメモや軽微・参考のメモは問題として数えない（realIssues）
+    const issues = a ? realIssues(a.issues) : [];
     if (claims.length < 3) why.push(`確かめた記述が${claims.length}件しかない`);
     // 照合の明細が、この下書きの記述・この下書きの出典に結び付いていること
     const unbound = claims.filter((c) => !flat(c.text) || !info[name].text.includes(flat(c.text)) || !info[name].urls.includes(String(c.source || '').trim()));
@@ -216,7 +223,7 @@ function judgeWeekly(check, wsrc, topics) {
   const a = check.articles.find((x) => x && x.file === file);
   const P = weeklyParts(fs.readFileSync(wsrc, 'utf8'));
   const claims = a && Array.isArray(a.claims) ? a.claims : [];
-  const issues = a && Array.isArray(a.issues) ? a.issues.filter((x) => String(x).trim() && !/^[^：:]{1,12}[：:]\s*問題なし/.test(String(x).trim())) : [];
+  const issues = a ? realIssues(a.issues) : [];
   if (!a) why.push('照合の結果に入っていない');
   const src = (c) => String(c.source || '').trim().replace(/\.md$/, '');
   // 同じ文の明細は1件と数え、8文字未満の短い切れ端は数えない（2026-11-11 Codex 2回目の指摘）
@@ -250,6 +257,41 @@ function rebuildList(state) {
     if (s.lastAttempt) for (const j of s.lastAttempt.judged || []) rows.push(`| ${w}（${s.lastAttempt.runId}の再実行・入れられる合格なし、前の記事を残した） | ${j.file} | ${j.pass ? '合格（ただし入れていない）' : '不合格（入れていない）：' + j.why.join('、')} | ${j.claims} | ${j.bad} | ${s.lastAttempt.checkFile} |`);
   }
   fs.writeFileSync(LIST, '# ニュース記事の照合一覧\n\nAIの照合の結果を、このプログラムが合否を計算し直したもの。合格した記事だけを自動で入れる（2026-11-11 経営者決定：人の最終確認はしない）。この表は run-week.mjs が毎回作り直す。\n\n| 週 | 記事 | 照合の結果（プログラムで再判定） | 確かめた記述 | 不一致・確認できない・指摘 | 照合の詳細 |\n|---|---|---|---|---|---|\n' + rows.join('\n') + '\n');
+}
+
+// 記事が0本の週（または週のまとめが照合で落ちた週）も、その週のページを必ず出す（2026-11-18 経営者決定）
+// 中身はメールと同じ「今週の新着記事はありません／審議中の案件リスト」。公開済みの記事を並べるだけで、AIは使わず新しい事実も足さない。
+// front-matter に placeholder: true を付け、同じ週をやり直して本物の週のまとめができたら置き換える。
+const isPlaceholder = (p) => fs.existsSync(p) && /^placeholder:\s*true\s*$/m.test((/^---\r?\n([\s\S]*?)\r?\n---/.exec(fs.readFileSync(p, 'utf8')) || [])[1] || '');
+function placeholderWeekly(fresh) {
+  const wdst = path.join(ART, `weekly-${WEEK}.md`);
+  if (fs.existsSync(wdst) && !isPlaceholder(wdst)) return; // 本物の週のまとめ・人が書いたページは触らない
+  const fmOf = (t) => (/^---\r?\n([\s\S]*?)\r?\n---/.exec(t) || [])[1] || '';
+  const get = (fm, k) => ((new RegExp(`^${k}:\\s*(.+)$`, 'm').exec(fm) || [])[1] || '').trim().replace(/^["']|["']$/g, '');
+  const docs = fs.readdirSync(ART).filter((f) => /^topic-[a-z0-9-]+\.md$/.test(f)).map((f) => {
+    const fm = fmOf(fs.readFileSync(path.join(ART, f), 'utf8'));
+    return {slug: f.replace(/\.md$/, ''), title: get(fm, 'title'), date: get(fm, 'date'), period: get(fm, 'period'), summary: get(fm, 'summary'), stage: get(fm, 'stage'), hidden: /^publish:\s*no\s*$/m.test(fm)};
+  }).filter((d) => d.title && !d.hidden).sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
+  const freshDocs = fresh.map((n) => docs.find((d) => d.slug === n)).filter(Boolean);
+  let watch = docs.filter((d) => d.stage === '案' && !fresh.includes(d.slug)).slice(0, 10), watchTitle = '審議中の案件リスト';
+  if (!watch.length && !freshDocs.length) { watch = docs.slice(0, 5); watchTitle = '最近の記事'; }
+  const ja = (ymd) => { const [y, m, d] = ymd.split('-').map(Number); return {y, m, d}; };
+  const a = ja(R.start), b = ja(R.last);
+  const range = `${a.y}年${a.m}月${a.d}日〜${b.m}月${b.d}日`;
+  const one = (s) => (String(s).match(/^.*?。/) || [String(s)])[0];
+  const item = (d) => `- [${d.title}](${d.slug}.html)（${d.date} の記事）：${one(d.summary)}`;
+  const head = freshDocs.length ? '今週の新着記事と、いま審議中の案件をまとめました。'
+    : watchTitle === '審議中の案件リスト' ? '今週の新着記事はありません。代わりに、いま審議中の案件をまとめました。記事を書いた時点では、どれも案の段階で、まだ決まっていません。続報が出たら、この週のまとめでお知らせします。'
+    : '今週の新着記事はありません。代わりに、最近の記事をまとめました。';
+  const title = `今週の介護ニュースまとめ（${range}）：` + (freshDocs.length ? `${freshDocs[0].title.split('：')[0]}${freshDocs.length > 1 ? 'ほか' : ''}` : `今週の新着記事はありません／${watchTitle}`);
+  const t = ['---', 'kind: weekly', `title: ${title}`, `date: ${today}`, `period: ${R.start}〜${R.last}`,
+    `summary: ${range.replace(/^\d+年/, '')}の介護ニュースのまとめ。${head}`,
+    `topics: [${freshDocs.map((d) => d.slug).join(', ')}]`, `watch: [${watch.map((d) => d.slug).join(', ')}]`,
+    'placeholder: true', 'tags: [週次まとめ]', '---', '', `# 今週の介護ニュースまとめ（${range}）`, '', '## 今週の総括', head, '',
+    ...(freshDocs.length ? ['## 今週の新着記事', ...freshDocs.map(item), ''] : []),
+    ...(watch.length ? [`## ${watchTitle}`, ...watch.map(item), ''] : [])].join('\n');
+  fs.writeFileSync(wdst, t);
+  log(`週のまとめの代わりのページを出す：weekly-${WEEK}（新着 ${freshDocs.length}本／${watchTitle} ${watch.length}本）`);
 }
 
 function selfTest() {
@@ -367,9 +409,11 @@ async function main() {
       fs.writeFileSync(STATE, JSON.stringify(state, null, 1));
       rebuildList(state);
       log(`入れられる合格記事がないため、この週の前の記事（${prev.join(', ') || 'なし'}）をそのまま残しました ／ 落とした：${judged.filter((j) => !j.pass).map((j) => `${j.file}（${j.why.join('、')}）`).join(' ') || 'なし'}`);
+      placeholderWeekly(prev.filter((n) => n.startsWith('topic-')));
       return;
     }
     for (const f of prev) { const p = path.join(ART, f + '.md'); if (fs.existsSync(p)) fs.unlinkSync(p); const h = path.join(ART, f + '.html'); if (fs.existsSync(h)) fs.unlinkSync(h); }
+    { const ph = path.join(ART, `weekly-${WEEK}.md`); if (isPlaceholder(ph)) { fs.unlinkSync(ph); const h = ph.replace(/\.md$/, '.html'); if (fs.existsSync(h)) fs.unlinkSync(h); } } // 代わりのページは、入れ直す記事で作り直す
     const added = addedThisRun;
     for (const n of passed) {
       const dst = path.join(ART, n + '.md');
@@ -382,7 +426,7 @@ async function main() {
     const wname = `weekly-${WEEK}`, wdst = path.join(ART, wname + '.md');
     let weeklyJudge = null;
     const topicsAdded = added.slice();
-    if (topicsAdded.length && !fs.existsSync(wdst)) {
+    if (topicsAdded.length && (!fs.existsSync(wdst) || isPlaceholder(wdst))) {
       const wdir = path.join(BASE, 'weekly');
       prepare(wdir, {'candidates.md': path.join(cdir, 'candidates.md')});
       fs.mkdirSync(path.join(wdir, 'topics'), {recursive: true});
@@ -409,6 +453,7 @@ async function main() {
       }
     }
     if (weeklyJudge) judged.push(weeklyJudge);
+    if (!added.includes(wname)) placeholderWeekly(topicsAdded);
     const checkDst = path.join(DIR, 'checks', `${WEEK}.md`);
     fs.mkdirSync(path.dirname(checkDst), {recursive: true});
     const vmd = path.join(vdir, 'check.md');
