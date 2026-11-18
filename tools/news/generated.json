@@ -98,21 +98,23 @@
   "judged": [],
   "checkFile": "tools/news/checks/2026-W46.md",
   "lastAttempt": {
-   "runId": "20261116T035634-02dd75",
-   "at": "2026-11-16T03:59:10.353Z",
+   "runId": "20261118T142753-768bef",
+   "at": "2026-11-18T14:30:05.024Z",
    "judged": [
     {
-     "file": "topic-kaigo-fukushoku-ishiki-chosa-2026-11.md",
+     "file": "topic-kaigo-ridatsu-shikaku-hoyusha-chosa-2026-11.md",
      "pass": false,
      "why": [
-      "問題の指摘が2件"
+      "一致しない・確認できない記述が2件",
+      "問題の指摘が2件",
+      "調査の調査した主体を確かめた明細がない"
      ],
-     "claims": 18,
-     "bad": 2,
-     "aiVerdict": "合格"
+     "claims": 13,
+     "bad": 4,
+     "aiVerdict": "不合格"
     }
    ],
-   "checkFile": "tools/news/checks/2026-W46_20261116T035634-02dd75.md"
+   "checkFile": "tools/news/checks/2026-W46_20261118T142753-768bef.md"
   }
  }
 }
