@@ -192,7 +192,7 @@ const docs = files.map(f => {
     slug, kind, body,
     title: meta.title || slug, date: meta.date || '', period: meta.period || '',
     summary: meta.summary || '', stage: meta.stage || '',
-    services: normalizeTags(arr(meta.services)), tags: normalizeTags(arr(meta.tags)), topics: arr(meta.topics),
+    services: normalizeTags(arr(meta.services)), tags: normalizeTags(arr(meta.tags)), topics: arr(meta.topics), watch: arr(meta.watch),
   };
 });
 const bySlug = Object.fromEntries(docs.map(d => [d.slug, d]));
@@ -335,7 +335,7 @@ const list = docs.filter(d => d.kind !== 'page').map(d => ({
   kind: d.kind, file: 'articles/' + d.slug + '.html', title: d.title, date: d.date, period: d.period,
   summary: d.summary, stage: d.stage, services: d.services, tags: d.tags.filter(t => !d.services.includes(t)),
   text: plainText(d.body),
-  ...(d.kind === 'weekly' ? { topics: d.topics, lead: weekLead(d.body), topicTitles: d.topics.filter(s => bySlug[s]).map(s => bySlug[s].title.split('：')[0]) } : {}),
+  ...(d.kind === 'weekly' ? { topics: d.topics, watch: d.watch.filter(s => bySlug[s]), lead: weekLead(d.body), topicTitles: d.topics.filter(s => bySlug[s]).map(s => bySlug[s].title.split('：')[0]) } : {}),
 }));
 list.sort((a, b) => (b.period || b.date).localeCompare(a.period || a.date) || a.title.localeCompare(b.title));
 const indexPath = path.join(root, 'index.html');
