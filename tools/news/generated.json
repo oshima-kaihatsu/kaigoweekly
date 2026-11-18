@@ -92,29 +92,30 @@
   "checkFile": "tools/news/checks/2026-W45.md"
  },
  "2026-W46": {
-  "runId": "20261111T081211-88e089",
-  "at": "2026-11-11T08:13:07.137Z",
-  "files": [],
-  "judged": [],
-  "checkFile": "tools/news/checks/2026-W46.md",
-  "lastAttempt": {
-   "runId": "20261118T142753-768bef",
-   "at": "2026-11-18T14:30:05.024Z",
-   "judged": [
-    {
-     "file": "topic-kaigo-ridatsu-shikaku-hoyusha-chosa-2026-11.md",
-     "pass": false,
-     "why": [
-      "一致しない・確認できない記述が2件",
-      "問題の指摘が2件",
-      "調査の調査した主体を確かめた明細がない"
-     ],
-     "claims": 13,
-     "bad": 4,
-     "aiVerdict": "不合格"
-    }
-   ],
-   "checkFile": "tools/news/checks/2026-W46_20261118T142753-768bef.md"
-  }
+  "runId": "20261118T150306-a52f08",
+  "at": "2026-11-18T15:07:11.767Z",
+  "files": [
+   "topic-kaigo-fukushoku-ishiki-chosa-2026-11",
+   "weekly-2026-W46"
+  ],
+  "judged": [
+   {
+    "file": "topic-kaigo-fukushoku-ishiki-chosa-2026-11.md",
+    "pass": true,
+    "why": [],
+    "claims": 16,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "weekly-2026-W46.md",
+    "pass": true,
+    "why": [],
+    "claims": 23,
+    "bad": 0,
+    "aiVerdict": "合格"
+   }
+  ],
+  "checkFile": "tools/news/checks/2026-W46.md"
  }
 }
