@@ -55,6 +55,12 @@ html { scroll-padding-top: 64px; }
 #issue-cards > li:nth-child(n + 2) h3 { font-size: 17px; line-height: 1.65; }
 #issue-cards > li:nth-child(n + 2) .sum { font-size: 14px; line-height: 1.85; }
 .pick .meta { font-size: 13px; }
+/* 記事が少ない週：1本だけなら横幅いっぱいに伸ばす。0本なら枠ごと出さない（2026-11-19） */
+#issue-cards > li:only-child { grid-column: 1 / -1; grid-row: auto; }
+#issue-cards > li:only-child .sum { max-width: 46em; }
+/* 2本なら左右の高さをそろえる（右の下に空白を残さない） */
+#issue-cards > li:first-child:nth-last-child(2) { grid-row: auto; }
+#issue-cards:empty { display: none; }
 
 /* 記事の一覧 */
 .tools { margin-bottom: 28px; }
