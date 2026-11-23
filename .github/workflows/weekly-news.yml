@@ -1,5 +1,5 @@
 # 毎週のニュース更新（2026-11-16、PC のタスク スケジューラから移した）
-# 毎週月曜 5:30（日本時間）に、前の週のニュースを集めて記事にし、kaigoweekly.jp へ公開する。
+# 毎週月曜 0:30（日本時間）に、前の週のニュースを集めて記事にし、kaigoweekly.jp へ公開する。
 # 週のまとめのメールは、Cloudflare の worker が月曜 8:30 に公開済みの dist/mail/weekly-latest.json を読んで送る。
 # 鍵（Secrets）：
 #   CLAUDE_CODE_OAUTH_TOKEN … 記事づくりの手順だけに渡す（Cloudflare の鍵は渡さない）
@@ -8,7 +8,7 @@ name: 毎週のニュース更新
 
 on:
   schedule:
-    - cron: '30 20 * * 0'   # UTC 日曜 20:30 ＝ 日本時間 月曜 5:30（GitHub の開始の遅れと実行時間を見込み、8:30 の配信の3時間前）
+    - cron: '30 15 * * 0'   # UTC 日曜 15:30 ＝ 日本時間 月曜 0:30。2026-11-23 に 5:30 から早めた（W47 で GitHub の開始が 4時間半遅れ、8:30 の配信に間に合わなかったため。8時間の余裕）
   workflow_dispatch:
     inputs:
       week:
@@ -30,7 +30,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 140   # 5:30 開始でも 7:50 までに必ず終わる（8:30 の配信に間に合わせる）
+    timeout-minutes: 140   # 開始が遅れても、終わりの上限をはっきりさせる（0:30 開始なら 2:50 まで）
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,6 +45,8 @@ jobs:
         run: |
           npm ci
           npm install -g @anthropic-ai/claude-code@2.1.325
+          # PDFの本文を文字にする道具（tools/news/pdf-text.mjs が使う。2026-11-23 追加）
+          sudo apt-get update -q && sudo apt-get install -y -q poppler-utils && pdftotext -v
 
       - name: 記事づくり（集める→下書き→照合→組み立て。公開はしない）
         id: make

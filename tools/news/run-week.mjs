@@ -1,6 +1,6 @@
 // run-week.mjs — 1週間分のニュースを、1コマンドで「ネタ集め→下書き→一次情報との照合→組み立て」まで進める。
 // 使い方: node tools/news/run-week.mjs 2026-W45 [--no-publish]
-//        2026-11-16 から GitHub Actions（.github/workflows/weekly-news.yml）で毎週月曜 5:30 に動かす。
+//        2026-11-16 から GitHub Actions（.github/workflows/weekly-news.yml）で毎週月曜に動かす（2026-11-23 から 0:30）。
 //        Actions では --no-publish で記事づくりまでを行い、公開（make-dist と wrangler deploy）は別の手順で行う（Cloudflare の鍵を AI の手順に渡さないため）
 //        週を省くと「先週」（実行日の前の月〜日、日本時間）を対象にする。
 // 公開・投稿・送信はしない。組み立て（node build.js）はこのPCの中の html を作るだけ。
@@ -20,6 +20,7 @@ import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {weekRange} from './collect.mjs';
+import {extractPdfs, pdfLinksOf, isGovHttps, isPdfUrl, hasPdftotext} from './pdf-text.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.resolve(DIR, '..', '..');
@@ -317,6 +318,21 @@ function selfTest() {
   log('閉じ込めの自己テスト：外は読めず・書けず（合格）');
 }
 
+// 下書きの前に、候補のうち官公庁のページ（とPDFそのもの）から、PDFを文字にして sources/ に置く（2026-11-23）
+// 厚労省を先にする（こども家庭庁の保育だけの資料で上限を使い切らないため）。1ページ8本・全体60本まで。
+async function pdfsForDraft(candJson, ddir) {
+  if (!hasPdftotext()) { log('PDFの本文：pdftotext がないため取り出さない（PDFは WebFetch だけで読む）'); return; }
+  const items = (JSON.parse(fs.readFileSync(candJson, 'utf8')).items || []).filter((x) => x.primary && isGovHttps(x.url));
+  items.sort((a, b) => (/mhlw\.go\.jp/.test(b.url) ? 1 : 0) - (/mhlw\.go\.jp/.test(a.url) ? 1 : 0));
+  const urls = [], until = Date.now() + 3 * 60e3; // リンク拾いは3分まで
+  for (const x of items) {
+    if (urls.length >= 60 || Date.now() > until) break;
+    if (isPdfUrl(x.url)) { urls.push(x.url); continue; }
+    try { urls.push(...await pdfLinksOf(x.url, 8)); } catch (e) { log(`PDFのリンクを拾えず：${x.url}（${e.message}）`); }
+  }
+  await extractPdfs(urls, ddir, {max: 60, budgetMs: 12 * 60e3, log});
+}
+
 function build() {
   const b = spawnSync(process.execPath, ['build.js'], {cwd: SITE, encoding: 'utf8'});
   log((b.stdout || '').trim());
@@ -365,6 +381,7 @@ async function main() {
     // 2. 下書き（作業用フォルダ1）
     const ddir = path.join(BASE, 'draft');
     prepare(ddir, {'candidates.md': path.join(cdir, 'candidates.md')});
+    await pdfsForDraft(path.join(cdir, 'candidates.json'), ddir);
     claude('draft.md', ddir, '下書き');
     const drafts = fs.readdirSync(path.join(ddir, 'drafts')).filter((f) => f.endsWith('.md') && f.startsWith('topic-')).map((f) => f.replace(/\.md$/, ''));
     const okDrafts = [];
@@ -380,6 +397,8 @@ async function main() {
     const vdir = path.join(BASE, 'verify');
     prepare(vdir);
     for (const n of okDrafts) fs.copyFileSync(path.join(ddir, 'drafts', n + '.md'), path.join(vdir, 'drafts', n + '.md'));
+    // 照合でも、出典の表にある官公庁のPDFは、このプログラムが文字にして sources/ に置く（2026-11-23）
+    if (okDrafts.length && hasPdftotext()) await extractPdfs(okDrafts.flatMap((n) => draftInfo(path.join(vdir, 'drafts', n + '.md')).urls), vdir, {max: 40, budgetMs: 8 * 60e3, log});
     const hashes = Object.fromEntries(okDrafts.map((n) => [n, sha(path.join(vdir, 'drafts', n + '.md'))]));
     let judged = [];
     if (okDrafts.length) {
