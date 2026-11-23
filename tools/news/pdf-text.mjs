@@ -11,14 +11,33 @@ import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
+import dns from 'node:dns/promises';
+import net from 'node:net';
 
 const GOV_HOST = /^([a-z0-9-]+\.)*go\.jp$/;
 const UA = 'Mozilla/5.0 (kaigoweekly-news-collector; weekly, low volume)';
 const MAX_BYTES = 30 * 1024 * 1024;
-const MAX_TEXT = 600 * 1024; // 1本あたりの文字の上限（これを超えた分は切る）
+const MAX_TEXT = 600 * 1024; // 1本あたりの文字の上限（これを超えた分は読まない）
+const MAX_HTML = 5 * 1024 * 1024; // PDFのリンクを拾うページの上限
+const MAX_PAGES = 300; // pdftotext で文字にするページ数の上限（出力が大きくなりすぎないように）
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-export const isGovHttps = (u) => { try { const x = new URL(u); return x.protocol === 'https:' && GOV_HOST.test(x.hostname); } catch { return false; } };
+// https・*.go.jp・既定のポート（443）・URLに認証情報なし（2026-11-23 Codex の指摘）
+export const isGovHttps = (u) => { try { const x = new URL(u); return x.protocol === 'https:' && GOV_HOST.test(x.hostname) && x.port === '' && !x.username && !x.password; } catch { return false; } };
+// 名前を引いた先が、内部・ローカル向けのアドレスでないこと（2026-11-23 Codex の指摘）
+function privateIp(ip) {
+  if (net.isIPv4(ip)) {
+    const [a, b] = ip.split('.').map(Number);
+    return a === 0 || a === 10 || a === 127 || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || (a === 198 && (b === 18 || b === 19)) || a >= 224;
+  }
+  const v = ip.toLowerCase();
+  if (v.startsWith('::ffff:')) return privateIp(v.slice(7));
+  return v === '::' || v === '::1' || /^f[cd]/.test(v) || /^fe[89ab]/.test(v) || v.startsWith('ff');
+}
+async function assertPublic(host) {
+  const addrs = await dns.lookup(host, {all: true});
+  if (!addrs.length || addrs.some((a) => privateIp(a.address))) throw new Error('内部向けのアドレスに当たるため取りに行かない：' + host);
+}
 export const isPdfUrl = (u) => { try { return /\.pdf$/i.test(new URL(u).pathname); } catch { return false; } };
 export const hasPdftotext = () => spawnSync('pdftotext', ['-v'], {encoding: 'utf8'}).status === 0;
 
@@ -27,6 +46,7 @@ async function fetchGov(url, timeoutMs = 60000) {
   let u = url;
   for (let i = 0; i < 5; i++) {
     if (!isGovHttps(u)) throw new Error('官公庁の https でない行き先：' + u);
+    await assertPublic(new URL(u).hostname);
     const res = await fetch(u, {headers: {'user-agent': UA}, redirect: 'manual', signal: AbortSignal.timeout(timeoutMs)});
     if (res.status >= 300 && res.status < 400 && res.headers.get('location')) { u = new URL(res.headers.get('location'), u).href; continue; }
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -36,7 +56,7 @@ async function fetchGov(url, timeoutMs = 60000) {
 }
 
 async function download(url) {
-  const {res} = await fetchGov(url);
+  const {res} = await fetchGov(url, 45000);
   const len = +res.headers.get('content-length') || 0;
   if (len > MAX_BYTES) throw new Error(`大きすぎる（${len} バイト）`);
   const chunks = []; let total = 0;
@@ -51,11 +71,14 @@ function toText(buf) {
   try {
     const p = path.join(tmp, 'in.pdf'), o = path.join(tmp, 'out.txt');
     fs.writeFileSync(p, buf);
-    const r = spawnSync('pdftotext', ['-layout', '-enc', 'UTF-8', p, o], {encoding: 'utf8', timeout: 120000});
+    const r = spawnSync('pdftotext', ['-layout', '-enc', 'UTF-8', '-l', String(MAX_PAGES), p, o], {encoding: 'utf8', timeout: 60000});
     if (r.status !== 0 || !fs.existsSync(o)) throw new Error('pdftotext が失敗：' + (r.stderr || r.error?.message || r.status));
-    let t = fs.readFileSync(o, 'utf8');
+    // 出力は先頭の MAX_TEXT バイトだけ読む（全体をメモリに載せない。2026-11-23 Codex の指摘）
+    const size = fs.statSync(o).size, fd = fs.openSync(o, 'r'), buf2 = Buffer.alloc(Math.min(size, MAX_TEXT));
+    try { fs.readSync(fd, buf2, 0, buf2.length, 0); } finally { fs.closeSync(fd); }
+    let t = buf2.toString('utf8').replace(/\uFFFD$/, '');
     if (t.replace(/\s/g, '').length < 50) throw new Error('文字がほとんど取り出せない（画像だけのPDFの可能性）');
-    if (t.length > MAX_TEXT) t = t.slice(0, MAX_TEXT) + '\n\n（ここで切りました：長すぎるため）\n';
+    if (size > MAX_TEXT) t += '\n\n（ここで切りました：長すぎるため）\n';
     return t;
   } finally { fs.rmSync(tmp, {recursive: true, force: true}); }
 }
@@ -63,7 +86,9 @@ function toText(buf) {
 // ページ（HTML）から、同じ官公庁の PDF へのリンクを拾う
 export async function pdfLinksOf(pageUrl, limit) {
   const {res, finalUrl} = await fetchGov(pageUrl, 30000);
-  const html = await res.text();
+  const chunks = []; let total = 0;
+  for await (const c of res.body) { total += c.length; if (total > MAX_HTML) throw new Error('ページが大きすぎる'); chunks.push(c); }
+  const html = Buffer.concat(chunks).toString('utf8');
   const out = [];
   for (const m of html.matchAll(/href\s*=\s*["']([^"'#]+\.pdf)(#[^"']*)?["']/gi)) {
     let u; try { u = new URL(m[1].replace(/&amp;/g, '&'), finalUrl).href; } catch { continue; }
@@ -74,13 +99,16 @@ export async function pdfLinksOf(pageUrl, limit) {
 }
 
 // urls の PDF を文字にして dir/sources/ に置き、dir/sources/index.md に「URL → ファイル」の表を書く
-export async function extractPdfs(urls, dir, {max = 60, log = console.log} = {}) {
+// budgetMs：この呼び出し全体の時間の上限。超えたら残りは取りに行かない（2026-11-23 Codex の指摘：ジョブの上限を超えないように）
+export async function extractPdfs(urls, dir, {max = 60, budgetMs = 10 * 60e3, log = console.log} = {}) {
+  const until = Date.now() + budgetMs;
   const want = [...new Set(urls.filter((u) => isGovHttps(u) && isPdfUrl(u)))].slice(0, max);
   const sdir = path.join(dir, 'sources');
   fs.mkdirSync(sdir, {recursive: true});
   const rows = [];
   let ok = 0;
   for (const u of want) {
+    if (Date.now() > until) { rows.push(`| ${u} | 取り出せず（時間の上限のため取りに行かなかった） |`); continue; }
     const name = 'pdf-' + crypto.createHash('sha256').update(u).digest('hex').slice(0, 12) + '.txt';
     try {
       const t = toText(await download(u));

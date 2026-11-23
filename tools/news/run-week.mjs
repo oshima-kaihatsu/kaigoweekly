@@ -324,13 +324,13 @@ async function pdfsForDraft(candJson, ddir) {
   if (!hasPdftotext()) { log('PDFの本文：pdftotext がないため取り出さない（PDFは WebFetch だけで読む）'); return; }
   const items = (JSON.parse(fs.readFileSync(candJson, 'utf8')).items || []).filter((x) => x.primary && isGovHttps(x.url));
   items.sort((a, b) => (/mhlw\.go\.jp/.test(b.url) ? 1 : 0) - (/mhlw\.go\.jp/.test(a.url) ? 1 : 0));
-  const urls = [];
+  const urls = [], until = Date.now() + 3 * 60e3; // リンク拾いは3分まで
   for (const x of items) {
-    if (urls.length >= 60) break;
+    if (urls.length >= 60 || Date.now() > until) break;
     if (isPdfUrl(x.url)) { urls.push(x.url); continue; }
     try { urls.push(...await pdfLinksOf(x.url, 8)); } catch (e) { log(`PDFのリンクを拾えず：${x.url}（${e.message}）`); }
   }
-  await extractPdfs(urls, ddir, {max: 60, log});
+  await extractPdfs(urls, ddir, {max: 60, budgetMs: 12 * 60e3, log});
 }
 
 function build() {
@@ -398,7 +398,7 @@ async function main() {
     prepare(vdir);
     for (const n of okDrafts) fs.copyFileSync(path.join(ddir, 'drafts', n + '.md'), path.join(vdir, 'drafts', n + '.md'));
     // 照合でも、出典の表にある官公庁のPDFは、このプログラムが文字にして sources/ に置く（2026-11-23）
-    if (okDrafts.length && hasPdftotext()) await extractPdfs(okDrafts.flatMap((n) => draftInfo(path.join(vdir, 'drafts', n + '.md')).urls), vdir, {max: 40, log});
+    if (okDrafts.length && hasPdftotext()) await extractPdfs(okDrafts.flatMap((n) => draftInfo(path.join(vdir, 'drafts', n + '.md')).urls), vdir, {max: 40, budgetMs: 8 * 60e3, log});
     const hashes = Object.fromEntries(okDrafts.map((n) => [n, sha(path.join(vdir, 'drafts', n + '.md'))]));
     let judged = [];
     if (okDrafts.length) {
