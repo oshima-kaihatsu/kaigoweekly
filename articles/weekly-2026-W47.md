@@ -1,10 +1,10 @@
 ---
 kind: weekly
-title: 今週の介護ニュースまとめ（2026年11月16日〜11月22日）：今週の新着記事はありません／審議中の案件リスト
+title: 今週の介護ニュースまとめ（2026年11月16日〜11月22日）：令和8年度介護事業経営実態調査の結果（案）ほか
 date: 2026-11-23
 period: 2026-11-16〜2026-11-22
-summary: 11月16日〜11月22日の介護ニュースのまとめ。今週の新着記事はありません。代わりに、いま審議中の案件をまとめました。記事を書いた時点では、どれも案の段階で、まだ決まっていません。続報が出たら、この週のまとめでお知らせします。
-topics: []
+summary: 11月16日〜11月22日の介護ニュースのまとめ。今週の新着記事と、いま審議中の案件をまとめました。
+topics: [topic-kaigo-keiei-jittai-chosa-2026-kekka-an, topic-shogu-kaizen-kasan-minaoshi-an-2026-11]
 watch: [topic-caremane-satellite-shotaki-haichi-an-2026-11, topic-tokuyo-caremane-kenmu-an-2026-11, topic-chiiki-kubun-r9-keika-sochi-an, topic-toroku-shisetsu-kaigo-shien-jinin-kijun-an, topic-caremane-teiki-kenshu-genzan-an, topic-gh-keikaku-sakusei-tantosha-haichi, topic-gh-yakin-haichi-kanwa-an, topic-kyotaku-kanrisha-shunin-caremane-yoken, topic-tsusho-nyuyoku-kaijo-kasan-an]
 placeholder: true
 tags: [週次まとめ]
@@ -13,7 +13,11 @@ tags: [週次まとめ]
 # 今週の介護ニュースまとめ（2026年11月16日〜11月22日）
 
 ## 今週の総括
-今週の新着記事はありません。代わりに、いま審議中の案件をまとめました。記事を書いた時点では、どれも案の段階で、まだ決まっていません。続報が出たら、この週のまとめでお知らせします。
+今週の新着記事と、いま審議中の案件をまとめました。
+
+## 今週の新着記事
+- [令和8年度介護事業経営実態調査の結果（案）：全サービス平均の収支差率は4.3%、通所介護は1.4%](topic-kaigo-keiei-jittai-chosa-2026-kekka-an.html)（2026-11-23 の記事）：介護事業経営調査委員会（11/16）と介護給付費分科会（11/20）に、令和8年度介護事業経営実態調査の結果（案）が出ました。
+- [処遇改善加算の見直し案：職場環境等要件などを切り離し、サービス提供体制強化加算の勤続年数要件は廃止案（第275回分科会）](topic-shogu-kaizen-kasan-minaoshi-an-2026-11.html)（2026-11-23 の記事）：第275回介護給付費分科会（11/16）に、介護人材確保に向けた処遇改善等の論点と対応案が出ました。
 
 ## 審議中の案件リスト
 - [ケアマネのサテライト事業所を制度化する案、小多機の訪問職員の配置も論点に（第274回介護給付費分科会）](topic-caremane-satellite-shotaki-haichi-an-2026-11.html)（2026-11-12 の記事）：厚労省は第274回介護給付費分科会で、中山間地域等の担い手不足への対応として、居宅介護支援のサテライト事業所を制度に位置付け、加算を設ける案を示しました。
