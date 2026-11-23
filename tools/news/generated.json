@@ -117,5 +117,50 @@
    }
   ],
   "checkFile": "tools/news/checks/2026-W46.md"
+ },
+ "2026-W47": {
+  "files": [],
+  "judged": [],
+  "checkFile": "",
+  "lastAttempt": {
+   "runId": "20261123T005911-0b1308",
+   "at": "2026-11-23T01:05:03.173Z",
+   "judged": [
+    {
+     "file": "topic-kaigo-keiei-jittai-chosa-2026.md",
+     "pass": false,
+     "why": [
+      "一致しない・確認できない記述が27件",
+      "問題の指摘が1件"
+     ],
+     "claims": 31,
+     "bad": 28,
+     "aiVerdict": "不合格"
+    },
+    {
+     "file": "topic-kaigo-shogu-jokyo-chosa-2026.md",
+     "pass": false,
+     "why": [
+      "一致しない・確認できない記述が20件",
+      "問題の指摘が1件"
+     ],
+     "claims": 24,
+     "bad": 21,
+     "aiVerdict": "不合格"
+    },
+    {
+     "file": "topic-kaigo-shogu-kaizen-ronten-2026-11.md",
+     "pass": false,
+     "why": [
+      "一致しない・確認できない記述が17件",
+      "問題の指摘が1件"
+     ],
+     "claims": 18,
+     "bad": 18,
+     "aiVerdict": "不合格"
+    }
+   ],
+   "checkFile": "tools/news/checks/2026-W47_20261123T005911-0b1308.md"
+  }
  }
 }
