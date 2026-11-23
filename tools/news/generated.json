@@ -119,51 +119,56 @@
   "checkFile": "tools/news/checks/2026-W46.md"
  },
  "2026-W47": {
-  "runId": "20261123T134502-3cb23a",
-  "at": "2026-11-23T13:53:30.638Z",
+  "runId": "20261123T135451-6c5a34",
+  "at": "2026-11-23T14:03:09.702Z",
   "files": [
-   "topic-kaigo-keiei-jittai-chosa-2026-kekka-an",
-   "topic-shogu-kaizen-kasan-minaoshi-an-2026-11"
+   "topic-kaigo-keiei-jittai-chosa-2026-11",
+   "topic-kaigo-shogu-jokyo-chosa-2026-11",
+   "topic-service-teikyo-taisei-kyoka-kasan-an-2026-11",
+   "weekly-2026-W47"
   ],
   "judged": [
    {
-    "file": "topic-kaigo-jujisha-shogu-chosa-2026-kekka-an.md",
+    "file": "topic-kaigo-keiei-jittai-chosa-2026-11.md",
+    "pass": true,
+    "why": [],
+    "claims": 25,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-kaigo-shogu-jokyo-chosa-2026-11.md",
+    "pass": true,
+    "why": [],
+    "claims": 22,
+    "bad": 0,
+    "aiVerdict": "合格"
+   },
+   {
+    "file": "topic-kaigo-shogu-kaizen-kasan-minaoshi-an-2026-11.md",
     "pass": false,
     "why": [
      "下書きの記述や出典の表と結び付かない明細が1件"
     ],
-    "claims": 28,
+    "claims": 16,
     "bad": 0,
     "aiVerdict": "合格"
    },
    {
-    "file": "topic-kaigo-keiei-jittai-chosa-2026-kekka-an.md",
+    "file": "topic-service-teikyo-taisei-kyoka-kasan-an-2026-11.md",
     "pass": true,
     "why": [],
-    "claims": 34,
-    "bad": 0,
-    "aiVerdict": "合格"
-   },
-   {
-    "file": "topic-shogu-kaizen-kasan-minaoshi-an-2026-11.md",
-    "pass": true,
-    "why": [],
-    "claims": 20,
+    "claims": 11,
     "bad": 0,
     "aiVerdict": "合格"
    },
    {
     "file": "weekly-2026-W47.md",
-    "pass": false,
-    "why": [
-     "ダイジェスト「1. 処遇改善加算の見直し案：職場環境等要件を切り離し、勤続年数要件は廃止案」の「一言でいうと」を確かめた明細がない",
-     "ダイジェスト「2. 介護事業経営実態調査（令和8年度）：全サービス平均の収支差率4.3%、通所介護は1.4%」の「一言でいうと」を確かめた明細がない",
-     "一致しない・確認できない記述が1件",
-     "問題の指摘が1件"
-    ],
-    "claims": 34,
-    "bad": 2,
-    "aiVerdict": "不合格"
+    "pass": true,
+    "why": [],
+    "claims": 47,
+    "bad": 0,
+    "aiVerdict": "合格"
    }
   ],
   "checkFile": "tools/news/checks/2026-W47.md"
